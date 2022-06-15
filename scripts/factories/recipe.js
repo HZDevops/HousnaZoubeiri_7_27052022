@@ -10,38 +10,39 @@ export function recipeFactory(recipe) {
     ustensils,
   } = recipe;
 
-  //Calculate total likes media
-  function getIngredientList(ingredients) {
+  //Get ingredients list
+  function getIngredientList() {
     let ingredientArray = []
 
     ingredients.forEach((ingredient) => {
-      ingredientArray.push(ingredient)
+        const ingredientBloc = document.createElement('span')
+        ingredientBloc.classList.add('ingredient')
+        ingredientBloc.innerHTML = `${ingredient.ingredient}: ${ingredient.quantity}${ingredient.unit}`
+        ingredientArray.push (ingredientBloc)
     })
-
-    console.log(ingredientArray)
+    return ingredientArray
   }
   //Create photographer media cards
   function getRecipeCardDOM() {
 
-      const article = document.createElement('article');
-
-      article.classList.add('recipe-card');
-
+      const article = document.createElement('article')
+      
+      article.classList.add('recipe-card')
+     
       const recipeCard = `
             <a href="#" class="recipe-link">
                 <div class="recipe-image"></div>
-                <div class="recipe-info">
-                    <div class="recipe-title">
+                <div class="recipe-title">
                         <span class="recipe-name">${name}</span>
                         <span class="recipe-time">${time}</span>
-                    </div>
-                    <p class="recipe-description">${description}</p>
                 </div>
+                <div id=${id} class="recipe-ingredient></div>
+                <p class="recipe-description">${description}</p>
             </a>
             
          `;
-      article.innerHTML = recipeCard;
-      return article;
+      article.innerHTML = recipeCard
+      return { article, id }
   }
 
   return {
