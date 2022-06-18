@@ -1,5 +1,6 @@
 import { getData } from './utils/getData.js'
 import { recipeFactory } from './factories/recipe.js'
+import { searchRecipe } from './utils/searchRecipe.js'
 
 let recipesArray = []
 
@@ -19,7 +20,7 @@ function displayRecipes(recipes) {
     const recipeCard = recipeModel.getRecipeCardDOM()
     const ingredientList = recipeModel.getIngredientList()
     
-    recipeContainer.appendChild(recipeCard.article)
+    recipeContainer.appendChild(recipeCard.card)
    
     for (let j=0; j<ingredientList.length; j++) {
       let recipeIngredient = document.getElementById(`${recipeCard.id}`)
@@ -31,3 +32,5 @@ function displayRecipes(recipes) {
 await loadRecipes()
 console.log(recipesArray)
 displayRecipes(recipesArray)
+const searchedRecipes = searchRecipe(recipesArray, 'chocolat')
+console.log(searchedRecipes)

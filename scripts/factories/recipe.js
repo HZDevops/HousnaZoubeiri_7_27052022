@@ -22,31 +22,29 @@ export function recipeFactory(recipe) {
     })
     return ingredientArray
   }
-  //Create photographer media cards
+  
+  //Create recipe card
   function getRecipeCardDOM() {
 
-      const article = document.createElement('article')
+      const card = document.createElement('a')
       
-      article.classList.add('recipe-card')
+      card.classList.add('recipe-card')
      
       const recipeCard = `
-            <a href="#" class="recipe-link">
                 <div class="recipe-image"></div>
                 <div class="recipe-title">
-                        <span class="recipe-name">${name}</span>
-                        <span class="recipe-time">${time}</span>
+                  <span class="recipe-name">${name}</span>
+                  <span class="recipe-time">${time}</span>
                 </div>
-                <div id=${id} class="recipe-ingredient></div>
+                <div id=${id} class="recipe-ingredient"></div>
                 <p class="recipe-description">${description}</p>
-            </a>
-            
-         `;
-      article.innerHTML = recipeCard
-      return { article, id }
+              `;
+      card.innerHTML = recipeCard
+      return { card, id }
   }
 
   return {
     getRecipeCardDOM,
     getIngredientList,
-  };
+  }
 }
