@@ -15,7 +15,7 @@ export function recipeFactory(recipe) {
     let ingredientArray = []
 
     ingredients.forEach((ingredient) => {
-        const ingredientBloc = document.createElement('span')
+        const ingredientBloc = document.createElement('li')
         ingredientBloc.classList.add('ingredient')
         ingredientBloc.innerHTML = `${ingredient.ingredient}: ${ingredient.quantity}${ingredient.unit}`
         ingredientArray.push (ingredientBloc)
@@ -26,18 +26,20 @@ export function recipeFactory(recipe) {
   //Create recipe card
   function getRecipeCardDOM() {
 
-      const card = document.createElement('a')
+    const card = document.createElement('a')
       
-      card.classList.add('recipe-card')
+    card.classList.add('recipe-card')
      
       const recipeCard = `
-                <div class="recipe-image"></div>
-                <div class="recipe-title">
-                  <span class="recipe-name">${name}</span>
-                  <span class="recipe-time">${time}</span>
+                <div class="card">
+                  <div class="card-img-top"></div>
+                  <div class="card-body">
+                    <h5 class="card-title">${name}</h5>
+                    <h5 class="recipe-time fw-bold">${time}min</h5>
+                    <ul id=${id} class="recipe-ingredient"></ul>
+                    <p class="card-text">${description}</p>
+                  </div>
                 </div>
-                <div id=${id} class="recipe-ingredient"></div>
-                <p class="recipe-description">${description}</p>
               `;
       card.innerHTML = recipeCard
       return { card, id }

@@ -1,0 +1,44 @@
+.recipe-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+h5 {
+    font-size: 18px;
+}
+
+.recipe-ingredient {
+    width:171px;
+    height: 105px;
+}
+
+a {
+    width:380px;
+    height: 364px;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.card {
+    width:380px;
+}
+
+.card-img-top {
+    background-color: #C7BEBE;
+    height: 178px;
+}
+
+.card-body {
+    height: 186px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

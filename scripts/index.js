@@ -32,5 +32,15 @@ function displayRecipes(recipes) {
 await loadRecipes()
 console.log(recipesArray)
 displayRecipes(recipesArray)
-const searchedRecipes = searchRecipe(recipesArray, 'chocolat')
-console.log(searchedRecipes)
+let inputRecipe = document.getElementById('floatingInput')
+let input = ''
+let searchedRecipes = recipesArray
+
+inputRecipe.addEventListener('keyup', function(e) {
+  console.log(inputRecipe.value.length, inputRecipe.value)
+ if (inputRecipe.value.length >= 3) {
+   searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value);
+  console.log(searchedRecipes);
+  }
+})
+
