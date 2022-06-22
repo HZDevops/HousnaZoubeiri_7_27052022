@@ -15,9 +15,16 @@ export function recipeFactory(recipe) {
     let ingredientArray = []
 
     ingredients.forEach((ingredient) => {
-        const ingredientBloc = document.createElement('li')
-        ingredientBloc.classList.add('ingredient')
-        ingredientBloc.innerHTML = `${ingredient.ingredient}: ${ingredient.quantity}${ingredient.unit}`
+      const ingredientBloc = document.createElement('li')
+      ingredientBloc.classList.add('ingredient')
+
+      if(!ingredient.quantity && !ingredient.unit) {
+        ingredientBloc.innerHTML = `${ingredient.ingredient}`
+      } else if (!ingredient.unit) {
+        ingredientBloc.innerHTML = `${ingredient.ingredient}: ${ingredient.quantity}`
+      } else {
+        ingredientBloc.innerHTML = `${ingredient.ingredient}: ${ingredient.quantity} ${ingredient.unit}`
+      }
         ingredientArray.push (ingredientBloc)
     })
     return ingredientArray

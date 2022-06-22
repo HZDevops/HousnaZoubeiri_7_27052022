@@ -2,6 +2,9 @@ import { getData } from './utils/getData.js'
 import { recipeFactory } from './factories/recipe.js'
 import { searchRecipe } from './utils/searchRecipe.js'
 
+//DOM elements
+let inputRecipe = document.getElementById('floatingInput')
+let recipeContainer = document.querySelector('.recipe-container')
 let recipesArray = []
 
 //Import recipes database in a array
@@ -15,7 +18,6 @@ function displayRecipes(recipes) {
   const recipeContainer = document.querySelector('.recipe-container')
  
   for (let i= 0; i < recipes.length; i ++) {
-  
     const recipeModel = recipeFactory(recipes[i])
     const recipeCard = recipeModel.getRecipeCardDOM()
     const ingredientList = recipeModel.getIngredientList()
@@ -30,17 +32,24 @@ function displayRecipes(recipes) {
 }
 
 await loadRecipes()
-console.log(recipesArray)
 displayRecipes(recipesArray)
-let inputRecipe = document.getElementById('floatingInput')
-let input = ''
+
 let searchedRecipes = recipesArray
 
 inputRecipe.addEventListener('keyup', function(e) {
-  console.log(inputRecipe.value.length, inputRecipe.value)
- if (inputRecipe.value.length >= 3) {
-   searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value);
-  console.log(searchedRecipes);
+  if (inputRecipe.value.length < 3 ) {
+    searchedRecipes = recipesArray
+    console.log(searchedRecipes)
+    displayRecipes(searchedRecipes)
   }
+    //console.log(inputRecipe.value.length, inputRecipe.value)
+  if (inputRecipe.value.length >= 3) {
+    searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value)
+    recipeContainer.innerHTML = '';
+    console.log(searchedRecipes)
+    displayRecipes(searchedRecipes)
+  }
+  
+  
 })
 

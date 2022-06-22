@@ -11,13 +11,15 @@ h5 {
 .recipe-ingredient {
     width:171px;
     height: 105px;
+    padding: 0;
 }
 
 a {
     width:380px;
     height: 364px;
-    margin-bottom: 20px;
+    margin-bottom: 45px;
     text-decoration: none;
+    color: black;
 }
 
 .card {
@@ -33,12 +35,11 @@ a {
     height: 186px;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.card-text {
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
+.ingredient {
+    list-style-type: none;
+  }
