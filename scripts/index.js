@@ -24,9 +24,9 @@ async function loadRecipes() {
  * Display recipe cards matched with input in search bar
  * @param {Array} recipes
  **/
-function displayRecipes(recipes) {
+export function displayRecipes(recipes) {
   const recipeContainer = document.querySelector('.recipe-container')
- 
+ //console.log(recipes)
   for (let i= 0; i < recipes.length; i ++) {
     const recipeModel = recipeFactory(recipes[i])
     const recipeCard = recipeModel.getRecipeCardDOM()
@@ -67,7 +67,7 @@ let searchedRecipes = recipesArray
 inputRecipeListner()
 selectAppliance(recipesArray)
 searchByUstensil(recipesArray, 'saladier')
-searchByAppliance(recipesArray, 'blender')
+//searchByAppliance(recipesArray, 'blender')
 searchByIngredient(recipesArray, 'lait')
 
 //searchByIngredients(recipesArray, 'coco')

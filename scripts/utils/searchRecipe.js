@@ -46,15 +46,16 @@ export function searchByUstensil(recipes, ustensil) {
  * @returns {Array} 
  **/
 export function searchByAppliance(recipes, appliance) {
-  let searchedRecipes = []
+  console.log(recipes, appliance)
+  let searchedRecipes = [];
   recipes.forEach((recipe) => {
     let applianceSearched = recipe.appliance.toLowerCase()
 
-    if (applianceSearched.includes(appliance) === true) {
-      searchedRecipes.push(recipe)
+    if (applianceSearched.includes(appliance.toLowerCase()) === true) {
+      searchedRecipes.push(recipe);
     }
   })
-  //console.log(searchedRecipes)
+  return searchedRecipes
 }
 
 /**
