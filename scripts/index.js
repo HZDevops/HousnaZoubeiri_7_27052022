@@ -1,6 +1,7 @@
 import { getData } from './utils/getData.js';
-import { recipeFactory } from './factories/recipe.js';
-import { selectAppliance } from './components/selectAppliance.js'
+import { displayRecipes } from './utils/displayRecipes.js';
+import { selectAppliance } from './components/selectAppliance.js';
+import { selectUstensil } from './components/selectUstensil.js';
 import {  searchRecipe, searchByUstensil, searchByAppliance, searchByIngredient } from './utils/searchRecipe.js';
 
 
@@ -21,26 +22,8 @@ async function loadRecipes() {
 }
 
 /**
- * Display recipe cards matched with input in search bar
- * @param {Array} recipes
+ * Display recipe by input in main search bar
  **/
-export function displayRecipes(recipes) {
-  const recipeContainer = document.querySelector('.recipe-container')
- //console.log(recipes)
-  for (let i= 0; i < recipes.length; i ++) {
-    const recipeModel = recipeFactory(recipes[i])
-    const recipeCard = recipeModel.getRecipeCardDOM()
-    const ingredientList = recipeModel.displayIngredientList()
-    recipeContainer.appendChild(recipeCard.card)
-   
-    //Insert every ingredient in the recipe card
-    for (let j=0; j<ingredientList.length; j++) {
-      let recipeIngredient = document.getElementById(`${recipeCard.id}`)
-      recipeIngredient.appendChild(ingredientList[j]);
-    }
-  }
-}
-
 function inputRecipeListner() {
   inputRecipe.addEventListener('keyup', function (e) {
     if (inputRecipe.value.length < 3) {
@@ -66,7 +49,8 @@ let searchedRecipes = recipesArray
 
 inputRecipeListner()
 selectAppliance(recipesArray)
-searchByUstensil(recipesArray, 'saladier')
+selectUstensil(recipesArray)
+//searchByUstensil(recipesArray, 'saladier')
 //searchByAppliance(recipesArray, 'blender')
 searchByIngredient(recipesArray, 'lait')
 

@@ -1,6 +1,6 @@
 import { getApplianceList } from '../utils/getApplianceList.js';
 import { searchByAppliance } from '../utils/searchRecipe.js';
-import { displayRecipes } from '../index.js';
+import { displayRecipes } from '../utils/displayRecipes.js';
 
 //DOM Elements
 const recipeContainer = document.querySelector('.recipe-container');
