@@ -10,13 +10,14 @@ export function recipeFactory(recipe) {
     ustensils,
   } = recipe;
 
-  //Get ingredients list
-  function getIngredientList() {
-    let ingredientArray = []
+  
+  //Display ingredients list
+  function displayIngredientList() {
+    let ingredientArray = [];
 
     ingredients.forEach((ingredient) => {
-      const ingredientBloc = document.createElement('li')
-      ingredientBloc.classList.add('ingredient')
+      const ingredientBloc = document.createElement('li');
+      ingredientBloc.classList.add('ingredient');
 
       if(!ingredient.quantity && !ingredient.unit) {
         ingredientBloc.innerHTML = `${ingredient.ingredient}`
@@ -25,9 +26,9 @@ export function recipeFactory(recipe) {
       } else {
         ingredientBloc.innerHTML = `${ingredient.ingredient}: ${ingredient.quantity} ${ingredient.unit}`
       }
-        ingredientArray.push (ingredientBloc)
+        ingredientArray.push (ingredientBloc);
     })
-    return ingredientArray
+    return ingredientArray;
   }
   
   //Create recipe card
@@ -54,6 +55,6 @@ export function recipeFactory(recipe) {
 
   return {
     getRecipeCardDOM,
-    getIngredientList,
+    displayIngredientList,
   }
 }

@@ -32,19 +32,21 @@
         </div>
     </header>
     <main>
-        <!--Dropdown tag-->
+        <!--Dropdown filter-->
+        <div class="dropdown-tag"></div>
         <div class="dropdown-container">
             <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-primary dropdown-toggle ingredient" data-bs-toggle="dropdown" aria-expanded="false">
                     Ingredients
                 </button>
                 <ul class="dropdown-menu"></ul>
             </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="btn-group appliance-button">
+                <input type="search" class="form-control label" id="appliance-input" placeholder="Rechercher une appareil">
+                <label class="label" id="appliance-label">
                     Appareils
-                </button>
-                <ul class="dropdown-menu"></ul>
+                </label>
+                <ul class="dropdown-menu appliance-items"></ul>
             </div>
             <div class="btn-group">
                 <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

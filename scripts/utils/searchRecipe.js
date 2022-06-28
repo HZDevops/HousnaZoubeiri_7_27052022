@@ -28,15 +28,15 @@ export function searchRecipe(recipes, string) {
  **/
 export function searchByUstensil(recipes, ustensil) {
     let searchedRecipes = []
-    
+
     recipes.forEach ((recipe) => {
         let ustensilSearched  = recipe.ustensils
-        console.log(ustensilSearched)
+        //console.log(ustensilSearched)
         if (ustensilSearched.filter((element) => element.includes(ustensil)).length > 0 ) {
            searchedRecipes.push(recipe)
         }
     })  
-    console.log (searchedRecipes)
+    //console.log (searchedRecipes)
 }
 
 /**
@@ -54,7 +54,7 @@ export function searchByAppliance(recipes, appliance) {
       searchedRecipes.push(recipe)
     }
   })
-  console.log(searchedRecipes)
+  //console.log(searchedRecipes)
 }
 
 /**
@@ -63,29 +63,22 @@ export function searchByAppliance(recipes, appliance) {
  * @param {Array} ingredients
  * @returns {Array} 
  */
- export function searchByIngredient(recipes, ingredient) {
-    let searchedRecipes = []
-    let ingredientsArray = []
+ export function searchByIngredient(recipes, ingredientFound) {
+    let searchedRecipes = [];
+    let ingredientsArray = [];
     
-    console.log(recipes)
+    //console.log(recipes)
     recipes.forEach((recipe) => {
         ingredientsArray = recipe.ingredients
-        //console.log(ingredientsArray)
+        ingredientsArray.forEach ((element, index, array) => {
+            if (element.ingredient.includes(ingredientFound)) {
+                searchedRecipes.push(recipe);
+                index ++;
+                array.length ++;
+            }
+        })
     })
         
-    /*for ( let i = 0; i < ingredientsArray.length ; i++ ) {
-        
-        let ingredient = ingredientsArray[i].ingredients
-        console.log(ingredient)
-    }*/
-        
-        
-        /*let ingredientSearched = .ingredient.toLowerCase();
-        console.log(ingredientSearched)
-        if (ingredientSearched.includes(ingredient) === true) {
-            searchedRecipes.push(recipe)
-         }*/
 
-
-    console.log(ingredientsArray)
+    //console.log(searchedRecipes)
 }

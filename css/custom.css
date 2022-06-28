@@ -48,3 +48,29 @@ a {
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.dropdown-menu {
+    top:69px;
+}
+.dropdown-item {
+    height:auto;
+    margin-bottom: 0;
+}
+
+.select {
+    margin-right: 5px;
+}
+
+.label {
+    width: 170px;
+    height:69px;
+    display: inline-block;
+    position: relative;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+#appliance-label, #appliance-input {
+    background: #68D9A4;
+}
