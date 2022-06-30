@@ -61,6 +61,10 @@ a {
     margin-right: 5px;
 }
 
+.btn-group {
+    margin-right:20px;
+}
+
 .label {
     width: 170px;
     height:69px;
@@ -69,8 +73,23 @@ a {
     color: white;
     font-weight: bold;
     border-radius: 5px;
+    padding-block:22px;
+    padding-left: 22px;
 }
 
-#appliance-label, #appliance-input {
+#appliance-label, #appliance-input, .appliance-tag {
     background: #68D9A4;
+}
+
+.appliance-name {
+    margin-right: 13px;
+}
+
+.tag, .bi {
+    color:white;
+}
+
+.bi-chevron-down {
+    margin-left:40px;
+    font-weight: bold;
 }

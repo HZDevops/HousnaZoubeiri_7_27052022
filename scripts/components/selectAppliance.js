@@ -9,6 +9,9 @@ const applianceLabel = document.getElementById('appliance-label')
 const applianceItems = document.querySelector('.appliance-items');
 let tagContainer = document.querySelector ('.tag-container');
 
+
+
+
 let applianceTag = ''
 let applianceArray = [];
 
@@ -18,7 +21,7 @@ applianceInput.style.display = 'none';
  * Create appliance tag in tag section
  */
 function createApplianceTag () {
-  applianceTag = `<div class="tag"><span class="appliance-tag"></span><i class="bi bi-x-circle"></i></div>`
+  applianceTag = `<button type="button" class="btn appliance-tag"><span class="appliance-name tag"></span><i class="bi bi-x-circle"></i></div>`
   tagContainer.innerHTML = applianceTag;
 }
 
@@ -27,8 +30,26 @@ function createApplianceTag () {
  * @param {Array} textContent
  */
 function updateSelectedTag (textContent) {
-  let appliance = document.querySelector('.appliance-tag')
-  appliance.innerHTML = textContent;
+  let appliance = document.querySelector('.appliance-name')
+  if (!appliance) {
+    createApplianceTag ();
+  } else {
+    appliance.innerHTML = textContent;
+  }
+}
+
+/**
+ * Remove tag in tag section when click in cross icon 
+ * @param {Array} recipes
+ */
+function closeApplianceTag(recipes) {
+  const tag = document.querySelector('.appliance-tag');
+  const closeTag = document.querySelector('.bi-x-circle');
+
+  closeTag.addEventListener('click', function (e) {
+    tag.remove();
+    displayRecipes(recipes);
+  });
 }
 
 /**
@@ -45,17 +66,24 @@ function displayApplianceTag (appliances, recipes) {
       applianceLabel.style.display = 'block';
       let applianceSelected = appliance.textContent;
 
-      if(!applianceTag){
-        createApplianceTag();
+      if(applianceTag){
         updateSelectedTag(applianceSelected);
+        closeApplianceTag(recipes);
+        let searchedRecipe = searchByAppliance(recipes, appliance.textContent);
+        recipeContainer.innerHTML = '';
+        console.log(searchedRecipe);
+        displayRecipes(searchedRecipe);
       } else {
+        createApplianceTag();
+        console.log('bonjour')
+        closeApplianceTag(recipes);
         updateSelectedTag(applianceSelected);
-      }
-      
-      let searchedRecipe = searchByAppliance(recipes, appliance.textContent);
-      recipeContainer.innerHTML = '';
-      console.log(searchedRecipe);
-      displayRecipes(searchedRecipe);
+        let searchedRecipe = searchByAppliance(recipes, appliance.textContent);
+        recipeContainer.innerHTML = '';
+        console.log(searchedRecipe);
+        displayRecipes(searchedRecipe);
+        
+      }  
     })
   })
 }
@@ -99,4 +127,9 @@ export function selectAppliance(recipes) {
       displayApplianceTag(appliances,recipes)
     })
   })
+  /*window.addEventListener('click', function(e){
+    applianceItems.style.display = 'none';
+    applianceInput.style.display = 'none';
+    applianceLabel.style.display = 'block';
+  })*/
 }

@@ -17,7 +17,7 @@
 
 <body>
     <header>
-        <div class="header-container">
+        <div class="header-container ms-5 me-5">
             <div class="row">
                 <div class="col mx-auto pt-5 text-center">
                     <img class="block mx-auto" src="/assets/logo.png" width="268" height="92" alt="logo site">
@@ -33,9 +33,9 @@
         </div>
     </header>
     <main>
-        <div class="tag-container"></div>
+        <div class="ms-5 me-5 tag-container"></div>
         <!--Dropdown filter-->
-        <div class="dropdown-container">
+        <div class="dropdown-container ms-5 me-5">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary dropdown-toggle ingredient" data-bs-toggle="dropdown" aria-expanded="false">
                     Ingredients
@@ -45,7 +45,7 @@
             <div class="btn-group appliance-button">
                 <input type="search" class="form-control label" id="appliance-input" placeholder="Rechercher une appareil">
                 <label class="label" id="appliance-label">
-                    Appareils
+                    Appareils<i class="bi bi-chevron-down"></i>
                 </label>
                 <ul class="dropdown-menu appliance-items"></ul>
             </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
         
-        <div class="recipe-container"></div>
+        <div class="recipe-container ms-5 me-5"></div>
     </main>
     <!-- Script js -->
     <script type=module src="scripts/index.js"></script>
