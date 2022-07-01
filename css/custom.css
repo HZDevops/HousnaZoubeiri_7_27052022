@@ -85,7 +85,11 @@ a {
     background: #ED6454;
 }
 
-.appliance-name, .ustensil-name {
+#ingredient-label, #ingredient-input, .ingredient-tag {
+    background: #3282F7;
+}
+
+.appliance-name, .ustensil-name, .ingredient-name {
     margin-right: 13px;
 }
 

@@ -27,7 +27,7 @@ function createIngredientTag() {
  * @param {Array} textContent
  */
 function updateSelectedTag(textContent) {
-  let ingredient = document.querySelector('.appliance-name');
+  let ingredient = document.querySelector('.ingredient-name');
   if (!ingredient) {
     createIngredientTag();
   } else {
@@ -54,7 +54,7 @@ function closeIngredientTag(recipes) {
  * @param {Array} ingredients
  * @param {Array} recipes
  */
-function displayIngredient(ingredients, recipes) {
+function displayIngredientTag(ingredients, recipes) {
   ingredients.forEach((ingredient) => {
     ingredient.addEventListener('click', (e) => {
       ingredientItems.style.display = 'none';
@@ -83,7 +83,7 @@ function displayIngredient(ingredients, recipes) {
           ingredient.textContent
         );
         recipeContainer.innerHTML = '';
-        console.log(searchedRecipe);
+        //console.log(searchedRecipe);
         displayRecipes(searchedRecipe);
       }
     });

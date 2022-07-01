@@ -65,25 +65,23 @@ export function searchByAppliance(recipes, appliance) {
 /**
  * Return an array with recipes matching with ingredient tag
  * @param {Array} recipes
- * @param {Array} ingredients
+ * @param {String} ingredient - value of ingredient
  * @returns {Array} 
  */
- export function searchByIngredient(recipes, ingredientFound) {
-    let searchedRecipes = [];
-    let ingredientsArray = [];
+ export function searchByIngredient(recipes, ingredient) {
+  let searchedRecipes = [];
+  let ingredientsArray = [];
     
-    //console.log(recipes)
-    recipes.forEach((recipe) => {
-        ingredientsArray = recipe.ingredients
-        ingredientsArray.forEach ((element, index, array) => {
-            if (element.ingredient.includes(ingredientFound)) {
-                searchedRecipes.push(recipe);
-                index ++;
-                array.length ++;
-            }
-        })
-    })
-        
-
-    //console.log(searchedRecipes)
+  recipes.forEach((recipe) => {
+    ingredientsArray = recipe.ingredients
+    ingredientsArray.forEach ((element, index, array) => {
+    if (element.ingredient.includes(ingredient)) {
+      searchedRecipes.push(recipe);
+      index ++;
+      array.length ++;
+    }
+  })
+  })
+       
+  return searchedRecipes;
 }
