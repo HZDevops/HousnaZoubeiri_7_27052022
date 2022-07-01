@@ -18,7 +18,7 @@ ustensilInput.style.display = 'none';
  * Create ustensil tag in tag section
  */
 function createUstensilTag() {
-  ustensilTag = `<button type="button" class="btn ustensil-tag"><span class="appliance-name tag"></span><i class="bi bi-x-circle"></i></div>`;
+  ustensilTag = `<button type="button" class="btn ustensil-tag"><span class="ustensil-name tag"></span><i class="bi bi-x-circle"></i></div>`;
   tagContainer.innerHTML = ustensilTag;
 }
 
@@ -27,7 +27,7 @@ function createUstensilTag() {
  * @param {Array} textContent
  */
 function updateSelectedTag(textContent) {
-  let ustensil = document.querySelector('.appliance-name');
+  let ustensil = document.querySelector('.ustensil-name');
   if (!ustensil) {
     createUstensilTag();
   } else {
@@ -50,7 +50,7 @@ function closeUstensilTag(recipes) {
 }
 
 /**
- * Display selected ustensil tag in tag section and searched recipes by appliance
+ * Display selected ustensil tag in tag section and searched recipes by ustensil
  * @param {Array} ustensils
  * @param {Array} recipes
  */

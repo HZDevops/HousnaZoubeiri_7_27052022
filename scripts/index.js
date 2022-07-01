@@ -2,7 +2,9 @@ import { getData } from './utils/getData.js';
 import { displayRecipes } from './utils/displayRecipes.js';
 import { selectAppliance } from './components/selectAppliance.js';
 import { selectUstensil } from './components/selectUstensil.js';
+import { selectIngredient } from './components/selectIngredient.js';
 import {  searchRecipe, searchByUstensil, searchByAppliance, searchByIngredient } from './utils/searchRecipe.js';
+
 
 
 //DOM elements
@@ -50,9 +52,10 @@ let searchedRecipes = recipesArray
 inputRecipeListner()
 selectAppliance(recipesArray)
 selectUstensil(recipesArray)
+selectIngredient(recipesArray)
 //searchByUstensil(recipesArray, 'saladier')
 //searchByAppliance(recipesArray, 'blender')
-searchByIngredient(recipesArray, 'lait')
+//searchByIngredient(recipesArray, 'lait')
 
 //searchByIngredients(recipesArray, 'coco')
 

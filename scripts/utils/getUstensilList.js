@@ -1,5 +1,5 @@
 /**
- * Get ustensils list
+ * Get ustensils array
  * @param {Array} recipes
  * @returns {Array}
  */
