@@ -27,16 +27,20 @@ export function searchRecipe(recipes, string) {
  * @returns {Array} 
  **/
 export function searchByUstensil(recipes, ustensil) {
-    let searchedRecipes = []
-
-    recipes.forEach ((recipe) => {
-        let ustensilSearched  = recipe.ustensils
-        //console.log(ustensilSearched)
-        if (ustensilSearched.filter((element) => element.includes(ustensil)).length > 0 ) {
-           searchedRecipes.push(recipe)
-        }
-    })  
-    //console.log (searchedRecipes)
+  let searchedRecipes = [];
+   
+  recipes.forEach ((recipe) => {
+    let ustensilSearched  = recipe.ustensils;
+        
+    for (let i = 0; i < ustensilSearched.length; i++) {
+      let element = ustensilSearched[i].toLowerCase();
+          
+      if (element.includes(ustensil.toLowerCase()) === true) {
+        searchedRecipes.push(recipe);
+      }
+    }
+  })  
+  return (searchedRecipes)
 }
 
 /**

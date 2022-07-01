@@ -4,9 +4,12 @@
  * @returns {Array}
  */ 
 export function getApplianceList(recipes) {
-  const applianceArray = [];
+  let applianceArray = [];
   recipes.forEach((recipe) => {
     applianceArray.push(recipe.appliance);
   });
+
+  applianceArray = applianceArray.filter((ele, pos) => applianceArray.indexOf(ele) == pos
+  );
   return applianceArray;
 }

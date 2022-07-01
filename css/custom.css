@@ -81,7 +81,11 @@ a {
     background: #68D9A4;
 }
 
-.appliance-name {
+#ustensil-label, #ustensil-input, .ustensil-tag {
+    background: #ED6454;
+}
+
+.appliance-name, .ustensil-name {
     margin-right: 13px;
 }
 

@@ -4,9 +4,16 @@
  * @returns {Array}
  */
 export function getUstensilList(recipes) {
-  const ustensilArray = [];
+  let ustensilArray = [];
   recipes.forEach((recipe) => {
-    ustensilArray.push(recipe.ustensils);
+    let array = recipe.ustensils;
+   
+    for (let i = 0; i< array.length ;i++) {
+     ustensilArray.push(array[i]);
+    }
   });
-  return ustensilArray;
+  ustensilArray = ustensilArray.filter(
+    (ele, pos) => ustensilArray.indexOf(ele) == pos
+  );
+  return (ustensilArray);
 }

@@ -75,7 +75,6 @@ function displayApplianceTag (appliances, recipes) {
         displayRecipes(searchedRecipe);
       } else {
         createApplianceTag();
-        console.log('bonjour')
         closeApplianceTag(recipes);
         updateSelectedTag(applianceSelected);
         let searchedRecipe = searchByAppliance(recipes, appliance.textContent);
@@ -93,10 +92,8 @@ function displayApplianceTag (appliances, recipes) {
  * @param {Array} recipes 
  */
 export function selectAppliance(recipes) {
-  const array = getApplianceList(recipes);
+  const applianceArray = getApplianceList(recipes);
  
-  applianceArray = array.filter((ele, pos) => array.indexOf(ele) == pos);
-  console.log(applianceArray);
   for (let i = 0; i < applianceArray.length; i++) {
     applianceItems.insertAdjacentHTML('beforeend',`<li><a class="dropdown-item" href="#">${applianceArray[i]}</a></li>`);
   }
