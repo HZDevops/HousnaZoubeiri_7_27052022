@@ -11,7 +11,7 @@ import {  searchRecipe, searchByUstensil, searchByAppliance, searchByIngredient 
 let inputRecipe = document.getElementById('floatingInput')
 let recipeContainer = document.querySelector('.recipe-container')
 
-let recipesArray = []
+let recipesArray = [];
 
 
 /**
@@ -28,16 +28,17 @@ async function loadRecipes() {
  **/
 function inputRecipeListner() {
   inputRecipe.addEventListener('keyup', function (e) {
+    let searchedRecipes = [];
+
     if (inputRecipe.value.length < 3) {
       searchedRecipes = recipesArray
-      //console.log(searchedRecipes)
+      console.log(searchedRecipes)
       displayRecipes(searchedRecipes)
     }
-    //console.log(inputRecipe.value.length, inputRecipe.value)
+    
     if (inputRecipe.value.length >= 3) {
-      searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value);
+      searchedRecipes = searchRecipe(recipesArray, inputRecipe.value);
       recipeContainer.innerHTML = ''
-      //console.log(searchedRecipes)
       displayRecipes(searchedRecipes)
     }
   })
@@ -47,15 +48,11 @@ await loadRecipes()
 
 displayRecipes(recipesArray)
 
-let searchedRecipes = recipesArray
+//let searchedRecipes = recipesArray
 
 inputRecipeListner()
 selectAppliance(recipesArray)
 selectUstensil(recipesArray)
 selectIngredient(recipesArray)
-//searchByUstensil(recipesArray, 'saladier')
-//searchByAppliance(recipesArray, 'blender')
-//searchByIngredient(recipesArray, 'lait')
 
-//searchByIngredients(recipesArray, 'coco')
 

@@ -6,7 +6,7 @@ import { recipeFactory } from '../factories/recipe.js';
  **/
 export function displayRecipes(recipes) {
   const recipeContainer = document.querySelector('.recipe-container');
-  //console.log(recipes)
+  console.log(recipes)
   for (let i = 0; i < recipes.length; i++) {
     const recipeModel = recipeFactory(recipes[i]);
     const recipeCard = recipeModel.getRecipeCardDOM();

@@ -2,21 +2,36 @@
 /**
  * Return an array with recipes matching with input string in search bar
  * @param {Array} recipes
- * @param {string} string
+ * @param {string} string - value of recipe name, ingredient ou description
  * @returns {Array} 
  **/
 
 export function searchRecipe(recipes, string) {
-  let searchedRecipes = []
+  let searchedRecipes = [];
 
   recipes.forEach((recipe) => {
-    let stringSearched = recipe.name.toLowerCase()
+    let nameRecipeSearched = recipe.name.toLowerCase();
+    let ingredientRecipeSearched = recipe.ingredients;
+    let descriptionRecipeSearched = recipe.description.toLowerCase();
     
-    if (stringSearched.includes(string) === true) {
-      searchedRecipes.push(recipe)
+    if (nameRecipeSearched.includes(string) === true) {
+      searchedRecipes.push(recipe);
     }
-  })
+    for (let i = 0; i < ingredientRecipeSearched.length; i++) {
+      if (
+        ingredientRecipeSearched[i].ingredient
+          .toLowerCase()
+          .includes(string) === true
+      ) {
+        searchedRecipes.push(recipe);
+      }
+    }
+    if (descriptionRecipeSearched.includes(string) === true) {
+      searchedRecipes.push(recipe);
+    }
 
+  })
+  
   return searchedRecipes
 }
 
