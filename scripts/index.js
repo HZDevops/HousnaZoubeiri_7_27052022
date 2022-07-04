@@ -26,13 +26,13 @@ async function loadRecipes() {
 /**
  * Display recipe by input in main search bar
  **/
-function inputRecipeListner() {
+export function inputRecipeListner() {
   inputRecipe.addEventListener('keyup', function (e) {
     let searchedRecipes = [];
 
     if (inputRecipe.value.length < 3) {
       searchedRecipes = recipesArray
-      console.log(searchedRecipes)
+      //console.log(searchedRecipes)
       displayRecipes(searchedRecipes)
     }
     
@@ -45,11 +45,7 @@ function inputRecipeListner() {
 }
 
 await loadRecipes()
-
 displayRecipes(recipesArray)
-
-//let searchedRecipes = recipesArray
-
 inputRecipeListner()
 selectAppliance(recipesArray)
 selectUstensil(recipesArray)

@@ -16,15 +16,25 @@ export function recipeFactory(recipe) {
     let ingredientArray = [];
 
     ingredients.forEach((ingredient) => {
-      const ingredientBloc = document.createElement('li');
-      ingredientBloc.classList.add('ingredient');
+      let ingredientBloc = document.createElement('li');
+      const ingredientItem = document.createElement('span');
+      const ingredientQuantity = document.createElement('span');
+      const ingredientUnit = document.createElement('span');
+
+      ingredientItem.classList.add('ingredient');
+      ingredientBloc.appendChild(ingredientItem);
+      ingredientBloc.appendChild(ingredientQuantity);
+      ingredientBloc.appendChild(ingredientUnit);
 
       if(!ingredient.quantity && !ingredient.unit) {
-        ingredientBloc.innerHTML = `${ingredient.ingredient}`
+        ingredientItem.innerHTML = `${ingredient.ingredient}`
       } else if (!ingredient.unit) {
-        ingredientBloc.innerHTML = `${ingredient.ingredient}: ${ingredient.quantity}`
+        ingredientItem.innerHTML = `${ingredient.ingredient}`
+        ingredientQuantity.innerHTML = `: ${ingredient.quantity}`;
       } else {
-        ingredientBloc.innerHTML = `${ingredient.ingredient}: ${ingredient.quantity} ${ingredient.unit}`
+        ingredientItem.innerHTML = `${ingredient.ingredient}`;
+        ingredientQuantity.innerHTML = `: ${ingredient.quantity}`;
+        ingredientUnit.innerHTML = ` ${ingredient.unit}`; 
       }
         ingredientArray.push (ingredientBloc);
     })
@@ -42,10 +52,14 @@ export function recipeFactory(recipe) {
                 <div class="card">
                   <div class="card-img-top"></div>
                   <div class="card-body">
-                    <h5 class="card-title">${name}</h5>
-                    <h5 class="recipe-time fw-bold">${time}min</h5>
-                    <ul id=${id} class="recipe-ingredient"></ul>
-                    <p class="card-text">${description}</p>
+                    <div class="card-heading">
+                      <h5 class="card-title">${name}</h5>
+                      <h5 class="recipe-time fw-bold"><i class="bi bi-clock"></i>${time}min</h5>
+                    </div>
+                    <div class="card-detail">
+                      <ul id=${id} class="recipe-ingredient"></ul>
+                      <p class="card-text">${description}</p>
+                    </div>
                   </div>
                 </div>
               `;

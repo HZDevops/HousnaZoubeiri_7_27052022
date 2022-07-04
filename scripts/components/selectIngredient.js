@@ -1,5 +1,6 @@
 import { getIngredientList } from '../utils/getIngredientList.js';
 import { searchByIngredient } from '../utils/searchRecipe.js';
+import { searchRecipe } from '../utils/searchRecipe.js';
 import { displayRecipes } from '../utils/displayRecipes.js';
 
 //DOM Elements

@@ -12,6 +12,7 @@ export function searchRecipe(recipes, string) {
   recipes.forEach((recipe) => {
     let nameRecipeSearched = recipe.name.toLowerCase();
     let ingredientRecipeSearched = recipe.ingredients;
+    console.log(ingredientRecipeSearched)
     let descriptionRecipeSearched = recipe.description.toLowerCase();
     
     if (nameRecipeSearched.includes(string) === true) {
@@ -19,19 +20,18 @@ export function searchRecipe(recipes, string) {
     }
     for (let i = 0; i < ingredientRecipeSearched.length; i++) {
       if (
-        ingredientRecipeSearched[i].ingredient
-          .toLowerCase()
+        (ingredientRecipeSearched[i].ingredient
+          .toLowerCase())
           .includes(string) === true
       ) {
+        //console.log(ingredientRecipeSearched[i]);
         searchedRecipes.push(recipe);
-      }
+      } 
     }
     if (descriptionRecipeSearched.includes(string) === true) {
       searchedRecipes.push(recipe);
     }
-
   })
-  
   return searchedRecipes
 }
 

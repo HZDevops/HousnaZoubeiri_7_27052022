@@ -33,25 +33,47 @@ a {
 
 .card-body {
     height: 186px;
-    display: flex;
-    justify-content: space-between;
     font-size: 12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-.ingredient {
+.card-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bi-clock {
+    margin-right: 10px;
+}
+
+li {
     list-style-type: none;
   }
+
+.ingredient {
+    font-weight: bold;
+}
+
+.card-detail {
+    display: flex;
+}
 
 .dropdown-container {
     margin-top: 50px;
     margin-bottom: 50px;
 }
 
+.card-text {
+    width: 171px;
+    height: 109px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+}
+
 .dropdown-menu {
     top:69px;
 }
+
 .dropdown-item {
     height:auto;
     margin-bottom: 0;
@@ -93,11 +115,8 @@ a {
     margin-right: 13px;
 }
 
-.tag, .bi {
-    color:white;
-}
-
 .bi-chevron-down {
     margin-left:40px;
     font-weight: bold;
+    color:white;
 }
