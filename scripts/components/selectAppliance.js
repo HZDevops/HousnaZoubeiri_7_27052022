@@ -7,15 +7,14 @@ const recipeContainer = document.querySelector('.recipe-container');
 const applianceInput = document.getElementById('appliance-input');
 const applianceLabel = document.getElementById('appliance-label')
 const applianceItems = document.querySelector('.appliance-items');
+const arrowUp = document.querySelector('.bi-chevron-up');
 let tagContainer = document.querySelector ('.tag-container');
 
 
-
-
 let applianceTag = ''
-let applianceArray = [];
 
 applianceInput.style.display = 'none';
+arrowUp.style.display = 'none';
 
 /**
  * Create appliance tag in tag section
@@ -48,7 +47,7 @@ function closeApplianceTag(recipes) {
 
   closeTag.addEventListener('click', function (e) {
     tag.remove();
-    displayRecipes(recipes);
+    inputRecipeListner();
   });
 }
 
@@ -95,13 +94,15 @@ export function selectAppliance(recipes) {
   const applianceArray = getApplianceList(recipes);
  
   for (let i = 0; i < applianceArray.length; i++) {
-    applianceItems.insertAdjacentHTML('beforeend',`<li><a class="dropdown-item" href="#">${applianceArray[i]}</a></li>`);
+    applianceItems.insertAdjacentHTML('beforeend',`<li class="dropdown-item appliance">${applianceArray[i]}</li>`);
   }
  
   applianceLabel.addEventListener('click', function (e) {
     applianceInput.style.display = 'block';
+    applianceInput.style.width = '667px';
+    arrowUp.style.display = 'block';
     applianceLabel.style.display = 'none';
-    applianceItems.style.display = 'block';
+    applianceItems.style.display = 'flex';
     
     let appliances = Array.from(document.getElementsByClassName('dropdown-item'));
     
@@ -115,7 +116,7 @@ export function selectAppliance(recipes) {
 
       for (let i = 0; i < newApplianceArray.length; i++) {
         applianceItems.insertAdjacentHTML('beforeend',
-                `<li><a class="dropdown-item" href="#">${newApplianceArray[i]}</a></li>`);
+                `<li class="dropdown-item">${newApplianceArray[i]}</li>`);
       }
       appliances = Array.from(
         document.getElementsByClassName('dropdown-item')
@@ -123,10 +124,14 @@ export function selectAppliance(recipes) {
 
       displayApplianceTag(appliances,recipes)
     })
+    if (arrowUp) {
+      arrowUp.addEventListener('click', (event) => {
+        applianceInput.style.display = 'none';
+        applianceItems.style.display = 'none';
+        arrowUp.style.display = 'none';
+        applianceLabel.style.display = 'block';
+      });
+    }
   })
-  /*window.addEventListener('click', function(e){
-    applianceItems.style.display = 'none';
-    applianceInput.style.display = 'none';
-    applianceLabel.style.display = 'block';
-  })*/
+  
 }

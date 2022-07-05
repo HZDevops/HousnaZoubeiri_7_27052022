@@ -12,7 +12,7 @@ export function searchRecipe(recipes, string) {
   recipes.forEach((recipe) => {
     let nameRecipeSearched = recipe.name.toLowerCase();
     let ingredientRecipeSearched = recipe.ingredients;
-    console.log(ingredientRecipeSearched)
+    console.log(ingredientRecipeSearched[ingredientRecipeSearched.length-1])
     let descriptionRecipeSearched = recipe.description.toLowerCase();
     
     if (nameRecipeSearched.includes(string) === true) {
@@ -89,13 +89,18 @@ export function searchByAppliance(recipes, appliance) {
     
   recipes.forEach((recipe) => {
     ingredientsArray = recipe.ingredients
+    const length = ingredientsArray.length;
+
     ingredientsArray.forEach ((element, index, array) => {
-    if (element.ingredient.includes(ingredient)) {
-      searchedRecipes.push(recipe);
-      index ++;
-      array.length ++;
+      if (element.ingredient.includes(ingredient)) {
+        searchedRecipes.push(recipe);
+        index ++;
+        array.length ++;
+      }
+    })
+    if (length != ingredientsArray.length) {
+      ingredientsArray.length --;
     }
-  })
   })
        
   return searchedRecipes;

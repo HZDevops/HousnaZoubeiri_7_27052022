@@ -1,19 +1,22 @@
 import { getIngredientList } from '../utils/getIngredientList.js';
 import { searchByIngredient } from '../utils/searchRecipe.js';
-import { searchRecipe } from '../utils/searchRecipe.js';
+import { inputRecipeListner } from '../index.js';
 import { displayRecipes } from '../utils/displayRecipes.js';
+import { getData } from '../utils/getData.js';
 
 //DOM Elements
 const recipeContainer = document.querySelector('.recipe-container');
 const ingredientInput = document.getElementById('ingredient-input');
 const ingredientLabel = document.getElementById('ingredient-label');
 const ingredientItems = document.querySelector('.ingredient-items');
+const arrowUp = document.querySelector('.bi-chevron-up');
+
 let tagContainer = document.querySelector('.tag-container');
 
 let ingredientTag = '';
-let ingredientArray = [];
 
 ingredientInput.style.display = 'none';
+arrowUp.style.display = 'none';
 
 /**
  * Create ingredient tag in tag section
@@ -40,13 +43,17 @@ function updateSelectedTag(textContent) {
  * Remove tag in tag section when click in cross icon
  * @param {Array} recipes
  */
-function closeIngredientTag(recipes) {
+async function closeIngredientTag(recipes) {
   const tag = document.querySelector('.ingredient-tag');
   const closeTag = document.querySelector('.bi-x-circle');
+  const recipesData = await getData();
+  console.log(recipesData)
 
   closeTag.addEventListener('click', function (e) {
     tag.remove();
-    displayRecipes(recipes);
+    recipeContainer.innerHTML = '';
+    displayRecipes(recipesData.recipes);
+    inputRecipeListner();
   });
 }
 
@@ -101,14 +108,16 @@ export function selectIngredient(recipes) {
   for (let i = 0; i < ingredientArray.length; i++) {
     ingredientItems.insertAdjacentHTML(
       'beforeend',
-      `<li><a class="dropdown-item" href="#">${ingredientArray[i]}</a></li>`
+      `<li class="dropdown-item">${ingredientArray[i]}</li>`
     );
   }
 
   ingredientLabel.addEventListener('click', function (e) {
     ingredientInput.style.display = 'block';
+    ingredientInput.style.width = '667px'
+    arrowUp.style.display = 'block';
     ingredientLabel.style.display = 'none';
-    ingredientItems.style.display = 'block';
+    ingredientItems.style.display = 'flex';
 
     let ingredients = Array.from(
       document.getElementsByClassName('dropdown-item')
@@ -127,17 +136,22 @@ export function selectIngredient(recipes) {
       for (let i = 0; i < newIngredientArray.length; i++) {
         ingredientItems.insertAdjacentHTML(
           'beforeend',
-          `<li><a class="dropdown-item" href="#">${newIngredientArray[i]}</a></li>`
+          `<li class="dropdown-item">${newIngredientArray[i]}</li>`
         );
       }
       ingredients = Array.from(document.getElementsByClassName('dropdown-item'));
 
       displayIngredientTag(ingredients, recipes);
     });
+
+    if(arrowUp) {
+      arrowUp.addEventListener('click', (event) => {
+        ingredientInput.style.display = 'none';
+        ingredientItems.style.display ='none';
+        arrowUp.style.display = 'none';
+        ingredientLabel.style.display = 'block';
+      });
+    } 
   });
-  /*window.addEventListener('click', function(e){
-    applianceItems.style.display = 'none';
-    applianceInput.style.display = 'none';
-    applianceLabel.style.display = 'block';
-  })*/
+    
 }

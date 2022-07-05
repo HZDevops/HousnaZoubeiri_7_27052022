@@ -1,3 +1,15 @@
+#floatingInput {
+    background:#E7E7E7;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+#floatingInput::placeholder {
+    color:black;
+    opacity: 0.25;
+}
+
 .recipe-container {
     display: flex;
     justify-content: space-around;
@@ -71,12 +83,29 @@ li {
 }
 
 .dropdown-menu {
-    top:69px;
+    flex-wrap: wrap;
+    top: 60px;
+    border: none;
+    border-radius: 5px;
+    left: 0.5px;
+    width: 666.1px;
+    height: 397px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dropdown-item {
-    height:auto;
+    width: 200px;
+    height:40px;
     margin-bottom: 0;
+    color:white;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+#ingredient-input::placeholder, #appliance-input::placeholder, #ustensil-input::placeholder { 
+  color: white;
+  opacity: 0.5; /* Firefox */
 }
 
 .select {
@@ -99,24 +128,43 @@ li {
     padding-left: 22px;
 }
 
-#appliance-label, #appliance-input, .appliance-tag {
+.appliance {
+    height:50px;
+}
+
+#appliance-label, #appliance-input, .appliance-tag, .appliance-items {
     background: #68D9A4;
+    color: white;
 }
 
-#ustensil-label, #ustensil-input, .ustensil-tag {
+#ustensil-label, #ustensil-input, .ustensil-tag, .ustensil-items {
     background: #ED6454;
+    color: white;
 }
 
-#ingredient-label, #ingredient-input, .ingredient-tag {
+#ingredient-label, #ingredient-input, .ingredient-tag,.ingredient-items {
     background: #3282F7;
+    color: white;
 }
 
 .appliance-name, .ustensil-name, .ingredient-name {
     margin-right: 13px;
+    color:white;
 }
 
-.bi-chevron-down {
+.bi-chevron-down, .bi-chevron-up {
     margin-left:40px;
     font-weight: bold;
+    color:white;
+    cursor:pointer;
+}
+
+.bi-chevron-up {
+    position: absolute;
+    left: 85%;
+    top: 30%;
+}
+
+.bi-x-circle  {
     color:white;
 }

@@ -1,5 +1,6 @@
 import { getUstensilList } from '../utils/getUstensilList.js';
 import { searchByUstensil } from '../utils/searchRecipe.js';
+import { inputRecipeListner } from '../index.js';
 import { displayRecipes } from '../utils/displayRecipes.js';
 
 //DOM Elements
@@ -7,12 +8,13 @@ const recipeContainer = document.querySelector('.recipe-container');
 const ustensilInput = document.getElementById('ustensil-input');
 const ustensilLabel = document.getElementById('ustensil-label');
 const ustensilItems = document.querySelector('.ustensil-items');
+const arrowUp = document.querySelector('.bi-chevron-up');
 let tagContainer = document.querySelector('.tag-container');
 
 let ustensilTag = '';
-let ustensilArray = [];
 
 ustensilInput.style.display = 'none';
+arrowUp.style.display = 'none';
 
 /**
  * Create ustensil tag in tag section
@@ -45,7 +47,7 @@ function closeUstensilTag(recipes) {
 
   closeTag.addEventListener('click', function (e) {
     tag.remove();
-    displayRecipes(recipes);
+    inputRecipeListner();
   });
 }
 
@@ -100,8 +102,10 @@ export function selectUstensil(recipes) {
 
   ustensilLabel.addEventListener('click', function (e) {
     ustensilInput.style.display = 'block';
+    ustensilInput.style.width = '667px';
+    arrowUp.style.display = 'block';
     ustensilLabel.style.display = 'none';
-    ustensilItems.style.display = 'block';
+    ustensilItems.style.display = 'flex';
 
     let ustensils = Array.from(
       document.getElementsByClassName('dropdown-item')
