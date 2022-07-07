@@ -11,8 +11,8 @@ export function recipeFactory(recipe) {
   } = recipe;
 
   
-  //Display ingredients list
-  function displayIngredientList() {
+  //Display ingredients list in card recipe
+  function createIngredientList() {
     let ingredientArray = [];
 
     ingredients.forEach((ingredient) => {
@@ -37,8 +37,11 @@ export function recipeFactory(recipe) {
         ingredientUnit.innerHTML = ` ${ingredient.unit}`; 
       }
         ingredientArray.push (ingredientBloc);
+        //console.log(ingredientArray)
     })
-    return ingredientArray;
+    return (ingredientArray = ingredientArray.filter(
+      (ele, pos) => ingredientArray.indexOf(ele) == pos
+    ));
   }
   
   //Create recipe card
@@ -69,6 +72,6 @@ export function recipeFactory(recipe) {
 
   return {
     getRecipeCardDOM,
-    displayIngredientList,
+    createIngredientList,
   }
 }

@@ -7,24 +7,19 @@
  **/
 
 export function searchRecipe(recipes, string) {
+  //console.log(recipes)
   let searchedRecipes = [];
 
   recipes.forEach((recipe) => {
     let nameRecipeSearched = recipe.name.toLowerCase();
     let ingredientRecipeSearched = recipe.ingredients;
-    console.log(ingredientRecipeSearched[ingredientRecipeSearched.length-1])
     let descriptionRecipeSearched = recipe.description.toLowerCase();
     
     if (nameRecipeSearched.includes(string) === true) {
       searchedRecipes.push(recipe);
     }
     for (let i = 0; i < ingredientRecipeSearched.length; i++) {
-      if (
-        (ingredientRecipeSearched[i].ingredient
-          .toLowerCase())
-          .includes(string) === true
-      ) {
-        //console.log(ingredientRecipeSearched[i]);
+      if ((ingredientRecipeSearched[i].ingredient.toLowerCase()).includes(string) === true) {
         searchedRecipes.push(recipe);
       } 
     }
@@ -32,7 +27,9 @@ export function searchRecipe(recipes, string) {
       searchedRecipes.push(recipe);
     }
   })
-  return searchedRecipes
+  return (searchedRecipes = searchedRecipes.filter(
+    (ele, pos) => searchedRecipes.indexOf(ele) == pos
+  ));
 }
 
 /**
