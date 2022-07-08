@@ -61,7 +61,7 @@ async function closeUstensilTag(recipes) {
  * @param {Array} ustensils
  * @param {Array} recipes
  */
-function displayApplianceTag(ustensils, recipes) {
+function displayUstensilTag(ustensils, recipes) {
 
   ustensils.forEach((ustensil) => {
     ustensil.addEventListener('click', (e) => {
@@ -123,14 +123,14 @@ export function selectUstensil(recipes, searchedRecipesFromMainInput) {
       document.getElementsByClassName('ustensil-item')
     );
 
-    displayApplianceTag(
+    displayUstensilTag(
       ustensilsFromDropdownMenu,
       searchedRecipesFromMainInput
     );
 
     ustensilInput.addEventListener('keyup', function (e) {
       let input = e.target.value.toLowerCase();
-      let newUstensilArray = ustensilsFromDropdownMenu.filter((ustensil) =>
+      let newUstensilArray = ustensilList.filter((ustensil) =>
         ustensil.toLowerCase().includes(input)
       );
 
@@ -146,5 +146,13 @@ export function selectUstensil(recipes, searchedRecipesFromMainInput) {
 
       displayUstensilTag(ustensilsFromDropdownMenu, searchedRecipesFromMainInput);
     });
+    if (arrowUp) {
+      arrowUp.addEventListener('click', () => {
+        ustensilInput.style.display = 'none';
+        ustensilItems.style.display = 'none';
+        arrowUp.style.display = 'none';
+        ustensilLabel.style.display = 'block';
+      });
+    }
   });
 }

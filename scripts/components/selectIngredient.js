@@ -133,7 +133,8 @@ export function selectIngredient(recipes, searchedRecipesFromMainInput) {
 
     ingredientInput.addEventListener('keyup', function (e) {
       let input = e.target.value.toLowerCase();
-      let newIngredientArray = ingredientsFromDropdownMenu.filter(
+      
+      let newIngredientArray = ingredientList.filter(
         (ingredient) => ingredient.toLowerCase().includes(input)
       );
 

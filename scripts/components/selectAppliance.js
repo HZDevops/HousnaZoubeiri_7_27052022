@@ -130,7 +130,7 @@ export function selectAppliance(recipes, searchedRecipesInMainInput) {
 
     applianceInput.addEventListener('keyup', function(e) {
       let input = e.target.value.toLowerCase();
-      let newApplianceArray = appliancesFromDropdownMenu.filter((appliance) =>
+      let newApplianceArray = applianceList.filter((appliance) =>
         appliance.toLowerCase().includes(input)
       );
     
@@ -140,7 +140,7 @@ export function selectAppliance(recipes, searchedRecipesInMainInput) {
         applianceItems.insertAdjacentHTML('beforeend',
                 `<li class="dropdown-item appliance-item">${newApplianceArray[i]}</li>`);
       }
-      appliances = Array.from(
+      appliancesFromDropdownMenu = Array.from(
         document.getElementsByClassName('appliance-item')
       );
 
