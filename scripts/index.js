@@ -11,7 +11,7 @@ let inputRecipe = document.getElementById('floatingInput')
 let recipeContainer = document.querySelector('.recipe-container')
 
 let recipesArray = [];
-//let lastSearch = [];
+let searchedRecipes =[];
 
 /**
  * Display recipe by input in main search bar
@@ -42,10 +42,10 @@ export function inputRecipeListner() {
 recipesArray = await getRecipes()
 displayRecipes(recipesArray)
 inputRecipeListner()
-
-//selectIngredient(recipesArray, searchedRecipes);
-//selectAppliance(recipesArray)
-//selectUstensil(recipesArray)
+searchedRecipes = recipesArray;
+selectIngredient(recipesArray, searchedRecipes);
+selectAppliance(recipesArray, searchedRecipes);
+selectUstensil(recipesArray, searchedRecipes);
 
 
 
