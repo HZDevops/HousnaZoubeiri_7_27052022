@@ -11,14 +11,16 @@ let inputRecipe = document.getElementById('floatingInput')
 let recipeContainer = document.querySelector('.recipe-container')
 
 let recipesArray = [];
-let searchedRecipes = [];
+//let lastSearch = [];
 
 /**
  * Display recipe by input in main search bar
  **/
 export function inputRecipeListner() {
   
+  let searchedRecipes = [];
   inputRecipe.addEventListener('keyup', function (e) {
+        
     if (inputRecipe.value.length < 3) {
       searchedRecipes = recipesArray
       displayRecipes(searchedRecipes)
@@ -26,21 +28,21 @@ export function inputRecipeListner() {
     
     if (inputRecipe.value.length >= 3) {
       searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value);
-      //console.log(searchedRecipes);
+    
       recipeContainer.innerHTML = '';
       displayRecipes(searchedRecipes);
       selectIngredient(recipesArray, searchedRecipes);
       selectAppliance(recipesArray, searchedRecipes);
+      selectUstensil(recipesArray, searchedRecipes);
     }
   })
   
 }
 
 recipesArray = await getRecipes()
-//console.log(recipesArray)
 displayRecipes(recipesArray)
 inputRecipeListner()
-//console.log(recipes);
+
 //selectIngredient(recipesArray, searchedRecipes);
 //selectAppliance(recipesArray)
 //selectUstensil(recipesArray)

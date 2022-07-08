@@ -1,53 +1,58 @@
 import { getApplianceList } from '../utils/getApplianceList.js';
 import { searchByAppliance } from '../utils/searchRecipe.js';
+import { inputRecipeListner } from '../index.js';
 import { displayRecipes } from '../utils/displayRecipes.js';
+import { getRecipes } from '../utils/getData.js';
 
 //DOM Elements
 const recipeContainer = document.querySelector('.recipe-container');
 const applianceInput = document.getElementById('appliance-input');
 const applianceLabel = document.getElementById('appliance-label')
-const applianceItems = document.querySelector('.appliance-items');
-const arrowUp = document.querySelector('.bi-chevron-up');
+const applianceItems = document.querySelector('.appliance-list');
+const arrowUp = document.querySelector('.appliance-chevron');
+
 let tagContainer = document.querySelector ('.tag-container');
-
-
-let applianceTag = ''
+let applianceTag = `<button type="button" class="btn appliance-tag"><span class="appliance-name tag"></span><i class="bi bi-x-circle close-appliance"></i></div>`;
 
 applianceInput.style.display = 'none';
 arrowUp.style.display = 'none';
 
 /**
  * Create appliance tag in tag section
+ * @param {String} applianceValue
  */
-function createApplianceTag () {
-  applianceTag = `<button type="button" class="btn appliance-tag"><span class="appliance-name tag"></span><i class="bi bi-x-circle"></i></div>`
-  tagContainer.innerHTML = applianceTag;
+function createApplianceTag(applianceValue) {
+  tagContainer.insertAdjacentHTML('beforeend', applianceTag);
+
+  let applianceName = document.querySelector('.appliance-name');
+  applianceName.innerHTML = applianceValue;
 }
 
 /**
  * Update appliance tag in tag section
- * @param {Array} textContent
+ * @param {String} applianceValue
  */
-function updateSelectedTag (textContent) {
-  let appliance = document.querySelector('.appliance-name')
-  if (!appliance) {
-    createApplianceTag ();
-  } else {
-    appliance.innerHTML = textContent;
-  }
+function updateApplianceTag(applianceValue) {
+  let appliance = document.querySelector('.appliance-name');
+
+  appliance.innerHTML = applianceValue;
 }
 
 /**
  * Remove tag in tag section when click in cross icon 
  * @param {Array} recipes
  */
-function closeApplianceTag(recipes) {
+async function closeApplianceTag(recipes) {
   const tag = document.querySelector('.appliance-tag');
-  const closeTag = document.querySelector('.bi-x-circle');
+  const closeTag = document.querySelector('.close-appliance');
+  const recipesData = await getRecipes();
+  console.log(recipesData)
 
   closeTag.addEventListener('click', function (e) {
-    tag.remove();
-    inputRecipeListner();
+   tag.remove();
+   recipeContainer.innerHTML = '';
+   displayRecipes(recipesData);
+   inputRecipeListner();
   });
 }
 
@@ -60,27 +65,40 @@ function displayApplianceTag (appliances, recipes) {
   
   appliances.forEach((appliance) => {
     appliance.addEventListener('click', (e) => {
+      
+      let searchedRecipeByAppliance = [];
+
+      let applianceSelected = appliance.textContent;
+      let currentApplianceTag = document.querySelector('.appliance-tag');
+      
       applianceItems.style.display = 'none';
       applianceInput.style.display = 'none';
       applianceLabel.style.display = 'block';
-      let applianceSelected = appliance.textContent;
-
-      if(applianceTag){
-        updateSelectedTag(applianceSelected);
+     
+      if (!currentApplianceTag) {
+        createApplianceTag(applianceSelected);
         closeApplianceTag(recipes);
-        let searchedRecipe = searchByAppliance(recipes, appliance.textContent);
-        recipeContainer.innerHTML = '';
-        console.log(searchedRecipe);
-        displayRecipes(searchedRecipe);
-      } else {
-        createApplianceTag();
-        closeApplianceTag(recipes);
-        updateSelectedTag(applianceSelected);
-        let searchedRecipe = searchByAppliance(recipes, appliance.textContent);
-        recipeContainer.innerHTML = '';
-        console.log(searchedRecipe);
-        displayRecipes(searchedRecipe);
         
+       searchedRecipeByAppliance = searchByAppliance(
+          recipes,
+          applianceSelected
+        );
+
+        recipeContainer.innerHTML = '';
+        //console.log(searchedRecipeByIngredient);
+        displayRecipes(searchedRecipeByAppliance);
+      } else {
+        updateApplianceTag(applianceSelected);
+        closeApplianceTag(recipes);
+
+        searchedRecipeByAppliance = searchByAppliance(
+          recipes,
+          applianceSelected
+        );
+
+        recipeContainer.innerHTML = '';
+        console.log(searchedRecipeByAppliance);
+        displayRecipes(searchedRecipeByAppliance);
       }  
     })
   })
@@ -90,11 +108,11 @@ function displayApplianceTag (appliances, recipes) {
  * Select appliance tag in dropdown menu
  * @param {Array} recipes 
  */
-export function selectAppliance(recipes) {
-  const applianceArray = getApplianceList(recipes);
+export function selectAppliance(recipes, searchedRecipesInMainInput) {
+  const applianceList = getApplianceList(recipes);
  
-  for (let i = 0; i < applianceArray.length; i++) {
-    applianceItems.insertAdjacentHTML('beforeend',`<li class="dropdown-item appliance">${applianceArray[i]}</li>`);
+  for (let i = 0; i < applianceList.length; i++) {
+    applianceItems.insertAdjacentHTML('beforeend',`<li class="dropdown-item appliance-item">${applianceList[i]}</li>`);
   }
  
   applianceLabel.addEventListener('click', function (e) {
@@ -104,28 +122,32 @@ export function selectAppliance(recipes) {
     applianceLabel.style.display = 'none';
     applianceItems.style.display = 'flex';
     
-    let appliances = Array.from(document.getElementsByClassName('dropdown-item'));
+    let appliancesFromDropdownMenu = Array.from(
+      document.getElementsByClassName('appliance-item')
+    );
     
-    displayApplianceTag(appliances,recipes);
+    displayApplianceTag(appliancesFromDropdownMenu, searchedRecipesInMainInput);
 
     applianceInput.addEventListener('keyup', function(e) {
       let input = e.target.value.toLowerCase();
-      let newApplianceArray = applianceArray.filter(appliance => appliance.toLowerCase().includes(input))
+      let newApplianceArray = appliancesFromDropdownMenu.filter((appliance) =>
+        appliance.toLowerCase().includes(input)
+      );
     
       applianceItems.innerHTML = '';
 
       for (let i = 0; i < newApplianceArray.length; i++) {
         applianceItems.insertAdjacentHTML('beforeend',
-                `<li class="dropdown-item">${newApplianceArray[i]}</li>`);
+                `<li class="dropdown-item appliance-item">${newApplianceArray[i]}</li>`);
       }
       appliances = Array.from(
-        document.getElementsByClassName('dropdown-item')
+        document.getElementsByClassName('appliance-item')
       );
 
-      displayApplianceTag(appliances,recipes)
+      displayApplianceTag(appliancesFromDropdownMenu,searchedRecipesInMainInput)
     })
     if (arrowUp) {
-      arrowUp.addEventListener('click', (event) => {
+      arrowUp.addEventListener('click', () => {
         applianceInput.style.display = 'none';
         applianceItems.style.display = 'none';
         arrowUp.style.display = 'none';

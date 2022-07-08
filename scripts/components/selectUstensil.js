@@ -2,52 +2,57 @@ import { getUstensilList } from '../utils/getUstensilList.js';
 import { searchByUstensil } from '../utils/searchRecipe.js';
 import { inputRecipeListner } from '../index.js';
 import { displayRecipes } from '../utils/displayRecipes.js';
+import { getRecipes } from '../utils/getData.js';
 
 //DOM Elements
 const recipeContainer = document.querySelector('.recipe-container');
 const ustensilInput = document.getElementById('ustensil-input');
 const ustensilLabel = document.getElementById('ustensil-label');
-const ustensilItems = document.querySelector('.ustensil-items');
-const arrowUp = document.querySelector('.bi-chevron-up');
-let tagContainer = document.querySelector('.tag-container');
+const ustensilItems = document.querySelector('.ustensil-list');
+const arrowUp = document.querySelector('.ustensil-chevron');
 
-let ustensilTag = '';
+let tagContainer = document.querySelector('.tag-container');
+let ustensilTag = `<button type="button" class="btn ustensil-tag"><span class="ustensil-name tag"></span><i class="bi bi-x-circle close-ustensil"></i></div>`;
 
 ustensilInput.style.display = 'none';
 arrowUp.style.display = 'none';
 
 /**
  * Create ustensil tag in tag section
+ * @param {String} ustensilValue
  */
-function createUstensilTag() {
-  ustensilTag = `<button type="button" class="btn ustensil-tag"><span class="ustensil-name tag"></span><i class="bi bi-x-circle"></i></div>`;
-  tagContainer.innerHTML = ustensilTag;
+function createUstensilTag(ustensilValue) {
+  tagContainer.insertAdjacentHTML('beforeend', ustensilTag);
+  
+  let ustensilName = document.querySelector('.ustensil-name');
+  ustensilName.innerHTML = ustensilValue;
 }
 
 /**
  * Update ustensil tag in tag section
- * @param {Array} textContent
+ *  @param {String} ustensilValue
  */
-function updateSelectedTag(textContent) {
+function updateUstensilTag(ustensilValue) {
   let ustensil = document.querySelector('.ustensil-name');
-  if (!ustensil) {
-    createUstensilTag();
-  } else {
-    ustensil.innerHTML = textContent;
-  }
+  
+  ustensil.innerHTML = ustensilValue;
 }
 
 /**
  * Remove tag in tag section when click in cross icon
  * @param {Array} recipes
  */
-function closeUstensilTag(recipes) {
+async function closeUstensilTag(recipes) {
   const tag = document.querySelector('.ustensil-tag');
-  const closeTag = document.querySelector('.bi-x-circle');
+  const closeTag = document.querySelector('.close-ustensil');
+  const recipesData = await getRecipes();
+  console.log(recipesData)
 
   closeTag.addEventListener('click', function (e) {
-    tag.remove();
-    inputRecipeListner();
+   tag.remove();
+   recipeContainer.innerHTML = '';
+   displayRecipes(recipesData);
+   inputRecipeListner();
   });
 }
 
@@ -57,30 +62,37 @@ function closeUstensilTag(recipes) {
  * @param {Array} recipes
  */
 function displayApplianceTag(ustensils, recipes) {
+
   ustensils.forEach((ustensil) => {
     ustensil.addEventListener('click', (e) => {
+      let searchedRecipeByUstensil = [];
+      let ustensilSelected = ustensil.textContent;
+      let currentUstensilTag = document.querySelector('.ustensil-tag');
+
       ustensilItems.style.display = 'none';
       ustensilInput.style.display = 'none';
       ustensilLabel.style.display = 'block';
-      let ustensilSelected = ustensil.textContent;
+      
 
-      if (ustensilTag) {
-        updateSelectedTag(ustensilSelected);
+      if (currentUstensilTag) {
+        updateUstensilTag(ustensilSelected);
         closeUstensilTag(recipes);
-        
-        let searchedRecipe = searchByUstensil(recipes, ustensil.textContent);
+
+        searchedRecipeByUstensil = searchByUstensil(recipes, ustensilSelected);
         recipeContainer.innerHTML = '';
-        console.log(searchedRecipe);
-        displayRecipes(searchedRecipe);
+        displayRecipes(searchedRecipeByUstensil);
       } else {
         createUstensilTag();
         closeUstensilTag(recipes);
-        updateSelectedTag(ustensilSelected);
-        
-        let searchedRecipe = searchByUstensil(recipes, ustensil.textContent);
+        updateUstensilTag(ustensilSelected);
+
+        searchedRecipeByUstensil = searchByUstensil(
+          recipes,
+          ustensilSelected
+        );
         recipeContainer.innerHTML = '';
-        console.log(searchedRecipe);
-        displayRecipes(searchedRecipe);
+        console.log(searchedRecipeByUstensil);
+        displayRecipes(searchedRecipeByUstensil);
       }
     });
   });
@@ -90,13 +102,13 @@ function displayApplianceTag(ustensils, recipes) {
  * Select ustensil tag in dropdown menu
  * @param {Array} recipes
  */
-export function selectUstensil(recipes) {
-  const ustensilArray = getUstensilList(recipes);
+export function selectUstensil(recipes, searchedRecipesFromMainInput) {
+  const ustensilList = getUstensilList(recipes);
 
-  for (let i = 0; i < ustensilArray.length; i++) {
+  for (let i = 0; i < ustensilList.length; i++) {
     ustensilItems.insertAdjacentHTML(
       'beforeend',
-      `<li><a class="dropdown-item" href="#">${ustensilArray[i]}</a></li>`
+      `<li><a class="dropdown-item ustensil-item" href="#">${ustensilList[i]}</a></li>`
     );
   }
 
@@ -107,15 +119,18 @@ export function selectUstensil(recipes) {
     ustensilLabel.style.display = 'none';
     ustensilItems.style.display = 'flex';
 
-    let ustensils = Array.from(
-      document.getElementsByClassName('dropdown-item')
+    let ustensilsFromDropdownMenu = Array.from(
+      document.getElementsByClassName('ustensil-item')
     );
 
-    displayApplianceTag(ustensils, recipes);
+    displayApplianceTag(
+      ustensilsFromDropdownMenu,
+      searchedRecipesFromMainInput
+    );
 
     ustensilInput.addEventListener('keyup', function (e) {
       let input = e.target.value.toLowerCase();
-      let newUstensilArray = ustensilArray.filter((ustensil) =>
+      let newUstensilArray = ustensilsFromDropdownMenu.filter((ustensil) =>
         ustensil.toLowerCase().includes(input)
       );
 
@@ -124,17 +139,12 @@ export function selectUstensil(recipes) {
       for (let i = 0; i < newUstensilArray.length; i++) {
         ustensilItems.insertAdjacentHTML(
           'beforeend',
-          `<li><a class="dropdown-item" href="#">${newUstensilArray[i]}</a></li>`
+          `<li><a class="dropdown-item ustensil-item" href="#">${newUstensilArray[i]}</a></li>`
         );
       }
-      ustensils = Array.from(document.getElementsByClassName('dropdown-item'));
+      ustensilsFromDropdownMenu = Array.from(document.getElementsByClassName('ustensil-item'));
 
-      displayUstensilTag(ustensils, recipes);
+      displayUstensilTag(ustensilsFromDropdownMenu, searchedRecipesFromMainInput);
     });
   });
-  /*window.addEventListener('click', function(e){
-    applianceItems.style.display = 'none';
-    applianceInput.style.display = 'none';
-    applianceLabel.style.display = 'block';
-  })*/
 }

@@ -8,12 +8,11 @@ import { getRecipes } from '../utils/getData.js';
 const recipeContainer = document.querySelector('.recipe-container');
 const ingredientInput = document.getElementById('ingredient-input');
 const ingredientLabel = document.getElementById('ingredient-label');
-const ingredientItems = document.querySelector('.ingredient-items');
-const arrowUp = document.querySelector('.bi-chevron-up');
+const ingredientItems = document.querySelector('.ingredient-list');
+const arrowUp = document.querySelector('.ingredient-chevron');
 
 let tagContainer = document.querySelector('.tag-container');
-
-let ingredientTag = '';
+let ingredientTag = `<button type="button" class="btn ingredient-tag"><span class="ingredient-name tag"></span><i class="bi bi-x-circle ingredient-close"></i></div>`;
 
 ingredientInput.style.display = 'none';
 arrowUp.style.display = 'none';
@@ -21,24 +20,23 @@ arrowUp.style.display = 'none';
 
 /**
  * Create ingredient tag in tag section
+ * @param {String} ingredientValue
  */
-function createIngredientTag() {
-  console.log('bonjour')
-  ingredientTag = `<button type="button" class="btn ingredient-tag"><span class="ingredient-name tag"></span><i class="bi bi-x-circle"></i></div>`;
-  tagContainer.innerHTML = ingredientTag;
+function createIngredientTag(ingredientValue) {
+  tagContainer.insertAdjacentHTML('beforeend', ingredientTag);
+  
+  let ingredientName = document.querySelector('.ingredient-name');
+  ingredientName.innerHTML = ingredientValue;
 }
 
 /**
  * Update ingredient tag in tag section
- * @param {Array} textContent
+ * @param {String} ingredientValue
  */
-function updateSelectedTag(textContent) {
+function updateIngredientTag(ingredientValue) {
   let ingredient = document.querySelector('.ingredient-name');
-  if (!ingredient) {
-    createIngredientTag();
-  } else {
-    ingredient.innerHTML = textContent;
-  }
+
+  ingredient.innerHTML = ingredientValue;
 }
 
 /**
@@ -47,9 +45,9 @@ function updateSelectedTag(textContent) {
  */
 async function closeIngredientTag(recipes) {
   const tag = document.querySelector('.ingredient-tag');
-  const closeTag = document.querySelector('.bi-x-circle');
+  const closeTag = document.querySelector('.ingredient-close');
   const recipesData = await getRecipes();
-  console.log(recipesData)
+  //console.log(recipesData)
 
   closeTag.addEventListener('click', function (e) {
     tag.remove();
@@ -65,36 +63,37 @@ async function closeIngredientTag(recipes) {
  * @param {Array} recipes
  */
 function displayIngredientTag(ingredients, recipes) {
-  //console.log(recipes)
+ 
   ingredients.forEach((ingredient) => {
     ingredient.addEventListener('click', (e) => {
+      let searchedRecipeByIngredient =[];
+
+      let ingredientSelected = ingredient.textContent;
+      let currentIngredientTag =  document.querySelector('.ingredient-tag')
+      
       ingredientItems.style.display = 'none';
       ingredientInput.style.display = 'none';
       ingredientLabel.style.display = 'block';
-      let ingredientSelected = ingredient.textContent;
-
-      if (!ingredientTag) {
-        createIngredientTag();
+           
+      if (!currentIngredientTag) {
+        createIngredientTag(ingredientSelected);
         closeIngredientTag(recipes);
-        updateSelectedTag(ingredientSelected);
-
-        let searchedRecipeByIngredient = searchByIngredient(
+       
+        searchedRecipeByIngredient = searchByIngredient(
           recipes,
-          ingredient.textContent
+          ingredientSelected
         );
         recipeContainer.innerHTML = '';
-        //console.log(searchedRecipeByIngredient);
         displayRecipes(searchedRecipeByIngredient);
       } else {
-        updateSelectedTag(ingredientSelected);
+        updateIngredientTag(ingredientSelected);
         closeIngredientTag(recipes);
         
-        let searchedRecipeByIngredient = searchByIngredient(
+        searchedRecipeByIngredient = searchByIngredient(
           recipes,
-          ingredient.textContent
+          ingredientSelected
         );
         recipeContainer.innerHTML = '';
-        //console.log(searchedRecipeByIngredient);
         displayRecipes(searchedRecipeByIngredient);
       }
     });
@@ -105,14 +104,14 @@ function displayIngredientTag(ingredients, recipes) {
  * Select ingredient tag in dropdown menu
  * @param {Array} recipes
  */
-export function selectIngredient(recipes, searchedRecipesInMainInput) {
+export function selectIngredient(recipes, searchedRecipesFromMainInput) {
   //console.log(recipes, searchedRecipesInMainInput)
-  const ingredientArray = getIngredientList(recipes);
+  const ingredientList = getIngredientList(recipes);
 
-  for (let i = 0; i < ingredientArray.length; i++) {
+  for (let i = 0; i < ingredientList.length; i++) {
     ingredientItems.insertAdjacentHTML(
       'beforeend',
-      `<li class="dropdown-item">${ingredientArray[i]}</li>`
+      `<li class="dropdown-item ingredient-item">${ingredientList[i]}</li>`
     );
   }
 
@@ -123,16 +122,19 @@ export function selectIngredient(recipes, searchedRecipesInMainInput) {
     ingredientLabel.style.display = 'none';
     ingredientItems.style.display = 'flex';
 
-    let ingredients = Array.from(
-      document.getElementsByClassName('dropdown-item')
+    let ingredientsFromDropdownMenu = Array.from(
+      document.getElementsByClassName('ingredient-item')
     );
 
-    displayIngredientTag(ingredients, searchedRecipesInMainInput);
+    displayIngredientTag(
+      ingredientsFromDropdownMenu,
+      searchedRecipesFromMainInput
+    );
 
     ingredientInput.addEventListener('keyup', function (e) {
       let input = e.target.value.toLowerCase();
-      let newIngredientArray = ingredientArray.filter((ingredient) =>
-        ingredient.toLowerCase().includes(input)
+      let newIngredientArray = ingredientsFromDropdownMenu.filter(
+        (ingredient) => ingredient.toLowerCase().includes(input)
       );
 
       ingredientItems.innerHTML = '';
@@ -140,21 +142,23 @@ export function selectIngredient(recipes, searchedRecipesInMainInput) {
       for (let i = 0; i < newIngredientArray.length; i++) {
         ingredientItems.insertAdjacentHTML(
           'beforeend',
-          `<li class="dropdown-item">${newIngredientArray[i]}</li>`
+          `<li class="dropdown-item ingredient-item">${newIngredientArray[i]}</li>`
         );
       }
-      ingredients = Array.from(document.getElementsByClassName('dropdown-item'));
+      ingredientsFromDropdownMenu = Array.from(
+        document.getElementsByClassName('ingredient-item')
+      );
 
-      displayIngredientTag(ingredients, searchedRecipesInMainInput);
+      displayIngredientTag(ingredientsFromDropdownMenu, searchedRecipesFromMainInput);
     });
 
     if(arrowUp) {
-      arrowUp.addEventListener('click', (event) => {
-        ingredientInput.style.display = 'none';
-        ingredientItems.style.display ='none';
-        arrowUp.style.display = 'none';
-        ingredientLabel.style.display = 'block';
-      });
+      arrowUp.addEventListener('click', function (e) {
+          ingredientInput.style.display = 'none';
+          ingredientItems.style.display = 'none';
+          arrowUp.style.display = 'none';
+          ingredientLabel.style.display = 'block';
+        });
     } 
   });
     

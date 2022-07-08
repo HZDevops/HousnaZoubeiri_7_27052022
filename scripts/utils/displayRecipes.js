@@ -22,4 +22,5 @@ export function displayRecipes(recipes) {
       recipeIngredients.appendChild(ingredientList[j]);
     }
   })
+  return recipes;
 }
