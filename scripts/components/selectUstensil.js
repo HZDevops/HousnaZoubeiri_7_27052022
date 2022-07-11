@@ -3,6 +3,8 @@ import { searchByUstensil } from '../utils/searchRecipe.js';
 import { inputRecipeListner } from '../index.js';
 import { displayRecipes } from '../utils/displayRecipes.js';
 import { getRecipes } from '../utils/getData.js';
+import { selectIngredient } from './selectIngredient.js';
+import { selectAppliance } from './selectAppliance.js';
 
 //DOM Elements
 const recipeContainer = document.querySelector('.recipe-container');
@@ -13,6 +15,7 @@ const arrowUp = document.querySelector('.ustensil-chevron');
 
 let tagContainer = document.querySelector('.tag-container');
 let ustensilTag = `<button type="button" class="btn ustensil-tag"><span class="ustensil-name tag"></span><i class="bi bi-x-circle close-ustensil"></i></div>`;
+const allRecipes = await getRecipes();
 
 ustensilInput.style.display = 'none';
 arrowUp.style.display = 'none';
@@ -42,16 +45,14 @@ function updateUstensilTag(ustensilValue) {
  * Remove tag in tag section when click in cross icon
  * @param {Array} recipes
  */
-async function closeUstensilTag(recipes) {
+async function closeUstensilTag() {
   const tag = document.querySelector('.ustensil-tag');
   const closeTag = document.querySelector('.close-ustensil');
-  const recipesData = await getRecipes();
-  console.log(recipesData)
-
+  
   closeTag.addEventListener('click', function (e) {
    tag.remove();
    recipeContainer.innerHTML = '';
-   displayRecipes(recipesData);
+   displayRecipes(allRecipes);
    inputRecipeListner();
   });
 }
@@ -65,7 +66,6 @@ function displayUstensilTag(ustensils, recipes) {
 
   ustensils.forEach((ustensil) => {
     ustensil.addEventListener('click', (e) => {
-      let searchedRecipeByUstensil = [];
       let ustensilSelected = ustensil.textContent;
       let currentUstensilTag = document.querySelector('.ustensil-tag');
 
@@ -78,21 +78,23 @@ function displayUstensilTag(ustensils, recipes) {
         updateUstensilTag(ustensilSelected);
         closeUstensilTag(recipes);
 
-        searchedRecipeByUstensil = searchByUstensil(recipes, ustensilSelected);
+        let searchedRecipeByUstensil = searchByUstensil(recipes, ustensilSelected);
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByUstensil);
+        selectAppliance(searchedRecipeByUstensil);
+        selectIngredient(searchedRecipeByUstensil);
       } else {
         createUstensilTag();
         closeUstensilTag(recipes);
         updateUstensilTag(ustensilSelected);
-
-        searchedRecipeByUstensil = searchByUstensil(
+        let searchedRecipeByUstensil = searchByUstensil(
           recipes,
           ustensilSelected
         );
         recipeContainer.innerHTML = '';
-        console.log(searchedRecipeByUstensil);
         displayRecipes(searchedRecipeByUstensil);
+        selectAppliance(searchedRecipeByUstensil);
+        selectIngredient(searchedRecipeByUstensil);
       }
     });
   });
@@ -102,8 +104,8 @@ function displayUstensilTag(ustensils, recipes) {
  * Select ustensil tag in dropdown menu
  * @param {Array} recipes
  */
-export function selectUstensil(recipes, searchedRecipesFromMainInput) {
-  const ustensilList = getUstensilList(recipes);
+export function selectUstensil(recipes) {
+  const ustensilList = getUstensilList(allRecipes);
 
   for (let i = 0; i < ustensilList.length; i++) {
     ustensilItems.insertAdjacentHTML(
@@ -125,7 +127,7 @@ export function selectUstensil(recipes, searchedRecipesFromMainInput) {
 
     displayUstensilTag(
       ustensilsFromDropdownMenu,
-      searchedRecipesFromMainInput
+      recipes
     );
 
     ustensilInput.addEventListener('keyup', function (e) {
@@ -144,7 +146,7 @@ export function selectUstensil(recipes, searchedRecipesFromMainInput) {
       }
       ustensilsFromDropdownMenu = Array.from(document.getElementsByClassName('ustensil-item'));
 
-      displayUstensilTag(ustensilsFromDropdownMenu, searchedRecipesFromMainInput);
+      displayUstensilTag(ustensilsFromDropdownMenu, recipes);
     });
     if (arrowUp) {
       arrowUp.addEventListener('click', () => {

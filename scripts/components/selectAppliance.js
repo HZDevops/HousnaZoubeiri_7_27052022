@@ -3,6 +3,8 @@ import { searchByAppliance } from '../utils/searchRecipe.js';
 import { inputRecipeListner } from '../index.js';
 import { displayRecipes } from '../utils/displayRecipes.js';
 import { getRecipes } from '../utils/getData.js';
+import { selectIngredient } from './selectIngredient.js';
+import { selectUstensil } from './selectUstensil.js';
 
 //DOM Elements
 const recipeContainer = document.querySelector('.recipe-container');
@@ -13,6 +15,7 @@ const arrowUp = document.querySelector('.appliance-chevron');
 
 let tagContainer = document.querySelector ('.tag-container');
 let applianceTag = `<button type="button" class="btn appliance-tag"><span class="appliance-name tag"></span><i class="bi bi-x-circle close-appliance"></i></div>`;
+const allRecipes = await getRecipes();
 
 applianceInput.style.display = 'none';
 arrowUp.style.display = 'none';
@@ -42,16 +45,14 @@ function updateApplianceTag(applianceValue) {
  * Remove tag in tag section when click in cross icon 
  * @param {Array} recipes
  */
-async function closeApplianceTag(recipes) {
+async function closeApplianceTag() {
   const tag = document.querySelector('.appliance-tag');
   const closeTag = document.querySelector('.close-appliance');
-  const recipesData = await getRecipes();
-  console.log(recipesData)
 
   closeTag.addEventListener('click', function (e) {
    tag.remove();
    recipeContainer.innerHTML = '';
-   displayRecipes(recipesData);
+   displayRecipes(allRecipes);
    inputRecipeListner();
   });
 }
@@ -66,8 +67,6 @@ function displayApplianceTag (appliances, recipes) {
   appliances.forEach((appliance) => {
     appliance.addEventListener('click', (e) => {
       
-      let searchedRecipeByAppliance = [];
-
       let applianceSelected = appliance.textContent;
       let currentApplianceTag = document.querySelector('.appliance-tag');
       
@@ -79,26 +78,27 @@ function displayApplianceTag (appliances, recipes) {
         createApplianceTag(applianceSelected);
         closeApplianceTag(recipes);
         
-       searchedRecipeByAppliance = searchByAppliance(
+       let searchedRecipeByAppliance = searchByAppliance(
           recipes,
           applianceSelected
         );
-
         recipeContainer.innerHTML = '';
-        //console.log(searchedRecipeByIngredient);
         displayRecipes(searchedRecipeByAppliance);
+        selectIngredient(searchedRecipeByAppliance);
+        selectUstensil(searchedRecipeByAppliance);
       } else {
         updateApplianceTag(applianceSelected);
         closeApplianceTag(recipes);
-
-        searchedRecipeByAppliance = searchByAppliance(
+        
+        let searchedRecipeByAppliance = searchByAppliance(
           recipes,
           applianceSelected
         );
 
         recipeContainer.innerHTML = '';
-        console.log(searchedRecipeByAppliance);
         displayRecipes(searchedRecipeByAppliance);
+        selectIngredient(searchedRecipeByAppliance);
+        selectUstensil(searchedRecipeByAppliance);
       }  
     })
   })
@@ -108,8 +108,8 @@ function displayApplianceTag (appliances, recipes) {
  * Select appliance tag in dropdown menu
  * @param {Array} recipes 
  */
-export function selectAppliance(recipes, searchedRecipesInMainInput) {
-  const applianceList = getApplianceList(recipes);
+export function selectAppliance(recipes) {
+  const applianceList = getApplianceList(allRecipes);
  
   for (let i = 0; i < applianceList.length; i++) {
     applianceItems.insertAdjacentHTML('beforeend',`<li class="dropdown-item appliance-item">${applianceList[i]}</li>`);
@@ -126,7 +126,7 @@ export function selectAppliance(recipes, searchedRecipesInMainInput) {
       document.getElementsByClassName('appliance-item')
     );
     
-    displayApplianceTag(appliancesFromDropdownMenu, searchedRecipesInMainInput);
+    displayApplianceTag(appliancesFromDropdownMenu, recipes);
 
     applianceInput.addEventListener('keyup', function(e) {
       let input = e.target.value.toLowerCase();
@@ -144,7 +144,7 @@ export function selectAppliance(recipes, searchedRecipesInMainInput) {
         document.getElementsByClassName('appliance-item')
       );
 
-      displayApplianceTag(appliancesFromDropdownMenu,searchedRecipesInMainInput)
+      displayApplianceTag(appliancesFromDropdownMenu,recipes)
     })
     if (arrowUp) {
       arrowUp.addEventListener('click', () => {

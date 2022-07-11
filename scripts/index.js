@@ -3,7 +3,7 @@ import { displayRecipes } from './utils/displayRecipes.js';
 import { selectIngredient } from './components/selectIngredient.js';
 import { selectAppliance } from './components/selectAppliance.js';
 import { selectUstensil } from './components/selectUstensil.js';
-import { searchRecipe, searchByUstensil, searchByAppliance, searchByIngredient } from './utils/searchRecipe.js';
+import { searchRecipe } from './utils/searchRecipe.js';
 
 
 //DOM elements
@@ -11,7 +11,6 @@ let inputRecipe = document.getElementById('floatingInput')
 let recipeContainer = document.querySelector('.recipe-container')
 
 let recipesArray = [];
-let searchedRecipes =[];
 
 /**
  * Display recipe by input in main search bar
@@ -31,9 +30,9 @@ export function inputRecipeListner() {
     
       recipeContainer.innerHTML = '';
       displayRecipes(searchedRecipes);
-      selectIngredient(recipesArray, searchedRecipes);
-      selectAppliance(recipesArray, searchedRecipes);
-      selectUstensil(recipesArray, searchedRecipes);
+      selectIngredient(searchedRecipes);
+      selectAppliance(searchedRecipes);
+      selectUstensil(searchedRecipes);
     }
   })
   
@@ -42,10 +41,11 @@ export function inputRecipeListner() {
 recipesArray = await getRecipes()
 displayRecipes(recipesArray)
 inputRecipeListner()
-searchedRecipes = recipesArray;
-selectIngredient(recipesArray, searchedRecipes);
-selectAppliance(recipesArray, searchedRecipes);
-selectUstensil(recipesArray, searchedRecipes);
+//searchedRecipes = recipesArray;
+//searchByTag(searchedRecipes);
+selectIngredient(recipesArray);
+selectAppliance(recipesArray);
+selectUstensil(recipesArray);
 
 
 
