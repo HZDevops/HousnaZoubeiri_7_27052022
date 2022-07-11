@@ -16,8 +16,8 @@ let recipesArray = [];
  * Display recipe by input in main search bar
  **/
 export function inputRecipeListner() {
-  
   let searchedRecipes = [];
+
   inputRecipe.addEventListener('keyup', function (e) {
         
     if (inputRecipe.value.length < 3) {
@@ -27,12 +27,19 @@ export function inputRecipeListner() {
     
     if (inputRecipe.value.length >= 3) {
       searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value);
-    
-      recipeContainer.innerHTML = '';
-      displayRecipes(searchedRecipes);
-      selectIngredient(searchedRecipes);
-      selectAppliance(searchedRecipes);
-      selectUstensil(searchedRecipes);
+      //console.log(searchedRecipes)
+      if(!searchedRecipes) {
+        const recipeInfo = `<p id='recipe-info'>
+          Aucune recette ne correspond à votre critère… vous pouvez chercher «
+          tarte aux pommes », « poisson », etc.</p>`;
+        recipeContainer.innerHTML = recipeInfo;
+      } else {
+        recipeContainer.innerHTML = '';
+        displayRecipes(searchedRecipes);
+        selectIngredient(searchedRecipes);
+        selectAppliance(searchedRecipes);
+        selectUstensil(searchedRecipes);
+      }
     }
   })
   
@@ -41,8 +48,6 @@ export function inputRecipeListner() {
 recipesArray = await getRecipes()
 displayRecipes(recipesArray)
 inputRecipeListner()
-//searchedRecipes = recipesArray;
-//searchByTag(searchedRecipes);
 selectIngredient(recipesArray);
 selectAppliance(recipesArray);
 selectUstensil(recipesArray);

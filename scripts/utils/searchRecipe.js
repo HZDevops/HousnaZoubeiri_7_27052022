@@ -1,4 +1,4 @@
-
+import { includes } from './includesFunction.js';
 /**
  * Return an array with recipes matching with input string in search bar
  * @param {Array} recipes
@@ -10,26 +10,25 @@ export function searchRecipe(recipes, string) {
   //console.log(recipes)
   let searchedRecipes = [];
 
-  recipes.forEach((recipe) => {
-    let nameRecipeSearched = recipe.name.toLowerCase();
-    let ingredientRecipeSearched = recipe.ingredients;
-    let descriptionRecipeSearched = recipe.description.toLowerCase();
+  for ( let i = 0; i < recipes.length ; i++) {
+    let nameRecipeSearched = recipes[i].name.toLowerCase();
+    let ingredientRecipeSearched = recipes[i].ingredients;
+    let descriptionRecipeSearched = recipes[i].description.toLowerCase();
     
-    if (nameRecipeSearched.includes(string) === true) {
-      searchedRecipes.push(recipe);
+    if (includes (string, nameRecipeSearched) === true) {
+      searchedRecipes.push(recipes[i]);
     }
-    for (let i = 0; i < ingredientRecipeSearched.length; i++) {
-      if ((ingredientRecipeSearched[i].ingredient.toLowerCase()).includes(string) === true) {
-        searchedRecipes.push(recipe);
+    for (let j = 0; j < ingredientRecipeSearched.length; j++) {
+      if (includes(string, ingredientRecipeSearched[j].ingredient.toLowerCase()) === true) {
+        searchedRecipes.push(recipes[i]);
       } 
     }
-    if (descriptionRecipeSearched.includes(string) === true) {
-      searchedRecipes.push(recipe);
+    if (includes (string, descriptionRecipeSearched) === true) {
+      searchedRecipes.push(recipes[i]);
     }
-  })
-  return (searchedRecipes = searchedRecipes.filter(
-    (ele, pos) => searchedRecipes.indexOf(ele) == pos
-  ));
+  }
+  console.log(searchedRecipes)
+    
 }
 
 /**
