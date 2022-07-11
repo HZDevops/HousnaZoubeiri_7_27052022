@@ -1,4 +1,5 @@
 import { includes } from './includesFunction.js';
+
 /**
  * Return an array with recipes matching with input string in search bar
  * @param {Array} recipes
@@ -7,7 +8,6 @@ import { includes } from './includesFunction.js';
  **/
 
 export function searchRecipe(recipes, string) {
-  //console.log(recipes)
   let searchedRecipes = [];
 
   for ( let i = 0; i < recipes.length ; i++) {
@@ -51,7 +51,7 @@ export function searchByUstensil(recipes, ustensil) {
       }
     }
   })  
-  return (searchedRecipes)
+  return (searchedRecipes);
 }
 
 /**
@@ -70,7 +70,7 @@ export function searchByAppliance(recipes, appliance) {
       searchedRecipes.push(recipe);
     }
   })
-  return searchedRecipes
+  return searchedRecipes;
 }
 
 /**
