@@ -172,3 +172,8 @@ li {
 .bi-x-circle  {
     color:white;
 }
+
+#recipe-info {
+    font-size: 20px;
+    font-weight: bold;
+} 
