@@ -7,8 +7,8 @@ import { recipeFactory } from '../factories/recipe.js';
 export function displayRecipes(recipes) {
   const recipeContainer = document.querySelector('.recipe-container');
   console.log(recipes)
-  recipes.forEach((recipe) => {
-    const recipeModel = recipeFactory(recipe);
+  for (let i=0; i< recipes.length; i++) {
+    const recipeModel = recipeFactory(recipes[i]);
     const recipeCard = recipeModel.getRecipeCardDOM();
     const ingredientList = recipeModel.createIngredientList();
     
@@ -21,6 +21,6 @@ export function displayRecipes(recipes) {
     for (let j = 0; j < ingredientList.length; j++) {
       recipeIngredients.appendChild(ingredientList[j]);
     }
-  })
+  }
   return recipes;
 }

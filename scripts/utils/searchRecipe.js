@@ -27,8 +27,8 @@ export function searchRecipe(recipes, string) {
       searchedRecipes.push(recipes[i]);
     }
   }
-  console.log(searchedRecipes)
-    
+  let newSearchedRecipes = [...new Set(searchedRecipes)];
+  return newSearchedRecipes;
 }
 
 /**
