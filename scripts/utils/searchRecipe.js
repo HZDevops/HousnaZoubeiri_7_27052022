@@ -9,7 +9,6 @@
 export function searchRecipe(recipes, string) {
   //console.log(recipes)
   let searchedRecipes = [];
-
   recipes.forEach((recipe) => {
     let nameRecipeSearched = recipe.name.toLowerCase();
     let ingredientRecipeSearched = recipe.ingredients;
@@ -40,7 +39,6 @@ export function searchRecipe(recipes, string) {
  **/
 export function searchByUstensil(recipes, ustensil) {
   let searchedRecipes = [];
-   
   recipes.forEach ((recipe) => {
     let ustensilSearched  = recipe.ustensils;
         
@@ -62,7 +60,7 @@ export function searchByUstensil(recipes, ustensil) {
  * @returns {Array} 
  **/
 export function searchByAppliance(recipes, appliance) {
-  console.log(recipes, appliance)
+  //console.log(recipes, appliance)
   let searchedRecipes = [];
   recipes.forEach((recipe) => {
     let applianceSearched = recipe.appliance.toLowerCase()
@@ -81,7 +79,7 @@ export function searchByAppliance(recipes, appliance) {
  * @returns {Array} 
  */
  export function searchByIngredient(recipes, ingredient) {
-  console.log(recipes)
+  //console.log(recipes)
   let searchedRecipes = [];
   let ingredientsArray = [];
     

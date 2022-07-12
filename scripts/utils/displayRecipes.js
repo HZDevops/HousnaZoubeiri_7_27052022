@@ -6,6 +6,7 @@ import { recipeFactory } from '../factories/recipe.js';
  **/
 export function displayRecipes(recipes) {
   const recipeContainer = document.querySelector('.recipe-container');
+  //console.log('bonjour');
   console.log(recipes)
   recipes.forEach((recipe) => {
     const recipeModel = recipeFactory(recipe);

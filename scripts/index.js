@@ -7,8 +7,8 @@ import { searchRecipe } from './utils/searchRecipe.js';
 
 
 //DOM elements
-let inputRecipe = document.getElementById('floatingInput')
-let recipeContainer = document.querySelector('.recipe-container')
+let inputRecipe = document.getElementById('floatingInput');
+let recipeContainer = document.querySelector('.recipe-container');
 
 let recipesArray = [];
 
@@ -21,25 +21,30 @@ export function inputRecipeListner() {
   inputRecipe.addEventListener('keyup', function (e) {
         
     if (inputRecipe.value.length < 3) {
+      recipeContainer.innerHTML = '';
       searchedRecipes = recipesArray
       displayRecipes(searchedRecipes)
     }
     
     if (inputRecipe.value.length >= 3) {
       searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value);
-      /*if (searchedRecipes.length = 0) {
-        recipeContainer.innerHTML = '';
-        const recipeInfo = `<p id='recipe-info'>
+      console.log(searchedRecipes)
+      if (searchedRecipes.length==0) {
+        //console.log('bonjour');
+        //recipeContainer.innerHTML = '';
+        
+        const recipeInfo = `<p id="recipe-info">
           Aucune recette ne correspond à votre critère… vous pouvez chercher «
           tarte aux pommes », « poisson », etc.</p>`;
         recipeContainer.innerHTML = recipeInfo;
-      } else {*/
+      } else {
+        //console.log('bonjour2');
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipes);
         selectIngredient(searchedRecipes);
         selectAppliance(searchedRecipes);
         selectUstensil(searchedRecipes);
-      //}  
+      }  
     }
   })
 }

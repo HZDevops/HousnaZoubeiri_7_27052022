@@ -66,7 +66,7 @@ function displayApplianceTag (appliances, recipes) {
   
   appliances.forEach((appliance) => {
     appliance.addEventListener('click', (e) => {
-      
+      let searchedRecipeByAppliance= [];
       let applianceSelected = appliance.textContent;
       let currentApplianceTag = document.querySelector('.appliance-tag');
       
@@ -78,7 +78,7 @@ function displayApplianceTag (appliances, recipes) {
         createApplianceTag(applianceSelected);
         closeApplianceTag(recipes);
         
-       let searchedRecipeByAppliance = searchByAppliance(
+       searchedRecipeByAppliance = searchByAppliance(
           recipes,
           applianceSelected
         );
@@ -90,7 +90,7 @@ function displayApplianceTag (appliances, recipes) {
         updateApplianceTag(applianceSelected);
         closeApplianceTag(recipes);
         
-        let searchedRecipeByAppliance = searchByAppliance(
+        searchedRecipeByAppliance = searchByAppliance(
           recipes,
           applianceSelected
         );

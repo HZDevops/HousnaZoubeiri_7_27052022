@@ -74,19 +74,17 @@ function displayUstensilTag(ustensils, recipes) {
       ustensilLabel.style.display = 'block';
       
 
-      if (currentUstensilTag) {
-        updateUstensilTag(ustensilSelected);
+      if (!currentUstensilTag) {
+        createUstensilTag(ustensilSelected);
         closeUstensilTag(recipes);
-
         let searchedRecipeByUstensil = searchByUstensil(recipes, ustensilSelected);
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByUstensil);
         selectAppliance(searchedRecipeByUstensil);
         selectIngredient(searchedRecipeByUstensil);
       } else {
-        createUstensilTag();
-        closeUstensilTag(recipes);
         updateUstensilTag(ustensilSelected);
+        closeUstensilTag(recipes);
         let searchedRecipeByUstensil = searchByUstensil(
           recipes,
           ustensilSelected
