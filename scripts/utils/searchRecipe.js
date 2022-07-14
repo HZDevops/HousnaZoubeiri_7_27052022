@@ -26,9 +26,8 @@ export function searchRecipe(recipes, string) {
       searchedRecipes.push(recipe);
     }
   })
-  return (searchedRecipes = searchedRecipes.filter(
-    (ele, pos) => searchedRecipes.indexOf(ele) == pos
-  ));
+  let FilteredSearchedRecipes = [...new Set(searchedRecipes)];
+  return FilteredSearchedRecipes;
 }
 
 /**
