@@ -49,11 +49,11 @@ async function closeUstensilTag() {
   const tag = document.querySelector('.ustensil-tag');
   const closeTag = document.querySelector('.close-ustensil');
   
-  closeTag.addEventListener('click', function (e) {
-   tag.remove();
-   recipeContainer.innerHTML = '';
-   displayRecipes(allRecipes);
-   inputRecipeListner();
+  closeTag.addEventListener('click', () => {
+    tag.remove();
+    recipeContainer.innerHTML = '';
+    displayRecipes(allRecipes);
+    inputRecipeListner();
   });
 }
 
@@ -65,14 +65,14 @@ async function closeUstensilTag() {
 function displayUstensilTag(ustensils, recipes) {
 
   ustensils.forEach((ustensil) => {
-    ustensil.addEventListener('click', (e) => {
+    ustensil.addEventListener('click', () => {
       let ustensilSelected = ustensil.textContent;
       let currentUstensilTag = document.querySelector('.ustensil-tag');
 
       ustensilItems.style.display = 'none';
       ustensilInput.style.display = 'none';
       ustensilLabel.style.display = 'block';
-      
+
 
       if (!currentUstensilTag) {
         createUstensilTag(ustensilSelected);
@@ -112,7 +112,7 @@ export function selectUstensil(recipes) {
     );
   }
 
-  ustensilLabel.addEventListener('click', function (e) {
+  ustensilLabel.addEventListener('click', () => {
     ustensilInput.style.display = 'block';
     ustensilInput.style.width = '667px';
     arrowUp.style.display = 'block';
@@ -130,8 +130,7 @@ export function selectUstensil(recipes) {
 
     ustensilInput.addEventListener('keyup', function (e) {
       let input = e.target.value.toLowerCase();
-      let newUstensilArray = ustensilList.filter((ustensil) =>
-        ustensil.toLowerCase().includes(input)
+      let newUstensilArray = ustensilList.filter((ustensil) => ustensil.toLowerCase().includes(input)
       );
 
       ustensilItems.innerHTML = '';

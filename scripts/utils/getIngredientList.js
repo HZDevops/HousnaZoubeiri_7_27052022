@@ -4,7 +4,6 @@
  * @returns {Array}
  */ 
 export function getIngredientList(recipes) {
-  //console.log(recipes)
   let ingredientArray = [];
   
   recipes.forEach((recipe) => {
@@ -13,7 +12,7 @@ export function getIngredientList(recipes) {
       ingredientArray.push(array[i].ingredient);
     }
     ingredientArray = ingredientArray.filter(
-      (ele, pos) => ingredientArray.indexOf(ele) == pos
+      (ele, pos) => ingredientArray.indexOf(ele) === pos
     );
   });
   return (ingredientArray);

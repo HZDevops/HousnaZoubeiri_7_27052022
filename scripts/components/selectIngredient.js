@@ -50,7 +50,7 @@ async function closeIngredientTag() {
   const tag = document.querySelector('.ingredient-tag');
   const closeTag = document.querySelector('.ingredient-close');
 
-  closeTag.addEventListener('click', function (e) {
+  closeTag.addEventListener('click', () => {
     tag.remove();
     recipeContainer.innerHTML = '';
     displayRecipes(allRecipes);
@@ -66,18 +66,18 @@ async function closeIngredientTag() {
 function displayIngredientTag(ingredients, recipes) {
 
   ingredients.forEach((ingredient) => {
-    ingredient.addEventListener('click', (e) => {
+    ingredient.addEventListener('click', () => {
       let ingredientSelected = ingredient.textContent;
-      let currentIngredientTag =  document.querySelector('.ingredient-tag');
-      
+      let currentIngredientTag = document.querySelector('.ingredient-tag');
+
       ingredientItems.style.display = 'none';
       ingredientInput.style.display = 'none';
       ingredientLabel.style.display = 'block';
-           
+
       if (!currentIngredientTag) {
         createIngredientTag(ingredientSelected);
         closeIngredientTag();
-       
+
         let searchedRecipeByIngredient = searchByIngredient(
           recipes,
           ingredientSelected
@@ -86,7 +86,7 @@ function displayIngredientTag(ingredients, recipes) {
         displayRecipes(searchedRecipeByIngredient);
         selectAppliance(searchedRecipeByIngredient);
         selectUstensil(searchedRecipeByIngredient);
-             
+
       } else {
         updateIngredientTag(ingredientSelected);
         closeIngredientTag();
@@ -117,9 +117,9 @@ export function selectIngredient(recipes) {
     );
   }
 
-  ingredientLabel.addEventListener('click', function (e) {
+  ingredientLabel.addEventListener('click', () => {
     ingredientInput.style.display = 'block';
-    ingredientInput.style.width = '667px'
+    ingredientInput.style.width = '667px';
     arrowUp.style.display = 'block';
     ingredientLabel.style.display = 'none';
     ingredientItems.style.display = 'flex';
@@ -129,10 +129,10 @@ export function selectIngredient(recipes) {
     );
 
     displayIngredientTag(ingredientsFromDropdownMenu, recipes);
-    
+
     ingredientInput.addEventListener('keyup', function (e) {
       let input = e.target.value.toLowerCase();
-      
+
       let newIngredientArray = ingredientList.filter(
         (ingredient) => ingredient.toLowerCase().includes(input)
       );
@@ -151,13 +151,13 @@ export function selectIngredient(recipes) {
       displayIngredientTag(ingredientsFromDropdownMenu, recipes);
     });
 
-    if(arrowUp) {
-      arrowUp.addEventListener('click', function (e) {
-          ingredientInput.style.display = 'none';
-          ingredientItems.style.display = 'none';
-          arrowUp.style.display = 'none';
-          ingredientLabel.style.display = 'block';
-        });
-    } 
+    if (arrowUp) {
+      arrowUp.addEventListener('click', () => {
+        ingredientInput.style.display = 'none';
+        ingredientItems.style.display = 'none';
+        arrowUp.style.display = 'none';
+        ingredientLabel.style.display = 'block';
+      });
+    }
   });
 }

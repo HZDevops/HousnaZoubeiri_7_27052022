@@ -2,12 +2,9 @@ export function recipeFactory(recipe) {
   const {
     id,
     name,
-    servings,
     ingredients,
     time,
     description,
-    appliance,
-    ustensils,
   } = recipe;
 
   
@@ -36,11 +33,10 @@ export function recipeFactory(recipe) {
         ingredientQuantity.innerHTML = `: ${ingredient.quantity}`;
         ingredientUnit.innerHTML = ` ${ingredient.unit}`; 
       }
-        ingredientArray.push (ingredientBloc);
-        //console.log(ingredientArray)
+      ingredientArray.push (ingredientBloc);
     })
     return (ingredientArray = ingredientArray.filter(
-      (ele, pos) => ingredientArray.indexOf(ele) == pos
+      (ele, pos) => ingredientArray.indexOf(ele) === pos
     ));
   }
   
@@ -51,7 +47,7 @@ export function recipeFactory(recipe) {
       
     card.classList.add('recipe-card')
      
-      const recipeCard = `
+    const recipeCard = `
                 <div class="card">
                   <div class="card-img-top"></div>
                   <div class="card-body">
@@ -66,8 +62,8 @@ export function recipeFactory(recipe) {
                   </div>
                 </div>
               `;
-      card.innerHTML = recipeCard
-      return { card, id }
+    card.innerHTML = recipeCard
+    return { card, id }
   }
 
   return {

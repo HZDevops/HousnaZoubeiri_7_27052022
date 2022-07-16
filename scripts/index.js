@@ -18,33 +18,29 @@ let recipesArray = [];
 export function inputRecipeListner() {
   
   let searchedRecipes = [];
-  inputRecipe.addEventListener('keyup', function (e) {
-        
+  inputRecipe.addEventListener('keyup', () => {
+
     if (inputRecipe.value.length < 3) {
       recipeContainer.innerHTML = '';
-      searchedRecipes = recipesArray
-      displayRecipes(searchedRecipes)
+      searchedRecipes = recipesArray;
+      displayRecipes(searchedRecipes);
     }
-    
+
     if (inputRecipe.value.length >= 3) {
       searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value);
-      console.log(searchedRecipes)
-      if (searchedRecipes.length==0) {
-        //console.log('bonjour');
-        //recipeContainer.innerHTML = '';
-        
+      console.log(searchedRecipes);
+      if (searchedRecipes.length === 0) {
         const recipeInfo = `<p id="recipe-info">
           Aucune recette ne correspond à votre critère… vous pouvez chercher «
           tarte aux pommes », « poisson », etc.</p>`;
         recipeContainer.innerHTML = recipeInfo;
       } else {
-        //console.log('bonjour2');
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipes);
         selectIngredient(searchedRecipes);
         selectAppliance(searchedRecipes);
         selectUstensil(searchedRecipes);
-      }  
+      }
     }
   })
 }

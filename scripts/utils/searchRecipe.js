@@ -77,7 +77,7 @@ export function searchByAppliance(recipes, appliance) {
  * @param {String} ingredient - value of ingredient
  * @returns {Array} 
  */
- export function searchByIngredient(recipes, ingredient) {
+export function searchByIngredient(recipes, ingredient) {
   //console.log(recipes)
   let searchedRecipes = [];
   let ingredientsArray = [];
@@ -93,10 +93,9 @@ export function searchByAppliance(recipes, appliance) {
         array.length ++;
       }
     })
-    if (length != ingredientsArray.length) {
+    if (length !== ingredientsArray.length) {
       ingredientsArray.length --;
     }
   })
-       
   return searchedRecipes;
 }

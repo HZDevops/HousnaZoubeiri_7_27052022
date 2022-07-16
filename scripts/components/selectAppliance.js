@@ -49,11 +49,11 @@ async function closeApplianceTag() {
   const tag = document.querySelector('.appliance-tag');
   const closeTag = document.querySelector('.close-appliance');
 
-  closeTag.addEventListener('click', function (e) {
-   tag.remove();
-   recipeContainer.innerHTML = '';
-   displayRecipes(allRecipes);
-   inputRecipeListner();
+  closeTag.addEventListener('click', () => {
+    tag.remove();
+    recipeContainer.innerHTML = '';
+    displayRecipes(allRecipes);
+    inputRecipeListner();
   });
 }
 
@@ -65,20 +65,20 @@ async function closeApplianceTag() {
 function displayApplianceTag (appliances, recipes) {
   
   appliances.forEach((appliance) => {
-    appliance.addEventListener('click', (e) => {
-      let searchedRecipeByAppliance= [];
+    appliance.addEventListener('click', () => {
+      let searchedRecipeByAppliance = [];
       let applianceSelected = appliance.textContent;
       let currentApplianceTag = document.querySelector('.appliance-tag');
-      
+
       applianceItems.style.display = 'none';
       applianceInput.style.display = 'none';
       applianceLabel.style.display = 'block';
-     
+
       if (!currentApplianceTag) {
         createApplianceTag(applianceSelected);
         closeApplianceTag(recipes);
-        
-       searchedRecipeByAppliance = searchByAppliance(
+
+        searchedRecipeByAppliance = searchByAppliance(
           recipes,
           applianceSelected
         );
@@ -89,7 +89,7 @@ function displayApplianceTag (appliances, recipes) {
       } else {
         updateApplianceTag(applianceSelected);
         closeApplianceTag(recipes);
-        
+
         searchedRecipeByAppliance = searchByAppliance(
           recipes,
           applianceSelected
@@ -99,7 +99,7 @@ function displayApplianceTag (appliances, recipes) {
         displayRecipes(searchedRecipeByAppliance);
         selectIngredient(searchedRecipeByAppliance);
         selectUstensil(searchedRecipeByAppliance);
-      }  
+      }
     })
   })
 }
@@ -115,37 +115,36 @@ export function selectAppliance(recipes) {
     applianceItems.insertAdjacentHTML('beforeend',`<li class="dropdown-item appliance-item">${applianceList[i]}</li>`);
   }
  
-  applianceLabel.addEventListener('click', function (e) {
+  applianceLabel.addEventListener('click', () => {
     applianceInput.style.display = 'block';
     applianceInput.style.width = '667px';
     arrowUp.style.display = 'block';
     applianceLabel.style.display = 'none';
     applianceItems.style.display = 'flex';
-    
+
     let appliancesFromDropdownMenu = Array.from(
       document.getElementsByClassName('appliance-item')
     );
-    
+
     displayApplianceTag(appliancesFromDropdownMenu, recipes);
 
-    applianceInput.addEventListener('keyup', function(e) {
+    applianceInput.addEventListener('keyup', function (e) {
       let input = e.target.value.toLowerCase();
-      let newApplianceArray = applianceList.filter((appliance) =>
-        appliance.toLowerCase().includes(input)
+      let newApplianceArray = applianceList.filter((appliance) => appliance.toLowerCase().includes(input)
       );
-    
+
       applianceItems.innerHTML = '';
 
       for (let i = 0; i < newApplianceArray.length; i++) {
         applianceItems.insertAdjacentHTML('beforeend',
-                `<li class="dropdown-item appliance-item">${newApplianceArray[i]}</li>`);
+          `<li class="dropdown-item appliance-item">${newApplianceArray[i]}</li>`);
       }
       appliancesFromDropdownMenu = Array.from(
         document.getElementsByClassName('appliance-item')
       );
 
-      displayApplianceTag(appliancesFromDropdownMenu,recipes)
-    })
+      displayApplianceTag(appliancesFromDropdownMenu, recipes);
+    });
     if (arrowUp) {
       arrowUp.addEventListener('click', () => {
         applianceInput.style.display = 'none';
@@ -155,5 +154,4 @@ export function selectAppliance(recipes) {
       });
     }
   })
-  
 }

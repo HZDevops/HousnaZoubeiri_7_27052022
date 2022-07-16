@@ -9,7 +9,7 @@ export function getApplianceList(recipes) {
     applianceArray.push(recipe.appliance);
   });
 
-  applianceArray = applianceArray.filter((ele, pos) => applianceArray.indexOf(ele) == pos
+  applianceArray = applianceArray.filter((ele, pos) => applianceArray.indexOf(ele) === pos
   );
   return applianceArray;
 }
