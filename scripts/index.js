@@ -1,14 +1,13 @@
 import { getRecipes } from './utils/getData.js';
-import { displayRecipes } from './utils/displayRecipes.js';
+import { displayRecipes } from './components/displayRecipes.js';
 import { selectIngredient } from './components/selectIngredient.js';
 import { selectAppliance } from './components/selectAppliance.js';
 import { selectUstensil } from './components/selectUstensil.js';
-import { searchRecipe } from './utils/searchRecipe.js';
-
+import { searchRecipe } from './components/searchRecipe.js';
 
 //DOM elements
-let inputRecipe = document.getElementById('floatingInput')
-let recipeContainer = document.querySelector('.recipe-container')
+let inputRecipe = document.getElementById('floatingInput');
+let recipeContainer = document.querySelector('.recipe-container');
 
 let recipesArray = [];
 
@@ -17,39 +16,34 @@ let recipesArray = [];
  **/
 export function inputRecipeListner() {
   let searchedRecipes = [];
-
-  inputRecipe.addEventListener('keyup', function (e) {
-        
+  inputRecipe.addEventListener('keyup', () => {
     if (inputRecipe.value.length < 3) {
-      searchedRecipes = recipesArray
-      displayRecipes(searchedRecipes)
+      recipeContainer.innerHTML = '';
+      searchedRecipes = recipesArray;
+      displayRecipes(searchedRecipes);
     }
-    
+
     if (inputRecipe.value.length >= 3) {
       searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value);
-      //console.log(searchedRecipes)
-      /*if(!searchedRecipes) {
-        const recipeInfo = `<p id='recipe-info'>
+      if (searchedRecipes.length === 0) {
+        const recipeInfo = `<p id="recipe-info">
           Aucune recette ne correspond à votre critère… vous pouvez chercher «
           tarte aux pommes », « poisson », etc.</p>`;
         recipeContainer.innerHTML = recipeInfo;
-      } else {*/
+      } else {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipes);
         selectIngredient(searchedRecipes);
         selectAppliance(searchedRecipes);
         selectUstensil(searchedRecipes);
-      //}
+      }
     }
-  })
+  });
 }
 
-recipesArray = await getRecipes()
-displayRecipes(recipesArray)
-inputRecipeListner()
+recipesArray = await getRecipes();
+displayRecipes(recipesArray);
+inputRecipeListner();
 selectIngredient(recipesArray);
 selectAppliance(recipesArray);
 selectUstensil(recipesArray);
-
-
-

@@ -1,7 +1,7 @@
 import { getUstensilList } from '../utils/getUstensilList.js';
-import { searchByUstensil } from '../utils/searchRecipe.js';
+import { searchByUstensil } from '../components/searchRecipe.js';
 import { inputRecipeListner } from '../index.js';
-import { displayRecipes } from '../utils/displayRecipes.js';
+import { displayRecipes } from '../components/displayRecipes.js';
 import { getRecipes } from '../utils/getData.js';
 import { selectIngredient } from './selectIngredient.js';
 import { selectAppliance } from './selectAppliance.js';
