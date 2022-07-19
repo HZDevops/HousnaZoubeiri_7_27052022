@@ -7,7 +7,6 @@
  **/
 
 export function searchRecipe(recipes, string) {
-  //console.log(recipes)
   let searchedRecipes = [];
   recipes.forEach((recipe) => {
     let nameRecipeSearched = recipe.name.toLowerCase();
@@ -28,6 +27,52 @@ export function searchRecipe(recipes, string) {
   })
   let FilteredSearchedRecipes = [...new Set(searchedRecipes)];
   return FilteredSearchedRecipes;
+}
+
+/**
+ * Return an array with recipes matching with ingredient tag
+ * @param {Array} recipes
+ * @param {String} ingredient - value of ingredient
+ * @returns {Array} 
+ */
+export function searchByIngredient(recipes, ingredient) {
+  let searchedRecipes = [];
+  let ingredientsArray = [];
+    
+  recipes.forEach((recipe) => {
+    ingredientsArray = recipe.ingredients
+    const length = ingredientsArray.length;
+
+    ingredientsArray.forEach ((element, index, array) => {
+      if (element.ingredient.includes(ingredient)) {
+        searchedRecipes.push(recipe);
+        index ++;
+        array.length ++;
+      }
+    })
+    if (length !== ingredientsArray.length) {
+      ingredientsArray.length --;
+    }
+  })
+  return searchedRecipes;
+}
+
+/**
+ * Return an array with recipes matching with appliance tag
+ * @param {Array} recipes
+ * @param {String} string - value of appliance
+ * @returns {Array} 
+ **/
+export function searchByAppliance(recipes, appliance) {
+  let searchedRecipes = [];
+  recipes.forEach((recipe) => {
+    let applianceSearched = recipe.appliance.toLowerCase()
+
+    if (applianceSearched.includes(appliance.toLowerCase()) === true) {
+      searchedRecipes.push(recipe);
+    }
+  })
+  return searchedRecipes
 }
 
 /**
@@ -52,50 +97,4 @@ export function searchByUstensil(recipes, ustensil) {
   return (searchedRecipes)
 }
 
-/**
- * Return an array with recipes matching with appliance tag
- * @param {Array} recipes
- * @param {String} string - value of appliance
- * @returns {Array} 
- **/
-export function searchByAppliance(recipes, appliance) {
-  //console.log(recipes, appliance)
-  let searchedRecipes = [];
-  recipes.forEach((recipe) => {
-    let applianceSearched = recipe.appliance.toLowerCase()
 
-    if (applianceSearched.includes(appliance.toLowerCase()) === true) {
-      searchedRecipes.push(recipe);
-    }
-  })
-  return searchedRecipes
-}
-
-/**
- * Return an array with recipes matching with ingredient tag
- * @param {Array} recipes
- * @param {String} ingredient - value of ingredient
- * @returns {Array} 
- */
-export function searchByIngredient(recipes, ingredient) {
-  //console.log(recipes)
-  let searchedRecipes = [];
-  let ingredientsArray = [];
-    
-  recipes.forEach((recipe) => {
-    ingredientsArray = recipe.ingredients
-    const length = ingredientsArray.length;
-
-    ingredientsArray.forEach ((element, index, array) => {
-      if (element.ingredient.includes(ingredient)) {
-        searchedRecipes.push(recipe);
-        index ++;
-        array.length ++;
-      }
-    })
-    if (length !== ingredientsArray.length) {
-      ingredientsArray.length --;
-    }
-  })
-  return searchedRecipes;
-}

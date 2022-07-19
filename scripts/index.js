@@ -1,9 +1,9 @@
 import { getRecipes } from './utils/getData.js';
-import { displayRecipes } from './utils/displayRecipes.js';
+import { displayRecipes } from './components/displayRecipes.js';
 import { selectIngredient } from './components/selectIngredient.js';
 import { selectAppliance } from './components/selectAppliance.js';
 import { selectUstensil } from './components/selectUstensil.js';
-import { searchRecipe } from './utils/searchRecipe.js';
+import { searchRecipe } from './components/searchRecipe.js';
 
 
 //DOM elements
@@ -28,7 +28,6 @@ export function inputRecipeListner() {
 
     if (inputRecipe.value.length >= 3) {
       searchedRecipes = searchRecipe(searchedRecipes, inputRecipe.value);
-      console.log(searchedRecipes);
       if (searchedRecipes.length === 0) {
         const recipeInfo = `<p id="recipe-info">
           Aucune recette ne correspond à votre critère… vous pouvez chercher «

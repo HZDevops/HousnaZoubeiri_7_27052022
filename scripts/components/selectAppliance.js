@@ -1,7 +1,7 @@
 import { getApplianceList } from '../utils/getApplianceList.js';
-import { searchByAppliance } from '../utils/searchRecipe.js';
+import { searchByAppliance } from '../components/searchRecipe.js';
 import { inputRecipeListner } from '../index.js';
-import { displayRecipes } from '../utils/displayRecipes.js';
+import { displayRecipes } from '../components/displayRecipes.js';
 import { getRecipes } from '../utils/getData.js';
 import { selectIngredient } from './selectIngredient.js';
 import { selectUstensil } from './selectUstensil.js';

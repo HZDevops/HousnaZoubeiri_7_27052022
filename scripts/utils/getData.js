@@ -1,5 +1,5 @@
 /**
- * Get data from database
+ * Get recipe data from database
  * @returns {Object}
  **/
 function getData() {

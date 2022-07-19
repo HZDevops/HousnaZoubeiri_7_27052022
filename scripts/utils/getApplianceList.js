@@ -1,5 +1,5 @@
 /**
- * Get appliances array
+ * Get appliances in an array
  * @param {Array} recipes
  * @returns {Array}
  */ 

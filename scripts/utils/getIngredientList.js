@@ -1,5 +1,5 @@
 /**
- * Get ingredients array
+ * Get ingredients list in an array
  * @param {Array} recipes
  * @returns {Array}
  */ 
