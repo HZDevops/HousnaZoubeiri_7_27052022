@@ -11,6 +11,7 @@ export function getIngredientList(recipes) {
     for (let i = 0; i < array.length; i++) {
       ingredientArray.push(array[i].ingredient);
     }
+    //Remove duplicated elements in ingredientArray 
     ingredientArray = ingredientArray.filter(
       (ele, pos) => ingredientArray.indexOf(ele) === pos
     );

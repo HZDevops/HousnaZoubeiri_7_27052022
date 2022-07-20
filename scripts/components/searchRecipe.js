@@ -46,7 +46,6 @@ export function searchByIngredient(recipes, ingredient) {
     ingredientsArray.forEach ((element, index, array) => {
       if (element.ingredient.includes(ingredient)) {
         searchedRecipes.push(recipe);
-        index ++;
         array.length ++;
       }
     })

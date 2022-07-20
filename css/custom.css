@@ -10,6 +10,12 @@
     opacity: 0.25;
 }
 
+.bi-search {
+    position: absolute;
+    right: 3%;
+    bottom: 25%;
+}
+
 .recipe-container {
     display: flex;
     justify-content: space-around;
