@@ -2,7 +2,7 @@ import { getRecipes } from '../utils/getData.js';
 import { getIngredientList } from '../utils/getIngredientList.js';
 import { getApplianceList } from '../utils/getApplianceList.js';
 import { getUstensilList } from '../utils/getUstensilList.js';
-import { openTagDropDownMenu, closeTagDropDownMenu } from '../utils/TagDropDownMenu.js';
+import { openTagDropDownMenu, closeTagDropDownMenu } from './TagDropDownMenu.js';
 import {
   createIngredientTag,
   createApplianceTag,
