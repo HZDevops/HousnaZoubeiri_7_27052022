@@ -1,9 +1,7 @@
 import { getRecipes } from './utils/getData.js';
 import { displayRecipes } from './components/displayRecipes.js';
-import { selectIngredient } from './components/selectIngredient.js';
-import { selectAppliance } from './components/selectAppliance.js';
-import { selectUstensil } from './components/selectUstensil.js';
 import { searchRecipe } from './components/searchRecipe.js';
+import { selectTag } from './components/searchByTag.js';
 
 
 //DOM elements
@@ -37,7 +35,7 @@ export function inputRecipeListner() {
       } else {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipes);
-        selectIngredient(searchedRecipes);
+        //selectIngredient(searchedRecipes);
         //selectAppliance(searchedRecipes);
         //selectUstensil(searchedRecipes);
       }
@@ -48,6 +46,7 @@ export function inputRecipeListner() {
 recipesArray = await getRecipes();
 displayRecipes(recipesArray);
 inputRecipeListner();
+selectTag();
 /*selectIngredient(recipesArray);
 selectAppliance(recipesArray);
 selectUstensil(recipesArray);*/

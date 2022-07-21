@@ -7,7 +7,7 @@ import { selectAppliance } from './selectAppliance.js';
 import { selectUstensil } from './selectUstensil.js';
 
 //DOM Elements
-let inputRecipe = document.getElementById('floatingInput');
+//let inputRecipe = document.getElementById('floatingInput');
 const recipeContainer = document.querySelector('.recipe-container');
 const ingredientInput = document.getElementById('ingredient-input');
 const ingredientLabel = document.getElementById('ingredient-label');
