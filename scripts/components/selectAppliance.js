@@ -62,11 +62,13 @@ async function closeApplianceTag() {
  * @param {Array} appliances
  * @param {Array} recipes
  */
-function displayApplianceTag (appliances, recipes) {
-  
+function displayApplianceTag (recipes) {
+  let searchedRecipeByAppliance = [];
+  let appliances = document.querySelectorAll('.appliance-item');
+
   appliances.forEach((appliance) => {
     appliance.addEventListener('click', () => {
-      let searchedRecipeByAppliance = [];
+      
       let applianceSelected = appliance.textContent;
       let currentApplianceTag = document.querySelector('.appliance-tag');
 
@@ -98,7 +100,7 @@ function displayApplianceTag (appliances, recipes) {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByAppliance);
         selectIngredient(searchedRecipeByAppliance);
-        selectUstensil(searchedRecipeByAppliance);
+        //selectUstensil(searchedRecipeByAppliance);
       }
     })
   })
@@ -122,11 +124,7 @@ export function selectAppliance(recipes) {
     applianceLabel.style.display = 'none';
     applianceItems.style.display = 'flex';
 
-    let appliancesFromDropdownMenu = Array.from(
-      document.getElementsByClassName('appliance-item')
-    );
-
-    displayApplianceTag(appliancesFromDropdownMenu, recipes);
+    displayApplianceTag(recipes);
 
     applianceInput.addEventListener('keyup', function (e) {
       let input = e.target.value.toLowerCase();
@@ -139,11 +137,7 @@ export function selectAppliance(recipes) {
         applianceItems.insertAdjacentHTML('beforeend',
           `<li class="dropdown-item appliance-item">${newApplianceArray[i]}</li>`);
       }
-      appliancesFromDropdownMenu = Array.from(
-        document.getElementsByClassName('appliance-item')
-      );
-
-      displayApplianceTag(appliancesFromDropdownMenu, recipes);
+      displayApplianceTag(recipes);
     });
     if (arrowUp) {
       arrowUp.addEventListener('click', () => {

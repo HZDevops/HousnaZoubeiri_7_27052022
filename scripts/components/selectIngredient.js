@@ -7,6 +7,7 @@ import { selectAppliance } from './selectAppliance.js';
 import { selectUstensil } from './selectUstensil.js';
 
 //DOM Elements
+let inputRecipe = document.getElementById('floatingInput');
 const recipeContainer = document.querySelector('.recipe-container');
 const ingredientInput = document.getElementById('ingredient-input');
 const ingredientLabel = document.getElementById('ingredient-label');
@@ -63,10 +64,13 @@ async function closeIngredientTag() {
  * @param {Array} ingredients
  * @param {Array} recipes
  */
-function displayIngredientTag(ingredients, recipes) {
+function displayIngredientTag(recipes) {
+  let searchedRecipeByIngredient = [];
+  let ingredients = document.querySelectorAll('.ingredient-item');
 
   ingredients.forEach((ingredient) => {
     ingredient.addEventListener('click', () => {
+      
       let ingredientSelected = ingredient.textContent;
       let currentIngredientTag = document.querySelector('.ingredient-tag');
 
@@ -78,7 +82,7 @@ function displayIngredientTag(ingredients, recipes) {
         createIngredientTag(ingredientSelected);
         closeIngredientTag();
 
-        let searchedRecipeByIngredient = searchByIngredient(
+        searchedRecipeByIngredient = searchByIngredient(
           recipes,
           ingredientSelected
         );
@@ -86,11 +90,10 @@ function displayIngredientTag(ingredients, recipes) {
         displayRecipes(searchedRecipeByIngredient);
         selectAppliance(searchedRecipeByIngredient);
         selectUstensil(searchedRecipeByIngredient);
-
       } else {
         updateIngredientTag(ingredientSelected);
         closeIngredientTag();
-        let searchedRecipeByIngredient = searchByIngredient(
+        searchedRecipeByIngredient = searchByIngredient(
           recipes,
           ingredientSelected
         );
@@ -108,6 +111,7 @@ function displayIngredientTag(ingredients, recipes) {
  * @param {Array} recipes
  */
 export function selectIngredient(recipes) {
+  
   const ingredientList = getIngredientList(allRecipes);
 
   for (let i = 0; i < ingredientList.length; i++) {
@@ -123,41 +127,36 @@ export function selectIngredient(recipes) {
     arrowUp.style.display = 'block';
     ingredientLabel.style.display = 'none';
     ingredientItems.style.display = 'flex';
+  });
 
-    let ingredientsFromDropdownMenu = Array.from(
-      document.getElementsByClassName('ingredient-item')
+  displayIngredientTag(recipes);
+
+  ingredientInput.addEventListener('keyup', function (e) {
+    let input = e.target.value.toLowerCase();
+
+    let newIngredientArray = ingredientList.filter(
+      (ingredient) => ingredient.toLowerCase().includes(input)
     );
 
-    displayIngredientTag(ingredientsFromDropdownMenu, recipes);
+    ingredientItems.innerHTML = '';
 
-    ingredientInput.addEventListener('keyup', function (e) {
-      let input = e.target.value.toLowerCase();
-
-      let newIngredientArray = ingredientList.filter(
-        (ingredient) => ingredient.toLowerCase().includes(input)
+    for (let i = 0; i < newIngredientArray.length; i++) {
+      ingredientItems.insertAdjacentHTML(
+        'beforeend',
+        `<li class="dropdown-item ingredient-item">${newIngredientArray[i]}</li>`
       );
-
-      ingredientItems.innerHTML = '';
-
-      for (let i = 0; i < newIngredientArray.length; i++) {
-        ingredientItems.insertAdjacentHTML(
-          'beforeend',
-          `<li class="dropdown-item ingredient-item">${newIngredientArray[i]}</li>`
-        );
-      }
-      ingredientsFromDropdownMenu = Array.from(
-        document.getElementsByClassName('ingredient-item')
-      );
-      displayIngredientTag(ingredientsFromDropdownMenu, recipes);
-    });
-
-    if (arrowUp) {
-      arrowUp.addEventListener('click', () => {
-        ingredientInput.style.display = 'none';
-        ingredientItems.style.display = 'none';
-        arrowUp.style.display = 'none';
-        ingredientLabel.style.display = 'block';
-      });
     }
+    displayIngredientTag(recipes);
   });
+
+  if (arrowUp) {
+    const ingredientInput = document.getElementById('ingredient-input');
+    arrowUp.addEventListener('click', () => {
+      ingredientInput.style.display = 'none';
+      ingredientItems.style.display = 'none';
+      arrowUp.style.display = 'none';
+      ingredientLabel.style.display = 'block';
+      ingredientInput.value='';
+    });
+  }
 }
