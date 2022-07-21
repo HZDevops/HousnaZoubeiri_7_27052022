@@ -2,7 +2,7 @@ import { getIngredientList } from '../utils/getIngredientList.js';
 import { getApplianceList } from '../utils/getApplianceList.js';
 
 import { inputRecipeListner } from '../index.js';
-//import { searchByIngredient } from '../components/searchRecipe.js';
+import { searchByIngredient, searchByAppliance, searchByUstensil } from '../components/searchRecipe.js';
 import { displayRecipes } from '../components/displayRecipes.js';
 import { getRecipes } from '../utils/getData.js';
 
@@ -53,6 +53,10 @@ function updateIngredientTag(ingredientValue) {
   ingredient.innerHTML = ingredientValue;
 }
 
+/**
+ * Create appliance tag in tag section
+ * @param {String} applianceValue
+ */
 function createApplianceTag(tagValue) {
   let applianceTag = `<button type="button" class="btn appliance-tag"><span class="appliance-name tag"></span><i class="bi bi-x-circle appliance-close"></i></div>`;
   tagContainer.insertAdjacentHTML('beforeend', applianceTag);
@@ -72,7 +76,7 @@ function updateApplianceTag(applianceValue) {
 }
 
 /**
- * Remove tag in tag section when click in cross icon
+ * Remove tag from tag section when click in cross icon
  */
 async function closeTag() {
   const tagIngredient = document.querySelector('.ingredient-tag');
@@ -80,6 +84,7 @@ async function closeTag() {
   let closeIngredientTag = document.querySelector('.ingredient-close');
   let closeApplianceTag = document.querySelector('.appliance-close');
 
+  //Close ingredient tag
   if (closeIngredientTag) {
     closeIngredientTag.addEventListener('click', () => {
       tagIngredient.remove();
@@ -89,6 +94,7 @@ async function closeTag() {
     });
   }
 
+  //Close appliance tag
   if (closeApplianceTag) {
     closeApplianceTag.addEventListener('click', () => {
       tagAppliance.remove();
@@ -100,21 +106,23 @@ async function closeTag() {
 }
 
 /**
- * Display selected ingredient tag in tag section and searched recipes by ingredient
- * @param {Array} ingredients
- * @param {Array} recipes
+ * Display selected tag in tag section and searched recipes by ingredient
  */
-function displayTag() {
-  //let searchedRecipeByIngredient = [];
+function displayTag(recipes) {
   let ingredients = document.querySelectorAll('.ingredient-item');
   let appliances = document.querySelectorAll('.appliance-item');
 
+  let searchedRecipeByTag = [];
+  let searchedRecipeByIngredient = [];
+  let searchedRecipeByAppliance = [];
+
+  //Create, update and close ingredient tag
   ingredients.forEach((ingredient) => {
     ingredient.addEventListener('click', () => {
-      //let ingredientTag = `<button type="button" class="btn ingredient-tag"><span class="ingredient-name tag"></span><i class="bi bi-x-circle ingredient-close"></i></div>`;
       let ingredientSelected = ingredient.textContent;
       let currentIngredientTag = document.querySelector('.ingredient-tag');
-
+      let currentApplianceTag = document.querySelector('.appliance-tag');
+ 
       ingredientItems.style.display = 'none';
       ingredientInput.style.display = 'none';
       ingredientLabel.style.display = 'block';
@@ -122,33 +130,49 @@ function displayTag() {
       if (!currentIngredientTag) {
         createIngredientTag(ingredientSelected);
         closeTag();
-
-        /*searchedRecipeByIngredient = searchByIngredient(
-          recipes,
-          ingredientSelected
-        );
-        recipeContainer.innerHTML = '';
-        displayRecipes(searchedRecipeByIngredient);*/
+        if(!currentApplianceTag) {
+          searchedRecipeByIngredient = searchByIngredient(recipes,ingredientSelected);
+          recipeContainer.innerHTML = '';
+          displayRecipes(searchedRecipeByIngredient);
+          searchedRecipeByTag = searchedRecipeByIngredient;
+        } else {
+          searchedRecipeByIngredient = searchByIngredient(searchedRecipeByTag, ingredientSelected)
+          recipeContainer.innerHTML = '';
+          displayRecipes(searchedRecipeByIngredient);
+          searchedRecipeByTag = searchedRecipeByIngredient;
+        }
       } else {
         updateIngredientTag(ingredientSelected);
         closeTag();
-        /*searchedRecipeByIngredient = searchByIngredient(
-          recipes,
-          ingredientSelected
-        );
-        recipeContainer.innerHTML = '';
-        displayRecipes(searchedRecipeByIngredient);
-        selectAppliance(searchedRecipeByIngredient);
-        selectUstensil(searchedRecipeByIngredient);*/
+        if (!currentApplianceTag) {
+          searchedRecipeByIngredient = searchByIngredient(
+            recipes,
+            ingredientSelected
+          );
+          recipeContainer.innerHTML = '';
+          displayRecipes(searchedRecipeByIngredient);
+          searchedRecipeByTag = searchedRecipeByIngredient;
+        } else {
+          searchedRecipeByIngredient = searchByIngredient(
+            searchedRecipeByAppliance,
+            ingredientSelected
+          );
+          recipeContainer.innerHTML = '';
+          displayRecipes(searchedRecipeByIngredient);
+          searchedRecipeByTag = searchedRecipeByIngredient;
+        }        
       }
     });
   });
 
+  //Create, update and close appliance tag
   appliances.forEach((appliance) => {
+    //console.log(searchedRecipeByTag)
     appliance.addEventListener('click', () => {
       let applianceSelected = appliance.textContent;
       let currentApplianceTag = document.querySelector('.appliance-tag');
-
+      let currentIngredientTag = document.querySelector('.ingredient-tag');
+    
       applianceItems.style.display = 'none';
       applianceInput.style.display = 'none';
       applianceLabel.style.display = 'block';
@@ -156,33 +180,54 @@ function displayTag() {
       if (!currentApplianceTag) {
         createApplianceTag(applianceSelected);
         closeTag();
-
-        /*searchedRecipeByIngredient = searchByIngredient(
-          recipes,
-          ingredientSelected
-        );
-        recipeContainer.innerHTML = '';
-        displayRecipes(searchedRecipeByIngredient);*/
+        if (!currentIngredientTag) {
+          searchedRecipeByAppliance = searchByAppliance(
+            recipes,
+            applianceSelected
+          );
+          recipeContainer.innerHTML = '';
+          displayRecipes(searchedRecipeByAppliance);
+          searchedRecipeByTag = searchedRecipeByAppliance;
+        } else {
+          searchedRecipeByAppliance = searchByAppliance(
+            searchedRecipeByTag,
+            applianceSelected
+          );
+          recipeContainer.innerHTML = '';
+          displayRecipes(searchedRecipeByAppliance);
+          searchedRecipeByTag = searchedRecipeByAppliance;
+        }
       } else {
         updateApplianceTag(applianceSelected);
         closeTag();
-        /*searchedRecipeByIngredient = searchByIngredient(
-          recipes,
-          ingredientSelected
-        );
-        recipeContainer.innerHTML = '';
-        displayRecipes(searchedRecipeByIngredient);
-        selectAppliance(searchedRecipeByIngredient);
-        selectUstensil(searchedRecipeByIngredient);*/
+        if (!currentIngredientTag) {
+            console.log('bonjour')
+          searchedRecipeByAppliance = searchByAppliance(
+            recipes,
+            applianceSelected
+          );
+          recipeContainer.innerHTML = '';
+          displayRecipes(searchedRecipeByAppliance);
+          searchedRecipeByTag = searchedRecipeByAppliance;
+        } else {
+            searchedRecipeByAppliance = searchByAppliance(
+            searchedRecipeByIngredient,
+            applianceSelected
+          );
+          recipeContainer.innerHTML = '';
+          displayRecipes(searchedRecipeByAppliance);
+          searchedRecipeByTag = searchedRecipeByAppliance;
+        }        
       }
     });
   });
 }
 
+
 /**
  * Select a tag in dropdown menu
  */
-export function selectTag() {
+export function selectTag(recipes) {
   const ingredientList = getIngredientList(allRecipes);
   const applianceList = getApplianceList(allRecipes);
 
@@ -216,6 +261,5 @@ export function selectTag() {
     applianceLabel.style.display = 'none';
     applianceItems.style.display = 'flex';
   });
-
-  displayTag();
+  displayTag(recipes);
 }

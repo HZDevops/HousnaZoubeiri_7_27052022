@@ -35,9 +35,7 @@ export function inputRecipeListner() {
       } else {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipes);
-        //selectIngredient(searchedRecipes);
-        //selectAppliance(searchedRecipes);
-        //selectUstensil(searchedRecipes);
+      
       }
     }
   })
@@ -46,10 +44,8 @@ export function inputRecipeListner() {
 recipesArray = await getRecipes();
 displayRecipes(recipesArray);
 inputRecipeListner();
-selectTag();
-/*selectIngredient(recipesArray);
-selectAppliance(recipesArray);
-selectUstensil(recipesArray);*/
+selectTag(recipesArray);
+
 
 
 
