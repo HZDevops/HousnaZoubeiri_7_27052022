@@ -35,7 +35,6 @@ export function inputRecipeListner() {
       } else {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipes);
-      
       }
     }
   })
