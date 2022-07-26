@@ -8,8 +8,7 @@ export function getApplianceList(recipes) {
   recipes.forEach((recipe) => {
     applianceArray.push(recipe.appliance);
   });
-
-  applianceArray = applianceArray.filter((ele, pos) => applianceArray.indexOf(ele) === pos
-  );
+  //Remove duplicated elements in applianceArray
+  applianceArray = [...new Set(applianceArray)];
   return applianceArray;
 }

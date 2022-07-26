@@ -12,9 +12,7 @@ export function getIngredientList(recipes) {
       ingredientArray.push(array[i].ingredient);
     }
     //Remove duplicated elements in ingredientArray 
-    ingredientArray = ingredientArray.filter(
-      (ele, pos) => ingredientArray.indexOf(ele) === pos
-    );
+    ingredientArray = [...new Set(ingredientArray)];
   });
   return (ingredientArray);
 }

@@ -17,23 +17,23 @@ import {
  
 //DOM Elements
 const recipeContainer = document.querySelector('.recipe-container');
-
 const allRecipes = await getRecipes();
 
 /**
  * Remove tag from tag section when click in cross icon
+ * @param {String} tagSelected
  */
 export async function closeTag(tagSelected) {
   const tagIngredient = document.querySelector('.ingredient-tag');
   const tagAppliance = document.querySelector('.appliance-tag');
   const tagUstensil = document.querySelector('.ustensil-tag');
-  let closeIngredientTag = document.querySelector('.ingredient-close');
-  let closeApplianceTag = document.querySelector('.appliance-close');
+  const closeIngredientTag = document.querySelector('.ingredient-close');
+  const closeApplianceTag = document.querySelector('.appliance-close');
   const closeUstensilTag = document.querySelector('.ustensil-close');
 
-  console.log(searchedRecipeByIngredient,
+  /*console.log(searchedRecipeByIngredient,
     searchedRecipeByAppliance,
-    searchedRecipeByUstensil)
+    searchedRecipeByUstensil)*/
 
   //Close ingredient tag
   if (closeIngredientTag) {
@@ -112,6 +112,4 @@ export async function closeTag(tagSelected) {
       inputRecipeListner();
     });
   }
-
-  
 }

@@ -1,52 +1,11 @@
 export function recipeFactory(recipe) {
-  const {
-    id,
-    name,
-    ingredients,
-    time,
-    description,
-  } = recipe;
-
-  
-  //Display ingredients list in card recipe
-  function createIngredientList() {
-    let ingredientArray = [];
-
-    ingredients.forEach((ingredient) => {
-      let ingredientBloc = document.createElement('li');
-      const ingredientItem = document.createElement('span');
-      const ingredientQuantity = document.createElement('span');
-      const ingredientUnit = document.createElement('span');
-
-      ingredientItem.classList.add('ingredient');
-      ingredientBloc.appendChild(ingredientItem);
-      ingredientBloc.appendChild(ingredientQuantity);
-      ingredientBloc.appendChild(ingredientUnit);
-
-      if(!ingredient.quantity && !ingredient.unit) {
-        ingredientItem.innerHTML = `${ingredient.ingredient}`
-      } else if (!ingredient.unit) {
-        ingredientItem.innerHTML = `${ingredient.ingredient}`
-        ingredientQuantity.innerHTML = `: ${ingredient.quantity}`;
-      } else {
-        ingredientItem.innerHTML = `${ingredient.ingredient}`;
-        ingredientQuantity.innerHTML = `: ${ingredient.quantity}`;
-        ingredientUnit.innerHTML = ` ${ingredient.unit}`; 
-      }
-      ingredientArray.push (ingredientBloc);
-    })
-    return (ingredientArray = ingredientArray.filter(
-      (ele, pos) => ingredientArray.indexOf(ele) === pos
-    ));
-  }
-  
+  const { id, name, ingredients, time, description } = recipe;
   //Create recipe card
   function getRecipeCardDOM() {
+    const card = document.createElement('a');
 
-    const card = document.createElement('a')
-      
-    card.classList.add('recipe-card')
-     
+    card.classList.add('recipe-card');
+
     const recipeCard = `
                 <div class="card">
                   <div class="card-img-top"></div>
@@ -62,12 +21,43 @@ export function recipeFactory(recipe) {
                   </div>
                 </div>
               `;
-    card.innerHTML = recipeCard
-    return { card, id }
+    card.innerHTML = recipeCard;
+    return { card, id };
   }
 
+  //Display ingredients list in card recipe
+  function createIngredientList() {
+    let ingredientArray = [];
+
+    ingredients.forEach((ingredient) => {
+      let ingredientBloc = document.createElement('li');
+      const ingredientItem = document.createElement('span');
+      const ingredientQuantity = document.createElement('span');
+      const ingredientUnit = document.createElement('span');
+
+      ingredientItem.classList.add('ingredient');
+      ingredientBloc.appendChild(ingredientItem);
+      ingredientBloc.appendChild(ingredientQuantity);
+      ingredientBloc.appendChild(ingredientUnit);
+
+      if (!ingredient.quantity && !ingredient.unit) {
+        ingredientItem.innerHTML = `${ingredient.ingredient}`;
+      } else if (!ingredient.unit) {
+        ingredientItem.innerHTML = `${ingredient.ingredient}`;
+        ingredientQuantity.innerHTML = `: ${ingredient.quantity}`;
+      } else {
+        ingredientItem.innerHTML = `${ingredient.ingredient}`;
+        ingredientQuantity.innerHTML = `: ${ingredient.quantity}`;
+        ingredientUnit.innerHTML = ` ${ingredient.unit}`;
+      }
+      ingredientArray.push(ingredientBloc);
+    });
+    return (ingredientArray = ingredientArray.filter(
+      (ele, pos) => ingredientArray.indexOf(ele) === pos
+    ));
+  }
   return {
     getRecipeCardDOM,
     createIngredientList,
-  }
+  };
 }

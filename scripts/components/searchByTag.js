@@ -42,6 +42,7 @@ const arrowUpUstensil = document.querySelector('.ustensil-chevron');
 
 const allRecipes = await getRecipes();
 
+//Tag fields initialisation
 ingredientInput.style.display = 'none';
 applianceInput.style.display = 'none';
 ustensilInput.style.display = 'none'
@@ -49,6 +50,7 @@ arrowUpIngredient.style.display = 'none';
 arrowUpAppliance.style.display = 'none'
 arrowUpUstensil.style.display = 'none';
 
+//Array initialisation for storing search recipes, tag close state and tag text selected
 export let searchedRecipeByTag = [];
 export let searchedRecipeByIngredient = [];
 export let searchedRecipeByAppliance = [];
@@ -56,20 +58,32 @@ export let searchedRecipeByUstensil = [];
 export let closed = [true, true, true]
 export let selectedTagText = ["","",""]
 
-export function setSearchedRecipeByIngredient (val) {
-  searchedRecipeByTag = val
-}
-
-export function setSearchedRecipeByAppliance (val) {
-  searchedRecipeByAppliance = val
-}
-
-export function setSearchedRecipeByUstensil (val) {
-  searchedRecipeByUstensil = val
+/**
+ * Set value in searched array by tag
+ * @param {Array} value
+ */
+export function setSearchedRecipeByIngredient (value) {
+  searchedRecipeByTag = value
 }
 
 /**
- * Display selected tag in tag section and searched recipes by ingredient, appliance and ustensil tag
+ * Set value in searched array by appliance
+ * @param {Array} value
+ */
+export function setSearchedRecipeByAppliance (value) {
+  searchedRecipeByAppliance = value
+}
+
+/**
+ * Set value in searched array by ustensil
+ * @param {Array} value
+ */
+export function setSearchedRecipeByUstensil (value) {
+  searchedRecipeByUstensil = value
+}
+
+/**
+ * Display selected tag in tag section and searched recipes by ingredient, appliance or ustensil tag
  * @param {Array} recipes
  */
 function displayTag(recipes) {
@@ -100,8 +114,7 @@ function displayTag(recipes) {
       } else {
         updateIngredientTag(ingredientSelected);
       }  
-      
-      
+            
       if (!currentApplianceTag && !currentUstensilTag) {
         searchedRecipeByIngredient = searchByIngredient(
           recipes,
@@ -136,7 +149,6 @@ function displayTag(recipes) {
         searchedRecipeByTag = searchedRecipeByIngredient;
       }
       selectedTagText[0] = ingredientSelected
-      
       closeTag(ingredientSelected);
     });
   });
@@ -161,7 +173,6 @@ function displayTag(recipes) {
         updateApplianceTag(applianceSelected);
       }
       
-        
       if (!currentIngredientTag && !currentUstensilTag) {
         searchedRecipeByAppliance = searchByAppliance(
           recipes,
@@ -218,8 +229,7 @@ function displayTag(recipes) {
       } else {
         updateUstensilTag(ustensilSelected);
       }
-        
-        
+               
       if (!currentIngredientTag && !currentApplianceTag) {
         searchedRecipeByUstensil = searchByUstensil(
           recipes,
@@ -258,7 +268,6 @@ function displayTag(recipes) {
     });
   });
 }
-
 
 
 /**
