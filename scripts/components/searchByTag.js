@@ -5,7 +5,7 @@ import { getUstensilList } from '../utils/getUstensilList.js';
 import {
   openTagDropDownMenu,
   closeTagDropDownMenu,
-} from '../components/TagDropDownMenu.js';
+} from './TagDropDownMenu.js';
 import {
   createIngredientTag,
   createApplianceTag,
@@ -19,8 +19,8 @@ import {
   searchByIngredient,
   searchByAppliance,
   searchByUstensil,
-} from './searchRecipe.js';
-import { displayRecipes } from './displayRecipes.js';
+} from '../components/searchRecipe.js';
+import { displayRecipes } from '../components/displayRecipes.js';
 
 //DOM Elements
 const recipeContainer = document.querySelector('.recipe-container');
@@ -45,6 +45,7 @@ const arrowUpUstensil = document.querySelector('.ustensil-chevron');
 
 const allRecipes = await getRecipes();
 
+//Tag fields initialisation
 ingredientInput.style.display = 'none';
 applianceInput.style.display = 'none';
 ustensilInput.style.display = 'none';
@@ -52,6 +53,7 @@ arrowUpIngredient.style.display = 'none';
 arrowUpAppliance.style.display = 'none';
 arrowUpUstensil.style.display = 'none';
 
+//Array initialisation for storing search recipes, tag close state and tag text selected
 export let searchedRecipeByTag = [];
 export let searchedRecipeByIngredient = [];
 export let searchedRecipeByAppliance = [];
@@ -59,20 +61,32 @@ export let searchedRecipeByUstensil = [];
 export let closed = [true, true, true];
 export let selectedTagText = ['', '', ''];
 
-export function setSearchedRecipeByIngredient(val) {
-  searchedRecipeByTag = val;
-}
-
-export function setSearchedRecipeByAppliance(val) {
-  searchedRecipeByAppliance = val;
-}
-
-export function setSearchedRecipeByUstensil(val) {
-  searchedRecipeByUstensil = val;
+/**
+ * Set value in searched array by tag
+ * @param {Array} value
+ */
+export function setSearchedRecipeByIngredient(value) {
+  searchedRecipeByTag = value;
 }
 
 /**
- * Display selected tag in tag section and searched recipes by ingredient, appliance and ustensil tag
+ * Set value in searched array by appliance
+ * @param {Array} value
+ */
+export function setSearchedRecipeByAppliance(value) {
+  searchedRecipeByAppliance = value;
+}
+
+/**
+ * Set value in searched array by ustensil
+ * @param {Array} value
+ */
+export function setSearchedRecipeByUstensil(value) {
+  searchedRecipeByUstensil = value;
+}
+
+/**
+ * Display selected tag in tag section and searched recipes by ingredient, appliance or ustensil tag
  * @param {Array} recipes
  */
 function displayTag(recipes) {
@@ -138,7 +152,6 @@ function displayTag(recipes) {
         searchedRecipeByTag = searchedRecipeByIngredient;
       }
       selectedTagText[0] = ingredientSelected;
-
       closeTag(ingredientSelected);
     });
   });
@@ -302,7 +315,6 @@ export function selectTag(recipes) {
         `<li class="dropdown-item ingredient-item">${newIngredientArray[i]}</li>`
       );
     }
-    displayTag(recipes);
   });
 
   //Listner in appliance drop-down input
@@ -320,7 +332,6 @@ export function selectTag(recipes) {
         `<li class="dropdown-item appliance-item">${newApplianceArray[i]}</li>`
       );
     }
-    displayTag(recipes);
   });
 
   //Listner in ustensil drop-down input
@@ -338,7 +349,6 @@ export function selectTag(recipes) {
         `<li><a class="dropdown-item ustensil-item" href="#">${newUstensilArray[i]}</a></li>`
       );
     }
-    displayTag(recipes);
   });
   displayTag(recipes);
 }

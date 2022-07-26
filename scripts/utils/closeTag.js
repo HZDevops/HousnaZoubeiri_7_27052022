@@ -21,25 +21,23 @@ import {
 
 //DOM Elements
 const recipeContainer = document.querySelector('.recipe-container');
-
 const allRecipes = await getRecipes();
 
 /**
  * Remove tag from tag section when click in cross icon
+ * @param {String} tagSelected
  */
 export async function closeTag(tagSelected) {
   const tagIngredient = document.querySelector('.ingredient-tag');
   const tagAppliance = document.querySelector('.appliance-tag');
   const tagUstensil = document.querySelector('.ustensil-tag');
-  let closeIngredientTag = document.querySelector('.ingredient-close');
-  let closeApplianceTag = document.querySelector('.appliance-close');
+  const closeIngredientTag = document.querySelector('.ingredient-close');
+  const closeApplianceTag = document.querySelector('.appliance-close');
   const closeUstensilTag = document.querySelector('.ustensil-close');
 
-  console.log(
-    searchedRecipeByIngredient,
+  /*console.log(searchedRecipeByIngredient,
     searchedRecipeByAppliance,
-    searchedRecipeByUstensil
-  );
+    searchedRecipeByUstensil)*/
 
   //Close ingredient tag
   if (closeIngredientTag) {
@@ -53,11 +51,13 @@ export async function closeTag(tagSelected) {
         displayRecipes(allRecipes);
       } else {
         if ((!closed[1] && closed[2]) || (closed[1] && !closed[2])) {
-          displayRecipes(
-            [...searchedRecipeByAppliance, ...searchedRecipeByUstensil].filter(
-              (elt, index, array) => array.indexOf(elt) === index
-            )
-          );
+          displayRecipes([
+            ...new Set([
+              ...searchedRecipeByAppliance,
+              ...searchedRecipeByUstensil,
+            ]),
+          ]);
+          //.filter((elt,index,array)=>array.indexOf(elt) === index));
         } else {
           if (searchedRecipeByAppliance.length >= searchedRecipeByUstensil) {
             displayRecipes(
@@ -86,11 +86,13 @@ export async function closeTag(tagSelected) {
         displayRecipes(allRecipes);
       } else {
         if ((!closed[0] && closed[2]) || (closed[0] && !closed[2])) {
-          displayRecipes(
-            [...searchedRecipeByIngredient, ...searchedRecipeByUstensil].filter(
-              (elt, index, array) => array.indexOf(elt) === index
-            )
-          );
+          displayRecipes([
+            ...new Set([
+              ...searchedRecipeByIngredient,
+              ...searchedRecipeByUstensil,
+            ]),
+          ]);
+          //.filter((elt,index,array)=>array.indexOf(elt) === index));
         } else {
           if (searchedRecipeByIngredient.length >= searchedRecipeByUstensil) {
             displayRecipes(
@@ -119,12 +121,13 @@ export async function closeTag(tagSelected) {
         displayRecipes(allRecipes);
       } else {
         if ((!closed[0] && closed[1]) || (closed[0] && !closed[1])) {
-          displayRecipes(
-            [
+          displayRecipes([
+            ...new Set([
               ...searchedRecipeByIngredient,
               ...searchedRecipeByAppliance,
-            ].filter((elt, index, array) => array.indexOf(elt) === index)
-          );
+            ]),
+          ]);
+          //.filter((elt,index,array)=>array.indexOf(elt) === index));
         } else {
           if (searchedRecipeByIngredient.length >= searchedRecipeByAppliance) {
             displayRecipes(

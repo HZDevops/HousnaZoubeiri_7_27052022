@@ -24,6 +24,8 @@ h5 {
     width:171px;
     height: 105px;
     padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 a {
