@@ -316,7 +316,6 @@ export function selectTag(recipes) {
         `<li class="dropdown-item ingredient-item">${newIngredientArray[i]}</li>`
       );
     }
-    displayTag(recipes);
   });
 
   //Listner in appliance drop-down input
@@ -334,7 +333,6 @@ export function selectTag(recipes) {
         `<li class="dropdown-item appliance-item">${newApplianceArray[i]}</li>`
       );
     }
-    displayTag(recipes);
   });
   
   //Listner in ustensil drop-down input
@@ -352,7 +350,6 @@ export function selectTag(recipes) {
         `<li><a class="dropdown-item ustensil-item" href="#">${newUstensilArray[i]}</a></li>`
       );
     }
-    displayTag(recipes);
   });
   displayTag(recipes);
 }

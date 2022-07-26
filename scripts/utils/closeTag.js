@@ -47,8 +47,8 @@ export async function closeTag(tagSelected) {
         displayRecipes(allRecipes)
       } else  {
         if((!closed[1] && closed[2]) || (closed[1] && !closed[2])) {
-          displayRecipes([...searchedRecipeByAppliance, ...searchedRecipeByUstensil]
-            .filter((elt,index,array)=>array.indexOf(elt) === index));
+          displayRecipes([...new Set([...searchedRecipeByAppliance, ...searchedRecipeByUstensil])])
+            //.filter((elt,index,array)=>array.indexOf(elt) === index));
         } else {
           if(searchedRecipeByAppliance.length >= searchedRecipeByUstensil) {
             displayRecipes(searchByUstensil(searchedRecipeByAppliance, selectedTagText[2]))
@@ -73,8 +73,8 @@ export async function closeTag(tagSelected) {
         displayRecipes(allRecipes)
       } else  {
         if((!closed[0] && closed[2]) || (closed[0] && !closed[2])) {
-          displayRecipes([...searchedRecipeByIngredient, ...searchedRecipeByUstensil]
-            .filter((elt,index,array)=>array.indexOf(elt) === index));
+          displayRecipes([...new Set([...searchedRecipeByIngredient, ...searchedRecipeByUstensil])])
+            //.filter((elt,index,array)=>array.indexOf(elt) === index));
         } else {
           if(searchedRecipeByIngredient.length >= searchedRecipeByUstensil) {
             displayRecipes(searchByUstensil(searchedRecipeByIngredient, selectedTagText[2]))
@@ -99,8 +99,8 @@ export async function closeTag(tagSelected) {
         displayRecipes(allRecipes)
       } else  {
         if((!closed[0] && closed[1]) || (closed[0] && !closed[1])) {
-          displayRecipes([...searchedRecipeByIngredient, ...searchedRecipeByAppliance]
-            .filter((elt,index,array)=>array.indexOf(elt) === index));
+          displayRecipes([...new Set([...searchedRecipeByIngredient, ...searchedRecipeByAppliance])])
+            //.filter((elt,index,array)=>array.indexOf(elt) === index));
         } else {
           if(searchedRecipeByIngredient.length >= searchedRecipeByAppliance) {
             displayRecipes(searchByAppliance(searchedRecipeByIngredient, selectedTagText[1]))
