@@ -2,12 +2,9 @@ export function recipeFactory(recipe) {
   const {
     id,
     name,
-    servings,
     ingredients,
     time,
     description,
-    appliance,
-    ustensils,
   } = recipe;
 
   

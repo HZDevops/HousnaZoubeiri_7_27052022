@@ -1,9 +1,7 @@
 import { getRecipes } from './utils/getData.js';
 import { displayRecipes } from './components/displayRecipes.js';
-import { selectIngredient } from './components/selectIngredient.js';
-import { selectAppliance } from './components/selectAppliance.js';
-import { selectUstensil } from './components/selectUstensil.js';
 import { searchRecipe } from './components/searchRecipe.js';
+import { selectTag } from './components/searchByTag.js';
 
 //DOM elements
 let inputRecipe = document.getElementById('floatingInput');
@@ -16,6 +14,8 @@ let recipesArray = [];
  **/
 export function inputRecipeListner() {
   let searchedRecipes = [];
+  inputRecipe.value = '';
+
   inputRecipe.addEventListener('keyup', () => {
     if (inputRecipe.value.length < 3) {
       recipeContainer.innerHTML = '';
@@ -33,9 +33,7 @@ export function inputRecipeListner() {
       } else {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipes);
-        selectIngredient(searchedRecipes);
-        selectAppliance(searchedRecipes);
-        selectUstensil(searchedRecipes);
+        
       }
     }
   });
@@ -44,6 +42,5 @@ export function inputRecipeListner() {
 recipesArray = await getRecipes();
 displayRecipes(recipesArray);
 inputRecipeListner();
-selectIngredient(recipesArray);
-selectAppliance(recipesArray);
-selectUstensil(recipesArray);
+selectTag(recipesArray);
+

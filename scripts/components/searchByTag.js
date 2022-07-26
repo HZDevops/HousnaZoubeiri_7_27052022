@@ -5,7 +5,7 @@ import { getUstensilList } from '../utils/getUstensilList.js';
 import {
   openTagDropDownMenu,
   closeTagDropDownMenu,
-} from './TagDropDownMenu.js';
+} from '../components/TagDropDownMenu.js';
 import {
   createIngredientTag,
   createApplianceTag,
