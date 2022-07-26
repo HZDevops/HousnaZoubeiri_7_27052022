@@ -68,7 +68,6 @@ export function searchRecipe(recipes, string) {
  * @returns {Array} 
  **/
 export function searchByAppliance(recipes, appliance) {
-  console.log(recipes, appliance)
   let searchedRecipes = [];
   recipes.forEach((recipe) => {
     let applianceSearched = recipe.appliance.toLowerCase()
