@@ -131,7 +131,7 @@ function displayTag(recipes) {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByAppliance);
         searchedRecipeByTag = searchedRecipeByIngredient;
-      }else if (!currentIngredientTag && currentUstensilTag) {
+      }else if (!currentApplianceTag && currentUstensilTag) {
         searchedRecipeByIngredient = searchByIngredient(
           searchedRecipeByUstensil,
           ingredientSelected
@@ -139,7 +139,7 @@ function displayTag(recipes) {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByIngredient);
         searchedRecipeByTag = searchedRecipeByIngredient;
-      }else if (currentIngredientTag && currentUstensilTag) {
+      }else if (currentApplianceTag && currentUstensilTag) {
         searchedRecipeByIngredient = searchByIngredient(
           searchedRecipeByTag,
           ingredientSelected
@@ -155,7 +155,7 @@ function displayTag(recipes) {
 
   //Create, update, close and search by appliance tag
   appliances.forEach((appliance) => {
-    //console.log(searchedRecipeByTag)
+    console.log(searchedRecipeByTag)
     appliance.addEventListener('click', () => {
       closed[1] = false
       let applianceSelected = appliance.textContent;
@@ -316,6 +316,7 @@ export function selectTag(recipes) {
         `<li class="dropdown-item ingredient-item">${newIngredientArray[i]}</li>`
       );
     }
+    displayTag(recipes);
   });
 
   //Listner in appliance drop-down input
@@ -333,6 +334,7 @@ export function selectTag(recipes) {
         `<li class="dropdown-item appliance-item">${newApplianceArray[i]}</li>`
       );
     }
+    displayTag(recipes);
   });
   
   //Listner in ustensil drop-down input
@@ -350,6 +352,7 @@ export function selectTag(recipes) {
         `<li><a class="dropdown-item ustensil-item" href="#">${newUstensilArray[i]}</a></li>`
       );
     }
+    displayTag(recipes);
   });
   displayTag(recipes);
 }

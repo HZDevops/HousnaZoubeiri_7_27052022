@@ -52,9 +52,8 @@ export function recipeFactory(recipe) {
       }
       ingredientArray.push(ingredientBloc);
     });
-    return (ingredientArray = ingredientArray.filter(
-      (ele, pos) => ingredientArray.indexOf(ele) === pos
-    ));
+    //Remove duplicated elements in ingredientArray
+    return [...new Set(ingredientArray)];
   }
   return {
     getRecipeCardDOM,

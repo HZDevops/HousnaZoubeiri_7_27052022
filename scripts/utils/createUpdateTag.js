@@ -3,7 +3,6 @@ let tagContainer = document.querySelector('.tag-container');
 
 /**
  * Create ingredient tag in tag section
- * @param {Element} tagElement
  * @param {String} ingredientValue
  */
 export function createIngredientTag(ingredientValue) {

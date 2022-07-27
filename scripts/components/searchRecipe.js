@@ -41,17 +41,12 @@ export function searchByIngredient(recipes, ingredient) {
     
   recipes.forEach((recipe) => {
     ingredientsArray = recipe.ingredients
-    const length = ingredientsArray.length;
-
-    ingredientsArray.forEach ((element, index, array) => {
+    
+    ingredientsArray.forEach ((element) => {
       if (element.ingredient.includes(ingredient)) {
         searchedRecipes.push(recipe);
-        array.length ++;
       }
     })
-    if (length !== ingredientsArray.length) {
-      ingredientsArray.length --;
-    }
   })
   return searchedRecipes;
 }
