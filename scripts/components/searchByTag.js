@@ -134,7 +134,7 @@ function displayTag(recipes) {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByAppliance);
         searchedRecipeByTag = searchedRecipeByIngredient;
-      } else if (!currentIngredientTag && currentUstensilTag) {
+      } else if (!currentApplianceTag && currentUstensilTag) {
         searchedRecipeByIngredient = searchByIngredient(
           searchedRecipeByUstensil,
           ingredientSelected
@@ -142,7 +142,7 @@ function displayTag(recipes) {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByIngredient);
         searchedRecipeByTag = searchedRecipeByIngredient;
-      } else if (currentIngredientTag && currentUstensilTag) {
+      } else if (currentApplianceTag && currentUstensilTag) {
         searchedRecipeByIngredient = searchByIngredient(
           searchedRecipeByTag,
           ingredientSelected
@@ -158,7 +158,7 @@ function displayTag(recipes) {
 
   //Create, update, close and search by appliance tag
   appliances.forEach((appliance) => {
-    //console.log(searchedRecipeByTag)
+    console.log(searchedRecipeByTag);
     appliance.addEventListener('click', () => {
       closed[1] = false;
       let applianceSelected = appliance.textContent;

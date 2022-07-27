@@ -57,7 +57,6 @@ export async function closeTag(tagSelected) {
               ...searchedRecipeByUstensil,
             ]),
           ]);
-          //.filter((elt,index,array)=>array.indexOf(elt) === index));
         } else {
           if (searchedRecipeByAppliance.length >= searchedRecipeByUstensil) {
             displayRecipes(
@@ -92,7 +91,6 @@ export async function closeTag(tagSelected) {
               ...searchedRecipeByUstensil,
             ]),
           ]);
-          //.filter((elt,index,array)=>array.indexOf(elt) === index));
         } else {
           if (searchedRecipeByIngredient.length >= searchedRecipeByUstensil) {
             displayRecipes(
@@ -127,7 +125,6 @@ export async function closeTag(tagSelected) {
               ...searchedRecipeByAppliance,
             ]),
           ]);
-          //.filter((elt,index,array)=>array.indexOf(elt) === index));
         } else {
           if (searchedRecipeByIngredient.length >= searchedRecipeByAppliance) {
             displayRecipes(

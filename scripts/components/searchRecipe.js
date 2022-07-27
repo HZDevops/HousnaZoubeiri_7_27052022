@@ -44,20 +44,13 @@ export function searchRecipe(recipes, string) {
     
   recipes.forEach((recipe) => {
     ingredientsArray = recipe.ingredients
-    const length = ingredientsArray.length;
-
+    
     ingredientsArray.forEach ((element, index, array) => {
       if (element.ingredient.includes(ingredient)) {
         searchedRecipes.push(recipe);
-        index ++;
-        array.length ++;
       }
     })
-    if (length != ingredientsArray.length) {
-      ingredientsArray.length --;
-    }
   })
-       
   return searchedRecipes;
 }
 
