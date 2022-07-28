@@ -98,6 +98,7 @@ function displayTag(recipes) {
 
   //Create, update, close and search by ingredient tag
   ingredients.forEach((ingredient) => {
+    
     ingredient.addEventListener('click', () => {
       closed[0] = false
       let ingredientSelected = ingredient.textContent;
@@ -155,7 +156,7 @@ function displayTag(recipes) {
 
   //Create, update, close and search by appliance tag
   appliances.forEach((appliance) => {
-    console.log(searchedRecipeByTag)
+
     appliance.addEventListener('click', () => {
       closed[1] = false
       let applianceSelected = appliance.textContent;
@@ -213,6 +214,7 @@ function displayTag(recipes) {
 
   //Create, update, close ans search by ustensil tag
   ustensils.forEach((ustensil) => {
+
     ustensil.addEventListener('click', () => {
       closed[2] = false
       let ustensilSelected = ustensil.textContent;
