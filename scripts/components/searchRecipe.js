@@ -45,7 +45,7 @@ export function searchRecipe(recipes, string) {
   recipes.forEach((recipe) => {
     ingredientsArray = recipe.ingredients
     
-    ingredientsArray.forEach ((element, index, array) => {
+    ingredientsArray.forEach ((element) => {
       if (element.ingredient.includes(ingredient)) {
         searchedRecipes.push(recipe);
       }
