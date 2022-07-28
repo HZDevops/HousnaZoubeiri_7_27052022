@@ -27,8 +27,9 @@ export function searchRecipe(recipes, string) {
       searchedRecipes.push(recipes[i]);
     }
   }
-  let newSearchedRecipes = [...new Set(searchedRecipes)];
-  return newSearchedRecipes;
+  let filteredArray = new Set(searchedRecipes.map(JSON.stringify));
+  searchedRecipes = Array.from(filteredArray).map(JSON.parse);
+  return searchedRecipes;
 }
 
 /**

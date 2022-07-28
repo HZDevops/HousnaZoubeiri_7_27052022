@@ -158,7 +158,6 @@ function displayTag(recipes) {
 
   //Create, update, close and search by appliance tag
   appliances.forEach((appliance) => {
-    console.log(searchedRecipeByTag);
     appliance.addEventListener('click', () => {
       closed[1] = false;
       let applianceSelected = appliance.textContent;
