@@ -1,8 +1,8 @@
 import { inputRecipeListner } from '../index.js';
 import { displayRecipes } from '../components/displayRecipes.js';
 import { searchByUstensil, searchByAppliance, searchByIngredient } from "../components/searchRecipe.js";
+import { selectTag } from '../components/searchByTag.js';
 import { getRecipes } from '../utils/getData.js';
-
 import { 
   searchedRecipeByTag,
   searchedRecipeByIngredient,
@@ -31,10 +31,6 @@ export async function closeTag(tagSelected) {
   const closeApplianceTag = document.querySelector('.appliance-close');
   const closeUstensilTag = document.querySelector('.ustensil-close');
 
-  /*console.log(searchedRecipeByIngredient,
-    searchedRecipeByAppliance,
-    searchedRecipeByUstensil)*/
-
   //Close ingredient tag
   if (closeIngredientTag) {
     closeIngredientTag.addEventListener('click', (e) => {
@@ -58,6 +54,7 @@ export async function closeTag(tagSelected) {
         }
       }
       inputRecipeListner();
+      selectTag(allRecipes);
     });
   }
 
@@ -84,6 +81,7 @@ export async function closeTag(tagSelected) {
         }
       }
       inputRecipeListner();
+      selectTag(allRecipes);
     });
   }
 
@@ -109,6 +107,7 @@ export async function closeTag(tagSelected) {
         }
       }
       inputRecipeListner();
+      selectTag(allRecipes);
     });
   }
 }

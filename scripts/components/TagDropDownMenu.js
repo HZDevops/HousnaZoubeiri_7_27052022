@@ -17,6 +17,7 @@ const ustensilItems = document.querySelector('.ustensil-list');
 const arrowUpUstensil = document.querySelector('.ustensil-chevron');
 
 export function openTagDropDownMenu() {
+  
   // Listener in ingredient drop-down button
   ingredientLabel.addEventListener('click', () => {
     ingredientInput.style.display = 'block';
