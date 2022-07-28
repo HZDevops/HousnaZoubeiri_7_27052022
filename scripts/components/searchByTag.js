@@ -281,8 +281,9 @@ export function displayTag(recipes) {
  * @param {Array} recipes
  */
 export function selectTag(recipes) {
-  createItemTagList(recipes);
+  
   openTagDropDownMenu();
+  createItemTagList(recipes);
   closeTagDropDownMenu();
   
   // Listner in ingredient drop-down input

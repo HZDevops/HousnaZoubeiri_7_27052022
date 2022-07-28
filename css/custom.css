@@ -98,8 +98,7 @@ li {
     left: 0.5px;
     width: 666.1px;
     height: 397px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: scroll;
 }
 
 .dropdown-item {
@@ -109,6 +108,10 @@ li {
     color:white;
     font-size: 18px;
     line-height: 22px;
+    margin-right: 20px;
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #ingredient-input::placeholder, #appliance-input::placeholder, #ustensil-input::placeholder { 
