@@ -4,7 +4,6 @@
  * @returns {Array}
  */ 
 export function getIngredientList(recipes) {
-  //console.log(recipes)
   let ingredientArray = [];
   
   recipes.forEach((recipe) => {

@@ -39,7 +39,6 @@ export function searchRecipe(recipes, string) {
  * @returns {Array} 
  */
  export function searchByIngredient(recipes, ingredient) {
-  console.log(recipes)
   let searchedRecipes = [];
   let ingredientsArray = [];
     

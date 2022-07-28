@@ -1,7 +1,5 @@
 import { getRecipes } from '../utils/getData.js';
-import { getIngredientList } from '../utils/getIngredientList.js';
-import { getApplianceList } from '../utils/getApplianceList.js';
-import { getUstensilList } from '../utils/getUstensilList.js';
+import { createItemTagList } from '../utils/createItemTagList.js';
 import {
   openTagDropDownMenu,
   closeTagDropDownMenu,
@@ -43,7 +41,7 @@ const ustensilLabel = document.getElementById('ustensil-label');
 const ustensilItems = document.querySelector('.ustensil-list');
 const arrowUpUstensil = document.querySelector('.ustensil-chevron');
 
-const allRecipes = await getRecipes();
+export const allRecipes = await getRecipes();
 
 //Tag fields initialisation
 ingredientInput.style.display = 'none';
@@ -89,15 +87,10 @@ export function setSearchedRecipeByUstensil(value) {
  * Display selected tag in tag section and searched recipes by ingredient, appliance or ustensil tag
  * @param {Array} recipes
  */
-function displayTag(recipes) {
+export function displayTag(recipes) {
   let ingredients = document.querySelectorAll('.ingredient-item');
   let appliances = document.querySelectorAll('.appliance-item');
   let ustensils = document.querySelectorAll('.ustensil-item');
-
-  searchedRecipeByTag = [];
-  searchedRecipeByIngredient = [];
-  searchedRecipeByAppliance = [];
-  searchedRecipeByUstensil = [];
 
   //Create, update, close and search by ingredient tag
   ingredients.forEach((ingredient) => {
@@ -125,6 +118,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByIngredient);
+        createItemTagList(searchedRecipeByIngredient);
         searchedRecipeByTag = searchedRecipeByIngredient;
       } else if (currentApplianceTag && !currentUstensilTag) {
         searchedRecipeByIngredient = searchByIngredient(
@@ -133,6 +127,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByAppliance);
+        createItemTagList(searchedRecipeByIngredient);
         searchedRecipeByTag = searchedRecipeByIngredient;
       } else if (!currentApplianceTag && currentUstensilTag) {
         searchedRecipeByIngredient = searchByIngredient(
@@ -141,6 +136,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByIngredient);
+        createItemTagList(searchedRecipeByIngredient);
         searchedRecipeByTag = searchedRecipeByIngredient;
       } else if (currentApplianceTag && currentUstensilTag) {
         searchedRecipeByIngredient = searchByIngredient(
@@ -149,6 +145,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByIngredient);
+        createItemTagList(searchedRecipeByIngredient);
         searchedRecipeByTag = searchedRecipeByIngredient;
       }
       selectedTagText[0] = ingredientSelected;
@@ -182,6 +179,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByAppliance);
+        createItemTagList(searchedRecipeByAppliance);
         searchedRecipeByTag = searchedRecipeByAppliance;
       } else if (currentIngredientTag && !currentUstensilTag) {
         searchedRecipeByAppliance = searchByAppliance(
@@ -190,6 +188,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByAppliance);
+        createItemTagList(searchedRecipeByAppliance);
         searchedRecipeByTag = searchedRecipeByAppliance;
       } else if (!currentIngredientTag && currentUstensilTag) {
         searchedRecipeByAppliance = searchByAppliance(
@@ -198,6 +197,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByAppliance);
+        createItemTagList(searchedRecipeByAppliance);
         searchedRecipeByTag = searchedRecipeByAppliance;
       } else if (currentIngredientTag && currentUstensilTag) {
         searchedRecipeByAppliance = searchByAppliance(
@@ -206,6 +206,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByAppliance);
+        createItemTagList(searchedRecipeByAppliance);
         searchedRecipeByTag = searchedRecipeByAppliance;
       }
       selectedTagText[1] = applianceSelected;
@@ -236,6 +237,7 @@ function displayTag(recipes) {
         searchedRecipeByUstensil = searchByUstensil(recipes, ustensilSelected);
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByUstensil);
+        createItemTagList(searchedRecipeByUstensil);
         searchedRecipeByTag = searchedRecipeByUstensil;
       } else if (currentIngredientTag && !currentApplianceTag) {
         searchedRecipeByUstensil = searchByUstensil(
@@ -244,6 +246,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByUstensil);
+        createItemTagList(searchedRecipeByUstensil);
         searchedRecipeByTag = searchedRecipeByUstensil;
       } else if (!currentIngredientTag && currentApplianceTag) {
         searchedRecipeByUstensil = searchByUstensil(
@@ -252,6 +255,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByUstensil);
+        createItemTagList(searchedRecipeByUstensil);
         searchedRecipeByTag = searchedRecipeByUstensil;
       } else if (currentIngredientTag && currentApplianceTag) {
         searchedRecipeByUstensil = searchByUstensil(
@@ -260,6 +264,7 @@ function displayTag(recipes) {
         );
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipeByUstensil);
+        createItemTagList(searchedRecipeByUstensil);
         searchedRecipeByTag = searchedRecipeByUstensil;
       }
       selectedTagText[ustensilSelected];
@@ -273,29 +278,8 @@ function displayTag(recipes) {
  * @param {Array} recipes
  */
 export function selectTag(recipes) {
-  const ingredientList = getIngredientList(allRecipes);
-  const applianceList = getApplianceList(allRecipes);
-  const ustensilList = getUstensilList(allRecipes);
-
-  for (let i = 0; i < ingredientList.length; i++) {
-    ingredientItems.insertAdjacentHTML(
-      'beforeend',
-      `<li class="dropdown-item ingredient-item">${ingredientList[i]}</li>`
-    );
-  }
-  for (let i = 0; i < applianceList.length; i++) {
-    applianceItems.insertAdjacentHTML(
-      'beforeend',
-      `<li class="dropdown-item appliance-item">${applianceList[i]}</li>`
-    );
-  }
-  for (let i = 0; i < ustensilList.length; i++) {
-    ustensilItems.insertAdjacentHTML(
-      'beforeend',
-      `<li><a class="dropdown-item ustensil-item" href="#">${ustensilList[i]}</a></li>`
-    );
-  }
   openTagDropDownMenu();
+  createItemTagList(recipes);
   closeTagDropDownMenu();
 
   // Listner in ingredient drop-down input
