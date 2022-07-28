@@ -16,17 +16,18 @@ export function searchRecipe(recipes, string) {
     if (nameRecipeSearched.includes(string) === true) {
       searchedRecipes.push(recipe);
     }
-    for (let i = 0; i < ingredientRecipeSearched.length; i++) {
-      if ((ingredientRecipeSearched[i].ingredient.toLowerCase()).includes(string) === true) {
+    ingredientRecipeSearched.forEach((element) => {
+      if ((element.ingredient.toLowerCase()).includes(string) === true) {
         searchedRecipes.push(recipe);
-      } 
-    }
+      }
+    })
     if (descriptionRecipeSearched.includes(string) === true) {
       searchedRecipes.push(recipe);
     }
   })
-  let FilteredSearchedRecipes = [...new Set(searchedRecipes)];
-  return FilteredSearchedRecipes;
+  let filteredArray = new Set(searchedRecipes.map(JSON.stringify));
+  searchedRecipes = Array.from(filteredArray).map(JSON.parse);
+  return searchedRecipes;
 }
 
 /**
