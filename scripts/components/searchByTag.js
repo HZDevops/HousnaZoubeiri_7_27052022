@@ -283,14 +283,13 @@ export function displayTag(recipes) {
 export function selectTag(recipes) {
   
   openTagDropDownMenu();
-  createItemTagList(recipes);
+  let itemTagList = createItemTagList(recipes);
   closeTagDropDownMenu();
   
   // Listner in ingredient drop-down input
   ingredientInput.addEventListener('keyup', function (e) {
     let input = e.target.value.toLowerCase();
-
-    let newIngredientArray = ingredientList.filter((ingredient) =>
+    let newIngredientArray = itemTagList.ingredientList.filter((ingredient) =>
       ingredient.toLowerCase().includes(input)
     );
 
@@ -308,7 +307,7 @@ export function selectTag(recipes) {
   //Listner in appliance drop-down input
   applianceInput.addEventListener('keyup', function (e) {
     let input = e.target.value.toLowerCase();
-    let newApplianceArray = applianceList.filter((appliance) =>
+    let newApplianceArray = itemTagList.applianceList.filter((appliance) =>
       appliance.toLowerCase().includes(input)
     );
 
@@ -326,7 +325,7 @@ export function selectTag(recipes) {
   //Listner in ustensil drop-down input
   ustensilInput.addEventListener('keyup', function (e) {
     let input = e.target.value.toLowerCase();
-    let newUstensilArray = ustensilList.filter((ustensil) =>
+    let newUstensilArray = itemTagList.ustensilList.filter((ustensil) =>
       ustensil.toLowerCase().includes(input)
     );
 

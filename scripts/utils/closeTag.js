@@ -2,7 +2,7 @@ import { inputRecipeListner } from '../index.js';
 import { displayRecipes } from '../components/displayRecipes.js';
 import { searchByUstensil, searchByAppliance, searchByIngredient } from "../components/searchRecipe.js";
 import { selectTag } from '../components/searchByTag.js';
-import { getRecipes } from '../utils/getData.js';
+import { getRecipes } from 'getData.js';
 import { 
   searchedRecipeByTag,
   searchedRecipeByIngredient,

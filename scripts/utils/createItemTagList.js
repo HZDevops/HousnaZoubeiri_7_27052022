@@ -52,4 +52,8 @@ export function createItemTagList(recipes) {
     );
   }
   displayTag(recipes);
+  return {ingredientList: ingredientList, 
+          applianceList : applianceList,
+          ustensilList : ustensilList
+          };
 }
