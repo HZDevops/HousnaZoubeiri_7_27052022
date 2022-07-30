@@ -126,7 +126,7 @@ export function displayTag(recipes) {
           ingredientSelected
         );
         recipeContainer.innerHTML = '';
-        displayRecipes(searchedRecipeByAppliance);
+        displayRecipes(searchedRecipeByIngredient);
         createItemTagList(searchedRecipeByIngredient);
         searchedRecipeByTag = searchedRecipeByIngredient;
       } else if (!currentApplianceTag && currentUstensilTag) {
