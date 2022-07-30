@@ -1,4 +1,4 @@
-# HousnaZoubeiri_7_27052022 - Implémentation d'un algorithme de recherche
+# Site internet "Les Petits Plats" - Implémentation d'un algorithme de recherche
 
 L’entreprise "Les Petits plats" a décidé de se lancer son propre site de recettes de cuisine.  
 L'objectif est d'implémenter un algorithme de recherche performant permettant à un utilisateur de faire une recherche rapide et quasi instantanée.
