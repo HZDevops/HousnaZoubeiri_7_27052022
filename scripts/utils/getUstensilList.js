@@ -9,7 +9,9 @@ export function getUstensilList(recipes) {
     let array = recipe.ustensils;
 
     for (let i = 0; i < array.length; i++) {
+      if(array[i]) {
       ustensilArray.push(array[i]);
+      }
     }
   });
   //Remove duplicated elements in ustensilArray

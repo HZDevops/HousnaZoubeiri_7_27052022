@@ -3,7 +3,6 @@ import { getIngredientList } from './getIngredientList.js';
 import { getApplianceList } from './getApplianceList.js';
 import { getUstensilList } from './getUstensilList.js';
 import { displayTag } from '../components/searchByTag.js';
-import { createIngredientTag, createApplianceTag, createUstensilTag, updateIngredientTag, updateApplianceTag, updateUstensilTag } from './createUpdateTag.js';
 
 //DOM elements
 let currentIngredientTag = document.querySelector('.ingredient-tag');
@@ -55,5 +54,5 @@ export function createItemTagList(recipes) {
   return {ingredientList: ingredientList, 
           applianceList : applianceList,
           ustensilList : ustensilList
-          };
+  };
 }
