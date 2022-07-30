@@ -10,9 +10,15 @@
     opacity: 0.25;
 }
 
+.bi-search {
+    position: absolute;
+    right: 3%;
+    bottom: 25%;
+}
+
 .recipe-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -91,7 +97,7 @@ li {
     border-radius: 5px;
     left: 0.5px;
     width: 666.1px;
-    height: 397px;
+    max-height: 397px;
     overflow: scroll;
 }
 
@@ -170,6 +176,10 @@ li {
     top: 30%;
 }
 
+#ingredient-down-chevron {
+    margin-left: 27px;
+}
+
 .btn {
     margin-right: 20px;
 }
@@ -181,4 +191,4 @@ li {
 #recipe-info {
     font-size: 20px;
     font-weight: bold;
-}
+} 

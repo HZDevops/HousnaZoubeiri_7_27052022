@@ -6,9 +6,8 @@ import {
   searchByIngredient,
 } from '../components/searchRecipe.js';
 import { selectTag } from '../components/searchByTag.js';
-import { getRecipes } from '../utils/getData.js';
+import { getRecipes } from './getData.js';
 import {
-  searchedRecipeByTag,
   searchedRecipeByIngredient,
   searchedRecipeByAppliance,
   searchedRecipeByUstensil,
@@ -34,6 +33,9 @@ export async function closeTag(tagSelected) {
   const closeIngredientTag = document.querySelector('.ingredient-close');
   const closeApplianceTag = document.querySelector('.appliance-close');
   const closeUstensilTag = document.querySelector('.ustensil-close');
+  const ingredientInput = document.getElementById('ingredient-input');
+  const applianceInput = document.getElementById('appliance-input');
+  const ustensilInput = document.getElementById('ustensil-input');
 
   //Close ingredient tag
   if (closeIngredientTag) {
@@ -41,6 +43,7 @@ export async function closeTag(tagSelected) {
       e.stopPropagation();
       tagIngredient.remove();
       recipeContainer.innerHTML = '';
+      ingredientInput.value = '';
       closed[0] = true;
       setSearchedRecipeByIngredient([]);
       if (closed[0] && closed[1] && closed[2]) {
@@ -75,6 +78,7 @@ export async function closeTag(tagSelected) {
       e.stopPropagation();
       tagAppliance.remove();
       recipeContainer.innerHTML = '';
+      applianceInput.value = '';
       closed[1] = true;
       setSearchedRecipeByAppliance([]);
       if (closed[0] && closed[1] && closed[2]) {
@@ -109,6 +113,7 @@ export async function closeTag(tagSelected) {
       e.stopPropagation();
       tagUstensil.remove();
       recipeContainer.innerHTML = '';
+      ustensilInput.value = '';
       closed[2] = true;
       setSearchedRecipeByUstensil([]);
       if (closed[0] && closed[1] && closed[2]) {

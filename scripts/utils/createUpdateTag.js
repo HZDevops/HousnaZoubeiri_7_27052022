@@ -6,7 +6,7 @@ let tagContainer = document.querySelector('.tag-container');
  * @param {String} ingredientValue
  */
 export function createIngredientTag(ingredientValue) {
-  let ingredientTag = `<button type="button" class="btn ingredient-tag"><span class="ingredient-name tag"></span><i class="bi bi-x-circle ingredient-close"></i></div>`;
+  let ingredientTag = `<button type="button" class="btn ingredient-tag"><span class="ingredient-name tag"></span><i class="bi bi-x-circle ingredient-close"></i></button>`;
   tagContainer.insertAdjacentHTML('beforeend', ingredientTag);
   let ingredientName = document.querySelector('.ingredient-name');
 
@@ -28,7 +28,7 @@ export function updateIngredientTag(ingredientValue) {
  * @param {String} applianceValue
  */
 export function createApplianceTag(tagValue) {
-  let applianceTag = `<button type="button" class="btn appliance-tag"><span class="appliance-name tag"></span><i class="bi bi-x-circle appliance-close"></i></div>`;
+  let applianceTag = `<button type="button" class="btn appliance-tag"><span class="appliance-name tag"></span><i class="bi bi-x-circle appliance-close"></i></button>`;
   tagContainer.insertAdjacentHTML('beforeend', applianceTag);
   let applianceName = document.querySelector('.appliance-name');
 
@@ -50,7 +50,7 @@ export function updateApplianceTag(applianceValue) {
  * @param {String} ustensilValue
  */
 export function createUstensilTag(ustensilValue) {
-  let ustensilTag = `<button type="button" class="btn ustensil-tag"><span class="ustensil-name tag"></span><i class="bi bi-x-circle ustensil-close"></i></div>`;
+  let ustensilTag = `<button type="button" class="btn ustensil-tag"><span class="ustensil-name tag"></span><i class="bi bi-x-circle ustensil-close"></i></button>`;
   tagContainer.insertAdjacentHTML('beforeend', ustensilTag);
 
   let ustensilName = document.querySelector('.ustensil-name');

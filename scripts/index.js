@@ -33,7 +33,6 @@ export function inputRecipeListner() {
       } else {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipes);
-        
       }
     }
   });
@@ -43,4 +42,3 @@ recipesArray = await getRecipes();
 displayRecipes(recipesArray);
 inputRecipeListner();
 selectTag(recipesArray);
-
