@@ -21,16 +21,10 @@ export function openTagDropDownMenu() {
   // Listener in ingredient drop-down button
   ingredientLabel.addEventListener('click', () => {
     //Close appliance drop-down menu before opening ingredient drop-down menu
-    applianceInput.style.display = 'none';
-    applianceItems.style.display = 'none';
-    arrowUpAppliance.style.display = 'none';
-    applianceLabel.style.display = 'block';
+    closeApplianceDropDownMenu();
 
     //Close ustensil drop-down menu before opening ingredient drop-down menu
-    ustensilInput.style.display = 'none';
-    ustensilItems.style.display = 'none';
-    arrowUpUstensil.style.display = 'none';
-    ustensilLabel.style.display = 'block';
+    closeUstensilDropDownMenu();
 
     //Open ingredient drop-down menu
     ingredientInput.style.display = 'block';
@@ -43,16 +37,10 @@ export function openTagDropDownMenu() {
   // Listner in appliance drop-down button
   applianceLabel.addEventListener('click', () => {
     //Close ingredient drop-down menu before opening appliance drop-down menu
-    ingredientInput.style.display = 'none';
-    ingredientItems.style.display = 'none';
-    arrowUpIngredient.style.display = 'none';
-    ingredientLabel.style.display = 'block';
+    closeIngredientDropDownMenu();
 
     //Close ustensil drop-down menu before opening appliance drop-down menu
-    ustensilInput.style.display = 'none';
-    ustensilItems.style.display = 'none';
-    arrowUpUstensil.style.display = 'none';
-    ustensilLabel.style.display = 'block';
+    closeUstensilDropDownMenu();
 
     //Open appliance drop-down menu
     applianceInput.style.display = 'block';
@@ -65,16 +53,10 @@ export function openTagDropDownMenu() {
   // Listener in ustensil drop-down button
   ustensilLabel.addEventListener('click', () => {
     //Close ingredient drop-down menu before opening ustensil drop-down menu
-    ingredientInput.style.display = 'none';
-    ingredientItems.style.display = 'none';
-    arrowUpIngredient.style.display = 'none';
-    ingredientLabel.style.display = 'block';
+    closeIngredientDropDownMenu();
 
     //Close appliance drop-down menu before opening ustensil drop-down menu
-    applianceInput.style.display = 'none';
-    applianceItems.style.display = 'none';
-    arrowUpAppliance.style.display = 'none';
-    applianceLabel.style.display = 'block';
+    closeApplianceDropDownMenu();
 
     //Open ustensil drop-down menu
     ustensilInput.style.display = 'block';
@@ -85,27 +67,42 @@ export function openTagDropDownMenu() {
   });
 }
 
-
+//Close all drop-down menus
 export function closeTagDropDownMenu() {
 
   arrowUpIngredient.addEventListener('click', () => {
-    ingredientInput.style.display = 'none';
-    ingredientItems.style.display = 'none';
-    arrowUpIngredient.style.display = 'none';
-    ingredientLabel.style.display = 'block';
+    closeIngredientDropDownMenu ()
   });
 
   arrowUpAppliance.addEventListener('click', () => {
-    applianceInput.style.display = 'none';
-    applianceItems.style.display = 'none';
-    arrowUpAppliance.style.display = 'none';
-    applianceLabel.style.display = 'block';
+    closeApplianceDropDownMenu ();
   });
 
   arrowUpUstensil.addEventListener('click', () => {
-    ustensilInput.style.display = 'none';
-    ustensilItems.style.display = 'none';
-    arrowUpUstensil.style.display = 'none';
-    ustensilLabel.style.display = 'block';
+    closeUstensilDropDownMenu ();
   });
+}
+
+// Close ingredient drop-down menu
+function closeIngredientDropDownMenu() {
+  ingredientInput.style.display = 'none';
+  ingredientItems.style.display = 'none';
+  arrowUpIngredient.style.display = 'none';
+  ingredientLabel.style.display = 'block';
+}
+
+// Close appliance drop-down menu
+function closeApplianceDropDownMenu () {
+  applianceInput.style.display = 'none';
+  applianceItems.style.display = 'none';
+  arrowUpAppliance.style.display = 'none';
+  applianceLabel.style.display = 'block';
+}
+
+// Close ustensil drop-down menu
+function closeUstensilDropDownMenu () {
+  ustensilInput.style.display = 'none';
+  ustensilItems.style.display = 'none';
+  arrowUpUstensil.style.display = 'none';
+  ustensilLabel.style.display = 'block';
 }
