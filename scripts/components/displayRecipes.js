@@ -6,7 +6,7 @@ import { recipeFactory } from '../factories/recipe.js';
  **/
 export function displayRecipes(recipes) {
   const recipeContainer = document.querySelector('.recipe-container');
-
+  
   if (recipes.length === 0) {
     const recipeInfo = `<p id="recipe-info">
           Aucune recette ne correspond à votre critère… vous pouvez chercher «

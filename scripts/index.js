@@ -1,4 +1,5 @@
 import { getRecipes } from './utils/getData.js';
+import { createItemTagList } from './utils/createItemTagList.js';
 import { displayRecipes } from './components/displayRecipes.js';
 import { searchRecipe } from './components/searchRecipe.js';
 import { selectTag } from './components/searchByTag.js';
@@ -35,6 +36,7 @@ export function inputRecipeListner() {
       } else {
         recipeContainer.innerHTML = '';
         displayRecipes(searchedRecipes);
+        createItemTagList(searchedRecipes);
       }
     }
   })
