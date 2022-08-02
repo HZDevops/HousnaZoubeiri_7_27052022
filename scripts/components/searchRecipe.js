@@ -20,11 +20,7 @@ export function searchRecipe(recipes, string) {
     }
     for (let j = 0; j < ingredientRecipeSearched.length; j++) {
       if (
-        includes(
-          string,
-          ingredientRecipeSearched[j].ingredient.toLowerCase()
-        ) === true
-      ) {
+        includes(string,ingredientRecipeSearched[j].ingredient.toLowerCase()) === true) {
         searchedRecipes.push(recipes[i]);
       }
     }
@@ -48,9 +44,10 @@ export function searchRecipe(recipes, string) {
   }
   
   // Loop to push unique object into array
-  for (let i = 0; i < uniqueRecipe.length; i ++) {
+  for (let i in uniqueRecipe) {
     newSearchedRecipes.push(uniqueRecipe[i]);
   }
+ 
   return newSearchedRecipes;
 }
 
