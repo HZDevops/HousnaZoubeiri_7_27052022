@@ -22,6 +22,7 @@ export function inputRecipeListner() {
       recipeContainer.innerHTML = '';
       searchedRecipes = recipesArray;
       displayRecipes(searchedRecipes);
+      createItemTagList(searchedRecipes);
     }
 
     if (inputRecipe.value.length >= 3) {
