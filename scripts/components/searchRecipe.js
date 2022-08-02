@@ -19,7 +19,12 @@ export function searchRecipe(recipes, string) {
       searchedRecipes.push(recipes[i]);
     }
     for (let j = 0; j < ingredientRecipeSearched.length; j++) {
-      if (includes(string, ingredientRecipeSearched[j].ingredient.toLowerCase()) === true) {
+      if (
+        includes(
+          string,
+          ingredientRecipeSearched[j].ingredient.toLowerCase()
+        ) === true
+      ) {
         searchedRecipes.push(recipes[i]);
       }
     }
@@ -27,9 +32,26 @@ export function searchRecipe(recipes, string) {
       searchedRecipes.push(recipes[i]);
     }
   }
-  let filteredArray = new Set(searchedRecipes.map(JSON.stringify));
-  searchedRecipes = Array.from(filteredArray).map(JSON.parse);
-  return searchedRecipes;
+
+  // Remove duplicate recipes in searchedRecipes
+  let newSearchedRecipes = [];
+  let nameRecipe = '';
+  let uniqueRecipe = {};
+
+  // Loop for the searchedRecipes elements
+  for (let i = 0; i < searchedRecipes.length; i++) {
+    // Extract the name of recipe
+    nameRecipe = searchedRecipes[i].name;
+
+    // Use the name of recipe as the index
+    uniqueRecipe[nameRecipe] = searchedRecipes[i];
+  }
+  
+  // Loop to push unique object into array
+  for (let i = 0; i < uniqueRecipe.length; i ++) {
+    newSearchedRecipes.push(uniqueRecipe[i]);
+  }
+  return newSearchedRecipes;
 }
 
 /**
