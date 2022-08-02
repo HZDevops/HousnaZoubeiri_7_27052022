@@ -98,7 +98,7 @@ li {
     left: 0.5px;
     width: 666.1px;
     max-height: 397px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .dropdown-item {

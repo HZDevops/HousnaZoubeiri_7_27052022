@@ -8,6 +8,7 @@
 
 export function searchRecipe(recipes, string) {
   let searchedRecipes = [];
+
   recipes.forEach((recipe) => {
     let nameRecipeSearched = recipe.name.toLowerCase();
     let ingredientRecipeSearched = recipe.ingredients;
